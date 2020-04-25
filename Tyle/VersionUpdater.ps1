@@ -1,14 +1,38 @@
-#(Get-Content .\AppMetaDataTemplate.cs).Replace('[PS_Stub_Date]', (Get-Date).ToString("yyyyMMdd")) | Set-Content .\AppMetaData.cs
-#timeout /t 10
-#(Get-Content .\AppMetaData.cs).Replace('[PS_Stub_Time]', (Get-Date).ToString("hhmmssfff")) | Set-Content .\AppMetaData.cs
-#pause
-
 param (
 	[Parameter(Mandatory=$true)][string]$projectDir
 )
-$startTime=(Get-Date)
+
+$startTime=(Get-Date).ToUniversalTime()
+
 $templateFilePath = [System.IO.Path]::Combine($projectDir, ".\AppMetaData.cs.Template")
 $targetFilePath = [System.IO.Path]::Combine($projectDir, ".\AppMetaData.cs")
-$content = [System.IO.File]::ReadAllText($templateFilePath).Replace("[PS_Stub_Date]", (($startTime).ToString("yyMMdd"))).Replace("[PS_Stub_Time]", (($startTime).ToString("HHmmss"))).Replace("[PS_Stub_CopyRightYear]", (($startTime).ToString("yyyy")))
+
+Write-Host "Template   :  $templateFilePath"
+Write-Host "Target     :  $targetFilePath"
+
+$minorVer  = $startTime.ToString("yyMM")
+$buildVer  = $startTime.ToString("dd")
+$revision  = $startTime.ToString("HHmm")
+$timeStamp = $startTime.ToString("yyyy-MM-dd  HH:mm:ss") + " UTC"
+
+Write-Host "Minor      :  $minorVer"
+Write-Host "Build      :  $buildVer"
+Write-Host "Revision   :  $revision"
+
+$repoBranch= & git rev-parse --abbrev-ref HEAD
+$commitHash= & git rev-parse HEAD
+
+Write-Host "RepoBranch :  $repoBranch"
+Write-Host "CommitHash :  $commitHash"
+
+$content = [System.IO.File]::ReadAllText($templateFilePath)
+$content = $content.Replace("[PS_Stub_Minor]", $minorVer).Replace("[PS_Stub_Build]", $buildVer).Replace("[PS_Stub_Revision]", $revision)
+$content = $content.Replace("[PS_Stub_CopyRightYear]", $startTime.ToString("yyyy"))
+$content = $content.Replace("[PS_Stub_RepoBranch]", $repoBranch).Replace("[PS_Stub_CommitHash]", $commitHash)
+$content = $content.Replace("[PS_Stub_BuildTimeStamp]", $timeStamp)
+
+Write-Host "Content    :"
+Write-Host $content
+Write-Host
+
 [System.IO.File]::WriteAllText($targetFilePath, $content)
-pause
