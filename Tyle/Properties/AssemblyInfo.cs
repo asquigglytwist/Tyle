@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle(AppMetaData.ApplicationName)]
 [assembly: AssemblyDescription(AppMetaData.Description)]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyConfiguration(AppMetaData.AssemblyConfiguration)]
 [assembly: AssemblyCompany(AppMetaData.CompanyName)]
 [assembly: AssemblyProduct(AppMetaData.ApplicationName)]
 [assembly: AssemblyCopyright(AppMetaData.CopyRight)]
