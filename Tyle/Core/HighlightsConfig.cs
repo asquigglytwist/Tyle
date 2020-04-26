@@ -9,8 +9,10 @@ namespace Tyle.Core
 {
     public static class HighlightsHandler
     {
-        static List<HighlightConfig> SensitiveList;        // [TIP]:  Change your toothpase
-        static List<HighlightConfig> InSensitiveList;  // [TIP]:  Learn some manners, will ya?
+        // [TIP]:  We aren't talking about tooth or toothpaste; But, if you don't believe me, you can take it with a pinch of salt!!
+        static readonly List<HighlightConfig> SensitiveList;
+        // [TIP]:  Learn some manners, will ya?
+        static readonly List<HighlightConfig> InSensitiveList;
 
         static HighlightsHandler()
         {
