@@ -37,10 +37,9 @@ namespace Tyle.UI
                 case TailedFileChangeType.InitialReadComplete:
                 case TailedFileChangeType.LastLineExtended:
                 case TailedFileChangeType.LinesAdded:
+                case TailedFileChangeType.Shrunk:
                     // [BIB]:  https://stackoverflow.com/a/661662
                     Invoke((MethodInvoker)delegate { UpdateTailView(); });
-                    break;
-                case TailedFileChangeType.Shrunk:
                     break;
                 case TailedFileChangeType.Renamed:
                     MessageBox.Show("File has been Renamed.");
