@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tyle.WinForms", "Src\UI\WinForms\WinForms.csproj", "{7E23E39E-DBA2-4FBE-8DBE-9D71963E8062}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinForms", "Src\UI\WinForms\WinForms.csproj", "{7E23E39E-DBA2-4FBE-8DBE-9D71963E8062}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Core", "Src\Core\Core.shproj", "{6413EB84-7AFB-43D8-8B9B-FAD9D00A1DE1}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Src\Core\Core.projitems*{6413eb84-7afb-43d8-8b9b-fad9d00a1de1}*SharedItemsImports = 13
+		Src\Core\Core.projitems*{7e23e39e-dba2-4fbe-8dbe-9d71963e8062}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
