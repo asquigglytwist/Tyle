@@ -191,7 +191,7 @@ namespace Tyle.Core
         {
             InitTailing();
             var currentSize = new FileInfo(TailedFilePath).Length;
-            if(currentSize>0)
+            if (currentSize > 0)
             {
                 OnTailedFileChanged(this, new TailedFileChangedArgs(TailedFileChangeType.InitialReadComplete, lsLinesInFile.Count));
             }
@@ -207,13 +207,13 @@ namespace Tyle.Core
                     var modTime = File.GetLastWriteTime(TailedFilePath);
                     if (modTime != LastModified)
                     {
+                        LastModified = modTime;
                         TailedFileChangeType temp = TailedFileChangeType.NoContentChange;
                         int linesRead = lsLinesInFile.Count;
                         var currentSize = new FileInfo(TailedFilePath).Length;
                         if (currentSize > StreamSize)
                         {
-                            bool lastLineExtended;
-                            if (TailToEOF(out lastLineExtended))
+                            if (TailToEOF(out bool lastLineExtended))
                             {
                                 linesRead = lsLinesInFile.Count - linesRead;
                                 if (lastLineExtended)
@@ -228,10 +228,6 @@ namespace Tyle.Core
                                 {
                                     temp = TailedFileChangeType.Shrunk;
                                 }
-                                // [BIB]:  https://stackoverflow.com/questions/33233161/how-to-ensure-that-streamreader-basestream-length-will-return-the-correct-value
-                                // [BIB]:  https://stackoverflow.com/a/20863065
-                                StreamSize = currentSize;
-                                LastModified = modTime;
                             }
                         }
                         else
@@ -242,10 +238,20 @@ namespace Tyle.Core
                              */
                             temp = TailedFileChangeType.Shrunk;
                         }
+                        if (temp == TailedFileChangeType.Shrunk)
+                        {
+                            fileStream.Close();
+                            InitTailing();
+                        }
+                        // [BIB]:  https://stackoverflow.com/questions/33233161/how-to-ensure-that-streamreader-basestream-length-will-return-the-correct-value
+                        // [BIB]:  https://stackoverflow.com/a/20863065
+                        StreamSize = currentSize;
                         OnTailedFileChanged(this, new TailedFileChangedArgs(temp, linesRead));
                     }
                     break;
                 case WatcherChangeTypes.Deleted:
+                    fileStream.Close();
+                    InitTailing();
                     OnTailedFileChanged(this, new TailedFileChangedArgs(TailedFileChangeType.Deleted));
                     break;
             }
