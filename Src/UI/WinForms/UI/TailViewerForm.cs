@@ -16,6 +16,10 @@ namespace Tyle.UI
 
         public TailViewerForm(MainForm mdiParentForm, string fileToTail)
         {
+            // [BIB]:  https://stackoverflow.com/a/10133046
+            //note! USING JUST AUTOSCALEMODE WILL NOT SOLVE ISSUE. MUST USE BOTH!
+            AutoScaleDimensions = new SizeF(96F, 96F); //IMPORTANT
+            AutoScaleMode = AutoScaleMode.Dpi;   //IMPORTANT
             Hide();
             InitializeComponent();
             MdiParent = MainForm = mdiParentForm;
@@ -24,6 +28,20 @@ namespace Tyle.UI
             WindowState = FormWindowState.Maximized;
             tailedFile = new TailedStream(fileToTail, TailedFile_OnTailedFileChanged);
             Show();
+#if DEBUG
+            var hi = new HighlightConfig("Hi", false, true, true, true, true,
+                Color.Green, Color.AliceBlue, lsvTailViewer.Font);
+            var hello = new HighlightConfig("hello", true, false, true, true, true,
+                Color.DarkSeaGreen, Color.Aquamarine, lsvTailViewer.Font);
+            var yo = new HighlightConfig("yo!", true, false, true, true, true,
+                Color.Red, Color.LightGoldenrodYellow, lsvTailViewer.Font);
+            var yoyo = new HighlightConfig("yoyo", true, true, true, true, false,
+                Color.Green, Color.Navy, lsvTailViewer.Font);
+            HighlightsHandler.Add(hi);
+            HighlightsHandler.Add(hello);
+            HighlightsHandler.Add(yo);
+            HighlightsHandler.Add(yoyo);
+#endif
         }
 
         private void TailedFile_OnTailedFileChanged(object sender, TailedFileChangedArgs args)
@@ -84,12 +102,16 @@ namespace Tyle.UI
         private void lsvTailViewer_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
         {
             var lineToDisplay = tailedFile[e.ItemIndex];
-            e.Item = new ListViewItem((e.ItemIndex + 1).ToString());
-            e.Item.UseItemStyleForSubItems = false;
-            e.Item.ToolTipText = lineToDisplay;
-            if (e.ItemIndex % 8 != 0)
+            e.Item = new ListViewItem((e.ItemIndex + 1).ToString())
             {
-                e.Item.SubItems.Add(lineToDisplay, Color.LightYellow, Color.Black, lsvTailViewer.Font);
+                UseItemStyleForSubItems = false,
+                ToolTipText = lineToDisplay
+            };
+            var matchingConfig = HighlightsHandler.TryGetConfigFor(lineToDisplay);
+            if (matchingConfig.HasValue)
+            {
+                var cfg = matchingConfig.Value;
+                e.Item.SubItems.Add(lineToDisplay, cfg.ForeGround, cfg.BackGround, cfg.DisplayFont);
             }
             else
             {
