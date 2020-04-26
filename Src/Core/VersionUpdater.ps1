@@ -6,6 +6,9 @@ param (
 $startTimeLocal = (Get-Date)
 $startTimeUTC   = $startTimeLocal.ToUniversalTime()
 
+Write-Host "LocalTime  :  $startTimeLocal"
+Write-Host "UTC Time  :  $startTimeUTC"
+
 $corePath = [System.IO.Path]::Combine($solutionDir, "Src\Core")
 $templateFilePath = [System.IO.Path]::Combine($corePath, "AppMetaData.cs.Template")
 $targetFilePath = [System.IO.Path]::Combine($corePath, "AppMetaData.cs")
@@ -32,7 +35,7 @@ $content = [System.IO.File]::ReadAllText($templateFilePath)
 $content = $content.Replace("[PS_Stub_Minor]", $minorVer).Replace("[PS_Stub_Build]", $buildVer).Replace("[PS_Stub_Revision]", $revision)
 $content = $content.Replace("[PS_Stub_CopyRightYear]", $startTimeUTC.ToString("yyyy"))
 $content = $content.Replace("[PS_Stub_RepoBranch]", $repoBranch).Replace("[PS_Stub_CommitHash]", $commitHash)
-$content = $content.Replace("[PS_Stub_BuildTimeStamp]", $timeStamp)
+$content = $content.Replace("[PS_Stub_BuildMode]", $buildMode).Replace("[PS_Stub_BuildTimeStamp]", $timeStamp)
 
 Write-Host "Content    :"
 Write-Host $content
