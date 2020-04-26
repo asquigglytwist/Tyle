@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tyle", "Tyle\Tyle.csproj", "{7E23E39E-DBA2-4FBE-8DBE-9D71963E8062}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tyle", "Tyle.WinForms\Tyle.WinForms.csproj", "{7E23E39E-DBA2-4FBE-8DBE-9D71963E8062}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
