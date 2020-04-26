@@ -21,12 +21,8 @@ namespace Tyle.UI
             MdiParent = MainForm = mdiParentForm;
             lsvTailViewer.ShowGroups = false;
             Text = Path.GetFileName(fileToTail);
-            //InitDisplay();
             WindowState = FormWindowState.Maximized;
-            //tailedFile.InitTailing();
             tailedFile = new TailedStream(fileToTail, TailedFile_OnTailedFileChanged);
-            //tailedFile.OnTailedFileChanged += TailedFile_OnTailedFileChanged;
-            //tailedFile.InitTailing();
             Show();
         }
 
@@ -51,10 +47,6 @@ namespace Tyle.UI
                 default:
                     break;
             }
-        }
-
-        protected void InitDisplay()
-        {
         }
 
         protected void UpdateTailView()
