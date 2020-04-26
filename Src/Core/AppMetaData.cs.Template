@@ -3,6 +3,7 @@
     public static class AppMetaData
     {
         public const string BuildTimeStamp = "[PS_Stub_BuildTimeStamp]";
+        public const string BuildMode = "[PS_Stub_BuildMode]";
 #region AssemblyInfo
         public const string ApplicationName = "Tyle";
         public const string Description = "Tail Your Logs Efficiently...";
