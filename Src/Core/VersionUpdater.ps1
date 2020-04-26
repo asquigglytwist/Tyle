@@ -1,19 +1,22 @@
 param (
-	[Parameter(Mandatory=$true)][string]$projectDir
+	[Parameter(Mandatory=$true)][string]$solutionDir,
+	[Parameter(Mandatory=$true)][string]$buildMode
 )
 
-$startTime=(Get-Date).ToUniversalTime()
+$startTimeLocal=(Get-Date)
+$startTimeUTC=$startTimeLocal.ToUniversalTime()
 
-$templateFilePath = [System.IO.Path]::Combine($projectDir, ".\AppMetaData.cs.Template")
-$targetFilePath = [System.IO.Path]::Combine($projectDir, ".\AppMetaData.cs")
+$corePath = [System.IO.Path]::Combine($solutionDir, "Src\Core")
+$templateFilePath = [System.IO.Path]::Combine($corePath, "AppMetaData.cs.Template")
+$targetFilePath = [System.IO.Path]::Combine($corePath, "AppMetaData.cs")
 
 Write-Host "Template   :  $templateFilePath"
 Write-Host "Target     :  $targetFilePath"
 
-$minorVer  = $startTime.ToString("yyMM")
-$buildVer  = $startTime.ToString("dd")
-$revision  = $startTime.ToString("HHmm")
-$timeStamp = $startTime.ToString("yyyy-MM-dd  HH:mm:ss") + " UTC"
+$minorVer  = $startTimeUTC.ToString("yyMM")
+$buildVer  = $startTimeUTC.ToString("dd")
+$revision  = $startTimeUTC.ToString("HHmm")
+$timeStamp = $startTimeUTC.ToString("yyyy-MM-dd  HH:mm:ss") + " UTC"
 
 Write-Host "Minor      :  $minorVer"
 Write-Host "Build      :  $buildVer"
@@ -27,7 +30,7 @@ Write-Host "CommitHash :  $commitHash"
 
 $content = [System.IO.File]::ReadAllText($templateFilePath)
 $content = $content.Replace("[PS_Stub_Minor]", $minorVer).Replace("[PS_Stub_Build]", $buildVer).Replace("[PS_Stub_Revision]", $revision)
-$content = $content.Replace("[PS_Stub_CopyRightYear]", $startTime.ToString("yyyy"))
+$content = $content.Replace("[PS_Stub_CopyRightYear]", $startTimeUTC.ToString("yyyy"))
 $content = $content.Replace("[PS_Stub_RepoBranch]", $repoBranch).Replace("[PS_Stub_CommitHash]", $commitHash)
 $content = $content.Replace("[PS_Stub_BuildTimeStamp]", $timeStamp)
 
