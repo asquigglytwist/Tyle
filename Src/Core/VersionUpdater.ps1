@@ -3,8 +3,8 @@ param (
 	[Parameter(Mandatory=$true)][string]$buildMode
 )
 
-$startTimeLocal=(Get-Date)
-$startTimeUTC=$startTimeLocal.ToUniversalTime()
+$startTimeLocal = (Get-Date)
+$startTimeUTC   = $startTimeLocal.ToUniversalTime()
 
 $corePath = [System.IO.Path]::Combine($solutionDir, "Src\Core")
 $templateFilePath = [System.IO.Path]::Combine($corePath, "AppMetaData.cs.Template")
@@ -22,8 +22,8 @@ Write-Host "Minor      :  $minorVer"
 Write-Host "Build      :  $buildVer"
 Write-Host "Revision   :  $revision"
 
-$repoBranch= & git rev-parse --abbrev-ref HEAD
-$commitHash= & git rev-parse HEAD
+$repoBranch = & git rev-parse --abbrev-ref HEAD
+$commitHash = & git rev-parse HEAD
 
 Write-Host "RepoBranch :  $repoBranch"
 Write-Host "CommitHash :  $commitHash"
