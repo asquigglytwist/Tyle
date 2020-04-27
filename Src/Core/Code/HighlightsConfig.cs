@@ -9,40 +9,37 @@ namespace Tyle.Core
 {
     public static class HighlightsHandler
     {
-        // [TIP]:  We aren't talking about tooth or toothpaste; But, if you don't believe me, you can take it with a pinch of salt!!
-        static readonly List<HighlightConfig> SensitiveList;
         // [TIP]:  Learn some manners, will ya?
-        static readonly List<HighlightConfig> InSensitiveList;
+        static readonly List<HighlightConfig> HighlightConfigList;
 
         static HighlightsHandler()
         {
-            SensitiveList = new List<Core.HighlightConfig>();
-            InSensitiveList = new List<HighlightConfig>();
+            HighlightConfigList = new List<HighlightConfig>();
         }
 
         public static void Add(HighlightConfig config)
         {
-            if(config.IgnoreCase)
+            HighlightConfigList.Add(config);
+        }
+
+        public static void Remove(int index)
+        {
+            var count = HighlightConfigList.Count;
+            if (count > 0 && index > 0 && count < index)
             {
-                InSensitiveList.Add(config);
+                HighlightConfigList.RemoveAt(index);
             }
-            else
-            {
-                SensitiveList.Add(config);
-            }
+            var exMsg = $"Index {index} out of range for {nameof(HighlightConfigList)} with {count} items.";
+            throw new IndexOutOfRangeException(exMsg);
         }
 
         public static HighlightConfig? TryGetConfigFor(string line)
         {
-            var temp = InSensitiveList.FindIndex(c => line.IndexOf(c.Pattern, StringComparison.CurrentCultureIgnoreCase) > -1);
+            var temp = HighlightConfigList.FindIndex(
+                c => line.IndexOf(c.Pattern, StringComparison.CurrentCultureIgnoreCase) > -1);
             if(temp >= 0)
             {
-                return InSensitiveList[temp];
-            }
-            temp = SensitiveList.FindIndex(c => line.Contains(c.Pattern));
-            if (temp >= 0)
-            {
-                return SensitiveList[temp];
+                return HighlightConfigList[temp];
             }
             return null;
         }
@@ -73,7 +70,6 @@ namespace Tyle.Core
                 | (italic ? FontStyle.Italic : FontStyle.Regular)
                 | (underline ? FontStyle.Underline : FontStyle.Regular)
                 | (strikeout ? FontStyle.Strikeout : FontStyle.Regular);
-            //DisplayFont = new Font("Verdana", 14, style);
             DisplayFont = new Font(displayFont, style);
         }
     }
