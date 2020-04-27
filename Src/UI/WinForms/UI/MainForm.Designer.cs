@@ -40,6 +40,7 @@
             this.tssBeforeExit = new System.Windows.Forms.ToolStripSeparator();
             this.mnuFExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrefs = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPHighlighting = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindows = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWCascade = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWTileHorizontally = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,7 +51,8 @@
             this.dlgOpenFile = new System.Windows.Forms.OpenFileDialog();
             this.tbcMDIChildren = new System.Windows.Forms.TabControl();
             this.imlMainForm = new System.Windows.Forms.ImageList(this.components);
-            this.mnuPHighlighting = new System.Windows.Forms.ToolStripMenuItem();
+            this.dlgFontForLSV = new System.Windows.Forms.FontDialog();
+            this.mnuPFont = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +67,7 @@
             // 
             // mnuMain
             // 
+            this.mnuMain.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.mnuMain.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.mnuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuFile,
@@ -74,7 +77,7 @@
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.MdiWindowListItem = this.mnuWindows;
             this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(897, 28);
+            this.mnuMain.Size = new System.Drawing.Size(897, 33);
             this.mnuMain.TabIndex = 2;
             this.mnuMain.Text = "menuStrip1";
             // 
@@ -88,27 +91,27 @@
             this.tssBeforeExit,
             this.mnuFExit});
             this.mnuFile.Name = "mnuFile";
-            this.mnuFile.Size = new System.Drawing.Size(44, 24);
+            this.mnuFile.Size = new System.Drawing.Size(54, 29);
             this.mnuFile.Text = "&File";
             // 
             // mnuFOpen
             // 
             this.mnuFOpen.Name = "mnuFOpen";
             this.mnuFOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.mnuFOpen.Size = new System.Drawing.Size(238, 26);
+            this.mnuFOpen.Size = new System.Drawing.Size(298, 34);
             this.mnuFOpen.Text = "&Open";
             this.mnuFOpen.Click += new System.EventHandler(this.mnuFOpen_Click);
             // 
             // tssAfterOpen
             // 
             this.tssAfterOpen.Name = "tssAfterOpen";
-            this.tssAfterOpen.Size = new System.Drawing.Size(235, 6);
+            this.tssAfterOpen.Size = new System.Drawing.Size(295, 6);
             // 
             // mnuFClose
             // 
             this.mnuFClose.Name = "mnuFClose";
             this.mnuFClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
-            this.mnuFClose.Size = new System.Drawing.Size(238, 26);
+            this.mnuFClose.Size = new System.Drawing.Size(298, 34);
             this.mnuFClose.Text = "&Close";
             this.mnuFClose.Click += new System.EventHandler(this.mnuFClose_Click);
             // 
@@ -117,30 +120,38 @@
             this.mnuFCloseAll.Name = "mnuFCloseAll";
             this.mnuFCloseAll.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.W)));
-            this.mnuFCloseAll.Size = new System.Drawing.Size(238, 26);
+            this.mnuFCloseAll.Size = new System.Drawing.Size(298, 34);
             this.mnuFCloseAll.Text = "Close &All";
             this.mnuFCloseAll.Click += new System.EventHandler(this.mnuFCloseAll_Click);
             // 
             // tssBeforeExit
             // 
             this.tssBeforeExit.Name = "tssBeforeExit";
-            this.tssBeforeExit.Size = new System.Drawing.Size(235, 6);
+            this.tssBeforeExit.Size = new System.Drawing.Size(295, 6);
             // 
             // mnuFExit
             // 
             this.mnuFExit.Name = "mnuFExit";
             this.mnuFExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.mnuFExit.Size = new System.Drawing.Size(238, 26);
+            this.mnuFExit.Size = new System.Drawing.Size(298, 34);
             this.mnuFExit.Text = "E&xit";
             this.mnuFExit.Click += new System.EventHandler(this.mnuFExit_Click);
             // 
             // mnuPrefs
             // 
             this.mnuPrefs.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuPHighlighting});
+            this.mnuPHighlighting,
+            this.mnuPFont});
             this.mnuPrefs.Name = "mnuPrefs";
-            this.mnuPrefs.Size = new System.Drawing.Size(97, 24);
+            this.mnuPrefs.Size = new System.Drawing.Size(118, 29);
             this.mnuPrefs.Text = "&Preferences";
+            // 
+            // mnuPHighlighting
+            // 
+            this.mnuPHighlighting.Name = "mnuPHighlighting";
+            this.mnuPHighlighting.Size = new System.Drawing.Size(270, 34);
+            this.mnuPHighlighting.Text = "&Highlighting";
+            this.mnuPHighlighting.Click += new System.EventHandler(this.mnuPHighlighting_Click);
             // 
             // mnuWindows
             // 
@@ -150,34 +161,34 @@
             this.mnuWTileVertically,
             this.mnuWArrangeIcons});
             this.mnuWindows.Name = "mnuWindows";
-            this.mnuWindows.Size = new System.Drawing.Size(82, 24);
+            this.mnuWindows.Size = new System.Drawing.Size(102, 29);
             this.mnuWindows.Text = "&Windows";
             // 
             // mnuWCascade
             // 
             this.mnuWCascade.Name = "mnuWCascade";
-            this.mnuWCascade.Size = new System.Drawing.Size(193, 26);
+            this.mnuWCascade.Size = new System.Drawing.Size(240, 34);
             this.mnuWCascade.Text = "&Cascade";
             this.mnuWCascade.Click += new System.EventHandler(this.mnuWCascade_Click);
             // 
             // mnuWTileHorizontally
             // 
             this.mnuWTileHorizontally.Name = "mnuWTileHorizontally";
-            this.mnuWTileHorizontally.Size = new System.Drawing.Size(193, 26);
+            this.mnuWTileHorizontally.Size = new System.Drawing.Size(240, 34);
             this.mnuWTileHorizontally.Text = "Tile &Horizontally";
             this.mnuWTileHorizontally.Click += new System.EventHandler(this.mnuWTileHorizontally_Click);
             // 
             // mnuWTileVertically
             // 
             this.mnuWTileVertically.Name = "mnuWTileVertically";
-            this.mnuWTileVertically.Size = new System.Drawing.Size(193, 26);
+            this.mnuWTileVertically.Size = new System.Drawing.Size(240, 34);
             this.mnuWTileVertically.Text = "Tile &Vertically";
             this.mnuWTileVertically.Click += new System.EventHandler(this.mnuWTileVertically_Click);
             // 
             // mnuWArrangeIcons
             // 
             this.mnuWArrangeIcons.Name = "mnuWArrangeIcons";
-            this.mnuWArrangeIcons.Size = new System.Drawing.Size(193, 26);
+            this.mnuWArrangeIcons.Size = new System.Drawing.Size(240, 34);
             this.mnuWArrangeIcons.Text = "&Iconify";
             this.mnuWArrangeIcons.Click += new System.EventHandler(this.mnuWArrangeIcons_Click);
             // 
@@ -186,14 +197,14 @@
             this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuHAabout});
             this.mnuHelp.Name = "mnuHelp";
-            this.mnuHelp.Size = new System.Drawing.Size(53, 24);
+            this.mnuHelp.Size = new System.Drawing.Size(65, 29);
             this.mnuHelp.Text = "&Help";
             // 
             // mnuHAabout
             // 
             this.mnuHAabout.Name = "mnuHAabout";
             this.mnuHAabout.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
-            this.mnuHAabout.Size = new System.Drawing.Size(182, 26);
+            this.mnuHAabout.Size = new System.Drawing.Size(234, 34);
             this.mnuHAabout.Text = "&About";
             this.mnuHAabout.Click += new System.EventHandler(this.mnuHAabout_Click);
             // 
@@ -207,7 +218,7 @@
             // 
             this.tbcMDIChildren.Dock = System.Windows.Forms.DockStyle.Top;
             this.tbcMDIChildren.ImageList = this.imlMainForm;
-            this.tbcMDIChildren.Location = new System.Drawing.Point(0, 28);
+            this.tbcMDIChildren.Location = new System.Drawing.Point(0, 33);
             this.tbcMDIChildren.Multiline = true;
             this.tbcMDIChildren.Name = "tbcMDIChildren";
             this.tbcMDIChildren.SelectedIndex = 0;
@@ -223,16 +234,15 @@
             this.imlMainForm.TransparentColor = System.Drawing.Color.Transparent;
             this.imlMainForm.Images.SetKeyName(0, "NewLinesFound.png");
             // 
-            // mnuPHighlighting
+            // mnuPFont
             // 
-            this.mnuPHighlighting.Name = "mnuPHighlighting";
-            this.mnuPHighlighting.Size = new System.Drawing.Size(181, 26);
-            this.mnuPHighlighting.Text = "&Highlighting";
-            this.mnuPHighlighting.Click += new System.EventHandler(this.mnuPHighlighting_Click);
+            this.mnuPFont.Name = "mnuPFont";
+            this.mnuPFont.Size = new System.Drawing.Size(270, 34);
+            this.mnuPFont.Text = "&Font";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(897, 587);
             this.Controls.Add(this.tbcMDIChildren);
@@ -273,6 +283,8 @@
         private System.Windows.Forms.ImageList imlMainForm;
         private System.Windows.Forms.ToolStripMenuItem mnuHAabout;
         private System.Windows.Forms.ToolStripMenuItem mnuPHighlighting;
+        private System.Windows.Forms.FontDialog dlgFontForLSV;
+        private System.Windows.Forms.ToolStripMenuItem mnuPFont;
     }
 }
 
