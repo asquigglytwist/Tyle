@@ -2,7 +2,7 @@
 
 namespace Tyle.UI
 {
-    public partial class FindDialog : Form
+    public partial class FindDialog : TyleFormBase
     {
         public static FindDialog findDialog;
 
@@ -37,14 +37,7 @@ namespace Tyle.UI
         #region EventHandlers
         private void tbxSearchText_TextChanged(object sender, System.EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tbxSearchText.Text))
-            {
-                btnFind.Enabled = false;
-            }
-            else
-            {
-                btnFind.Enabled = true;
-            }
+            btnFind.Enabled = !string.IsNullOrWhiteSpace(tbxSearchText.Text);
         }
         #endregion
     }
