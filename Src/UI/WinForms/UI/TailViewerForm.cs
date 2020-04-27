@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace Tyle.UI
 {
     #region TailViewerForm
-    public partial class TailViewerForm : Form
+    public partial class TailViewerForm : TyleFormBase
     {
         #region Fields
         MainForm MainForm;
@@ -16,10 +16,6 @@ namespace Tyle.UI
 
         public TailViewerForm(MainForm mdiParentForm, string fileToTail)
         {
-            // [BIB]:  https://stackoverflow.com/a/10133046
-            //note! USING JUST AUTOSCALEMODE WILL NOT SOLVE ISSUE. MUST USE BOTH!
-            AutoScaleDimensions = new SizeF(96F, 96F); //IMPORTANT
-            AutoScaleMode = AutoScaleMode.Dpi;   //IMPORTANT
             Hide();
             InitializeComponent();
             MdiParent = MainForm = mdiParentForm;

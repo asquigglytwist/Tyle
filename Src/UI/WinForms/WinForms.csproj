@@ -129,6 +129,9 @@
     <Compile Include="UI\Highlighter.Designer.cs">
       <DependentUpon>Highlighter.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\TyleFormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <EmbeddedResource Include="UI\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>

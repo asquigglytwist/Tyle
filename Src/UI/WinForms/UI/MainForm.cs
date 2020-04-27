@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Tyle.UI
 {
-    public partial class MainForm : Form
+    public partial class MainForm : TyleFormBase
     {
         private Dictionary<string, TailViewerForm> mapOpenFiles;
 
@@ -46,8 +46,10 @@ namespace Tyle.UI
                 {
                     var tailForm = new TailViewerForm(this, file);
                     mapOpenFiles[temp] = tailForm;
-                    var newPage = new TabPage(tailForm.Text);
-                    newPage.ToolTipText = file;
+                    var newPage = new TabPage(tailForm.Text)
+                    {
+                        ToolTipText = file
+                    };
                     tbcMDIChildren.TabPages.Add(newPage);
                     tbcMDIChildren.SelectedTab = newPage;
                     tbcMDIChildren.Show();

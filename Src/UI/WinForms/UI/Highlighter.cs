@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Tyle.UI
 {
-    public partial class Highlighter : Form
+    public partial class Highlighter : TyleFormBase
     {
         public static Highlighter visualCues;
         private ColorsComboBox cmbBackGround;
