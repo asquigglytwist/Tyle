@@ -11,9 +11,16 @@ namespace Tyle
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UI.MainForm());
+            try
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new UI.MainForm());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Unable to start {AppMetaData.ApplicationName}; Exception thrown:{Environment.NewLine}\t{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+            }
         }
     }
 }
