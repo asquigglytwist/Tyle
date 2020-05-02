@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinForms", "Src\UI\WinForms
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Core", "Src\Core\Core.shproj", "{6413EB84-7AFB-43D8-8B9B-FAD9D00A1DE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectListView", "Src\ThirdParty\ObjectListView\ObjectListView.csproj", "{18FEDA0C-D147-4286-B39A-01204808106A}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Src\Core\Core.projitems*{6413eb84-7afb-43d8-8b9b-fad9d00a1de1}*SharedItemsImports = 13
@@ -21,6 +23,10 @@ Global
 		{7E23E39E-DBA2-4FBE-8DBE-9D71963E8062}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E23E39E-DBA2-4FBE-8DBE-9D71963E8062}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E23E39E-DBA2-4FBE-8DBE-9D71963E8062}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18FEDA0C-D147-4286-B39A-01204808106A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18FEDA0C-D147-4286-B39A-01204808106A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18FEDA0C-D147-4286-B39A-01204808106A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18FEDA0C-D147-4286-B39A-01204808106A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

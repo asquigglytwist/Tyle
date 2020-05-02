@@ -12,7 +12,7 @@ namespace Tyle.Core
         const int ItemNotFound = -1, DelayBeforeRaisingEvent = 2000;
         readonly int CRLFLength = Environment.NewLine.Length;
         StreamReader fileStream;
-        List<string> lsLinesInFile;
+        List<LogEntry> lsLinesInFile;
         FileSystemWatcher fileWatcher;
         public delegate void TailedFileChangedHandler(object sender, TailedFileChangedArgs e);
         public event TailedFileChangedHandler OnTailedFileChanged;
@@ -23,7 +23,7 @@ namespace Tyle.Core
         {
             TailedFilePath = filePath;
             LongestLine = "---";
-            lsLinesInFile = new List<string>();
+            lsLinesInFile = new List<LogEntry>();
         }
 
         public TailedStream(string filePath, TailedFileChangedHandler changeHandler)
@@ -63,10 +63,10 @@ namespace Tyle.Core
             if (lsLinesInFile.Count > 0)
             {
                 searchStartIndex %= lsLinesInFile.Count;
-                foundItemIndex = lsLinesInFile.FindIndex(searchStartIndex, (line => (line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > -1)));
+                foundItemIndex = lsLinesInFile.FindIndex(searchStartIndex, (entry => (entry.LogLine.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > -1)));
                 if (foundItemIndex == ItemNotFound && searchStartIndex != 0 && wrapSearch)
                 {
-                    foundItemIndex = lsLinesInFile.FindIndex(0, (line => (line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > ItemNotFound)));
+                    foundItemIndex = lsLinesInFile.FindIndex(0, (line => (line.LogLine.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > ItemNotFound)));
                 }
             }
             return foundItemIndex;
@@ -101,6 +101,7 @@ namespace Tyle.Core
         protected bool ReadLinesToEOF()
         {
             string temp;
+            int lineNum = lsLinesInFile.Count;
             try
             {
                 while ((temp = fileStream.ReadLine()) != null)
@@ -111,7 +112,7 @@ namespace Tyle.Core
                     }
                     temp = temp.Replace("\t", "    ");
                     LongestLine = (LongestLine.Length < temp.Length ? temp : LongestLine);
-                    lsLinesInFile.Add(temp);
+                    lsLinesInFile.Add(new LogEntry(lineNum, temp));
                 }
             }
             catch (Exception)
@@ -137,16 +138,17 @@ namespace Tyle.Core
                             var charsRead = temp.Length;
                             var shiftInPosition = ((fileStream.BaseStream.Position - charsRead) - lastKnownPosition);
                             temp = temp.Replace("\t", "    ");
+                            int lineNum = lsLinesInFile.Count;
                             if (shiftInPosition < CRLFLength)
                             {
                                 // TODO:  We should theoretically not be running into an IndexOutOfRange issue here; Check again though...
-                                lsLinesInFile[lsLinesInFile.Count - 1] = lsLinesInFile[lsLinesInFile.Count - 1] + temp;
+                                lsLinesInFile[lsLinesInFile.Count - 1] = new LogEntry(lineNum, lsLinesInFile[lsLinesInFile.Count - 1].LogLine + temp);
                                 lastLineExtended = true;
                             }
                             else
                             {
                                 // We've read the line; So we have to add it to the list...
-                                lsLinesInFile.Add(temp);
+                                lsLinesInFile.Add(new LogEntry(lineNum, temp));
                             }
                             LongestLine = (LongestLine.Length < temp.Length ? temp : LongestLine);
                         }
@@ -277,6 +279,14 @@ namespace Tyle.Core
             }
         }
 
+        public List<LogEntry> AllLines
+        {
+            get
+            {
+                return lsLinesInFile;
+            }
+        }
+
         public long StreamSize { get; private set; }
         public DateTime LastModified { get; private set; }
 
@@ -288,12 +298,29 @@ namespace Tyle.Core
         {
             get
             {
-                return lsLinesInFile[index];
+                return lsLinesInFile[index].LogLine;
             }
         }
         #endregion
     }
     #endregion
+
+    public class LogEntry
+    {
+        public LogEntry(int num, string line)
+        {
+            LineNumber = num;
+            LogLine = line;
+        }
+
+        public int LineNumber
+        { get; protected set; }
+
+        public string LogLine
+        {
+            get; protected set;
+        }
+    }
 
     #region TailedFileChangeType
     /// <summary>

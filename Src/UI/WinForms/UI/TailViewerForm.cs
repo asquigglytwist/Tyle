@@ -19,24 +19,24 @@ namespace Tyle.UI
             Hide();
             InitializeComponent();
             MdiParent = MainForm = mdiParentForm;
-            lsvTailViewer.ShowGroups = false;
+            //lsvTailViewer.ShowGroups = false;
             Text = Path.GetFileName(fileToTail);
             WindowState = FormWindowState.Maximized;
             tailedFile = new TailedStream(fileToTail, TailedFile_OnTailedFileChanged);
             Show();
 #if DEBUG
-            var hi = new HighlightConfig("Hi", false, true, true, true, true,
-                Color.Green, Color.AliceBlue, lsvTailViewer.Font);
-            var hello = new HighlightConfig("hello", true, false, true, true, true,
-                Color.DarkSeaGreen, Color.Aquamarine, lsvTailViewer.Font);
-            var yo = new HighlightConfig("yo!", true, false, true, true, true,
-                Color.Red, Color.LightGoldenrodYellow, lsvTailViewer.Font);
-            var yoyo = new HighlightConfig("yoyo", true, true, true, true, false,
-                Color.Green, Color.Navy, lsvTailViewer.Font);
-            HighlightsHandler.Add(hi);
-            HighlightsHandler.Add(hello);
-            HighlightsHandler.Add(yo);
-            HighlightsHandler.Add(yoyo);
+            //var hi = new HighlightConfig("Hi", false, true, true, true, true,
+            //    Color.Green, Color.AliceBlue, lsvTailViewer.Font);
+            //var hello = new HighlightConfig("hello", true, false, true, true, true,
+            //    Color.DarkSeaGreen, Color.Aquamarine, lsvTailViewer.Font);
+            //var yo = new HighlightConfig("yo!", true, false, true, true, true,
+            //    Color.Red, Color.LightGoldenrodYellow, lsvTailViewer.Font);
+            //var yoyo = new HighlightConfig("yoyo", true, true, true, true, false,
+            //    Color.Green, Color.Navy, lsvTailViewer.Font);
+            //HighlightsHandler.Add(hi);
+            //HighlightsHandler.Add(hello);
+            //HighlightsHandler.Add(yo);
+            //HighlightsHandler.Add(yoyo);
 #endif
         }
 
@@ -67,24 +67,28 @@ namespace Tyle.UI
         {
             int lineCount = tailedFile.LineCount;
             MainForm.NotifyFileUpdate(Text);
-            lsvTailViewer.VirtualListSize = lineCount;
-            lsvTailViewer.AutoFitColumnsToContent(tailedFile.LongestLine);
-            lsvTailViewer.SelectVirtualItem(tailedFile.LineCount - 1);
-            // [BIB]:  https://stackoverflow.com/a/30104935
-            lsvTailViewer.Refresh();
+            olvColLine.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            //olvColLine.WordWrap = true;
+            olvTailViewer.SetObjects(tailedFile.AllLines);
+            olvTailViewer.Scrollable = true;
+            //lsvTailViewer.VirtualListSize = lineCount;
+            //lsvTailViewer.AutoFitColumnsToContent(tailedFile.LongestLine);
+            //lsvTailViewer.SelectVirtualItem(tailedFile.LineCount - 1);
+            //// [BIB]:  https://stackoverflow.com/a/30104935
+            //lsvTailViewer.Refresh();
         }
 
         protected bool FindNextItem()
         {
-            if (lsvTailViewer.VirtualListSize > 0)
-            {
-                var foundItemIndex = tailedFile.FindItem(FindDialog.findDialog.SearchText, lsvTailViewer.SearchBeginIndex, FindDialog.findDialog.WrapSearch);
-                if (foundItemIndex != -1)
-                {
-                    lsvTailViewer.SelectVirtualItem(foundItemIndex);
-                    return true;
-                }
-            }
+            //if (lsvTailViewer.VirtualListSize > 0)
+            //{
+            //    var foundItemIndex = tailedFile.FindItem(FindDialog.findDialog.SearchText, lsvTailViewer.SearchBeginIndex, FindDialog.findDialog.WrapSearch);
+            //    if (foundItemIndex != -1)
+            //    {
+            //        lsvTailViewer.SelectVirtualItem(foundItemIndex);
+            //        return true;
+            //    }
+            //}
             return false;
         }
 
@@ -94,16 +98,47 @@ namespace Tyle.UI
             Activate();
         }
 
+        internal void SetLSVFont(Font fontForListView)
+        {
+            //this.lsvTailViewer.Font = fontForListView;
+        }
+
         #region EventHandlers
         private void lsvTailViewer_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
         {
             var lineToDisplay = tailedFile[e.ItemIndex];
+            var matchingConfig = HighlightsHandler.TryGetConfigFor(lineToDisplay);
+#if LINE_PRECEDES_LINENUMBER
+            e.Item = new ListViewItem(lineToDisplay);
+            if (matchingConfig.HasValue)
+            {
+                var cfg = matchingConfig.Value;
+                e.Item = new ListViewItem(lineToDisplay)
+                {
+                    ForeColor = cfg.ForeGround,
+                    BackColor = cfg.BackGround,
+                    Font = cfg.DisplayFont,
+                    UseItemStyleForSubItems = false,
+                    ToolTipText = lineToDisplay
+                };
+                //e.Item.SubItems.Add(lineToDisplay, cfg.ForeGround, cfg.BackGround, cfg.DisplayFont);
+            }
+            else
+            {
+                e.Item = new ListViewItem(lineToDisplay)
+                {
+                    UseItemStyleForSubItems = false,
+                    ToolTipText = lineToDisplay
+                };
+                //e.Item.SubItems.Add(lineToDisplay, this.ForeColor, this.BackColor, lsvTailViewer.Font);
+            }
+            e.Item.SubItems.Add((e.ItemIndex + 1).ToString());
+#else
             e.Item = new ListViewItem((e.ItemIndex + 1).ToString())
             {
                 UseItemStyleForSubItems = false,
                 ToolTipText = lineToDisplay
             };
-            var matchingConfig = HighlightsHandler.TryGetConfigFor(lineToDisplay);
             if (matchingConfig.HasValue)
             {
                 var cfg = matchingConfig.Value;
@@ -113,6 +148,7 @@ namespace Tyle.UI
             {
                 e.Item.SubItems.Add(lineToDisplay, Color.Black, Color.White, lsvTailViewer.Font);
             }
+#endif
         }
 
         private void frmTailViewer_FormClosing(object sender, FormClosingEventArgs e)
