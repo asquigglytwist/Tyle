@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -8,6 +9,7 @@ namespace Tyle.UI
     public partial class MainForm : TyleFormBase
     {
         private Dictionary<string, TailViewerForm> mapOpenFiles;
+        private Font fontForListView;
 
         public MainForm()
         {
@@ -18,6 +20,7 @@ namespace Tyle.UI
 #endif
             Icon = Properties.Resources.Tyle;
             Text = AppMetaData.ApplicationName;
+            fontForListView = this.Font;
             ResetAppState();
             // [BIB]:  https://stackoverflow.com/questions/1792470/subset-of-array-in-c-sharp
             OpenFilesForTailing(Environment.GetCommandLineArgs().Skip(1).ToArray());
@@ -170,6 +173,22 @@ namespace Tyle.UI
         private void mnuPHighlighting_Click(object sender, EventArgs e)
         {
             Highlighter.visualCues.ShowDialog();
+        }
+
+        private void mnuPFont_Click(object sender, EventArgs e)
+        {
+            if (dlgFontForLSV.ShowDialog() == DialogResult.OK)
+            {
+                var selFont = dlgFontForLSV.Font;
+                if (selFont != fontForListView)
+                {
+                    foreach (var openFile in mapOpenFiles.Values)
+                    {
+                        openFile.SetLSVFont(selFont);
+                    }
+                }
+                fontForListView = selFont;
+            }
         }
     }
 }

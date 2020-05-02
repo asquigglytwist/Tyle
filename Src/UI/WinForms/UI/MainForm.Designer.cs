@@ -239,6 +239,7 @@
             this.mnuPFont.Name = "mnuPFont";
             this.mnuPFont.Size = new System.Drawing.Size(270, 34);
             this.mnuPFont.Text = "&Font";
+            this.mnuPFont.Click += new System.EventHandler(this.mnuPFont_Click);
             // 
             // MainForm
             // 
