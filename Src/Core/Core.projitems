@@ -11,14 +11,13 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AppMetaData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Code\HighlightsConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Code\TailedFileChangedArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Code\TailedFileChangeType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Code\TailedStream.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Native.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)AppMetaData.cs.Template" />
     <None Include="$(MSBuildThisFileDirectory)VersionUpdater.ps1" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Code\" />
   </ItemGroup>
 </Project>

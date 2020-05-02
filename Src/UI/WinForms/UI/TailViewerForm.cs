@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Text;
+using Core.Code;
 
 namespace Tyle.UI
 {
