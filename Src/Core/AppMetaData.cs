@@ -2,7 +2,7 @@ namespace Tyle
 {
     public static class AppMetaData
     {
-        public const string BuildTimeStamp = "2020-05-02  18:55:39 UTC";
+        public const string BuildTimeStamp = "2020-05-02  19:00:30 UTC";
         public const string BuildMode = "WinForms";
 #region AssemblyInfo
         public const string ApplicationName = "Tyle";
@@ -20,7 +20,7 @@ namespace Tyle
         private const string major = "0";
         private const string minor = "2005";
         private const string build = "02";
-        private const string revision = "1855";
+        private const string revision = "1900";
         public const string ProductVersion = major + "." + minor + ".0.0";
         public const string AssemblyVersion = major + "." + minor + "." + build + ".0";
         // [BIB]:  https://stackoverflow.com/questions/17144355/how-can-i-replace-every-occurrence-of-a-string-in-a-file-with-powershell
@@ -31,7 +31,7 @@ namespace Tyle
         // [BIB]:  https://stackoverflow.com/questions/6245570/how-to-get-the-current-branch-name-in-git
         public const string RepoBranch = "master";
         // [BIB]:  https://stackoverflow.com/questions/5694389/get-the-short-git-version-hash
-        public const string CommitHash = "92aea7cde592557e927fc00a0c6a4926caadd66e";
+        public const string CommitHash = "30fbef2656b2e04030aaa3f23d8213a1662a9b47";
 #endregion //  Git - Repo Details
     }
 }
