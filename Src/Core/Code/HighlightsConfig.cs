@@ -47,6 +47,7 @@ namespace Tyle.Core
 
     public struct HighlightConfig
     {
+        public readonly string UniqueID;
         public readonly string Pattern;
         public readonly bool IgnoreCase, Bold, Italic, Underline, Strikeout;
         public readonly Color ForeGround, BackGround;
@@ -71,6 +72,7 @@ namespace Tyle.Core
                 | (underline ? FontStyle.Underline : FontStyle.Regular)
                 | (strikeout ? FontStyle.Strikeout : FontStyle.Regular);
             DisplayFont = new Font(displayFont, style);
+            UniqueID = Guid.NewGuid().ToString("N").ToLowerInvariant();
         }
     }
 }
