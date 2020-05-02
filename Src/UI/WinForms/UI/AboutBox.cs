@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Tyle.UI
@@ -29,6 +31,20 @@ namespace Tyle.UI
             //lblVersion.Text = AppMetaData.ProductVersion;
             //lblCopyright.Text = AppMetaData.CopyRight;
             //lblDescription.Text = AppMetaData.Description;
+            Type t = typeof(AppMetaData);
+            FieldInfo[] fields = t.GetFields(BindingFlags.Static | BindingFlags.Public);
+            lsvAboutDetails.View = View.Details;
+            lsvAboutDetails.Items.Clear();
+            lsvAboutDetails.FullRowSelect = true;
+            foreach (FieldInfo fi in fields)
+            {
+                var fiValue = fi.GetValue(null).ToString();
+                var field = new ListViewItem(fiValue);
+                field.SubItems.Add(new ListViewItem.ListViewSubItem(field, fi.Name));
+                field.ToolTipText = fiValue;
+                lsvAboutDetails.Items.Add(field);
+            }
+            lsvAboutDetails.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
     }
 }
