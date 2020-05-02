@@ -10,8 +10,8 @@ namespace Tyle.UI
     public partial class TailViewerForm : TyleFormBase
     {
         #region Fields
-        MainForm MainForm;
-        TailedStream tailedFile;
+        readonly MainForm MainForm;
+        readonly TailedStream tailedFile;
         #endregion
 
         public TailViewerForm(MainForm mdiParentForm, string fileToTail)
@@ -19,7 +19,6 @@ namespace Tyle.UI
             Hide();
             InitializeComponent();
             MdiParent = MainForm = mdiParentForm;
-            lsvTailViewer.ShowGroups = false;
             Text = Path.GetFileName(fileToTail);
             WindowState = FormWindowState.Maximized;
             tailedFile = new TailedStream(fileToTail, TailedFile_OnTailedFileChanged);
@@ -68,7 +67,7 @@ namespace Tyle.UI
             int lineCount = tailedFile.LineCount;
             MainForm.NotifyFileUpdate(Text);
             lsvTailViewer.VirtualListSize = lineCount;
-            lsvTailViewer.AutoFitColumnsToContent(tailedFile.LongestLine);
+            lsvTailViewer.AutoFitColumnsToContent(tailedFile.LongestLine, lsvTailViewer.Font);
             lsvTailViewer.SelectVirtualItem(tailedFile.LineCount - 1);
             // [BIB]:  https://stackoverflow.com/a/30104935
             lsvTailViewer.Refresh();
@@ -92,6 +91,11 @@ namespace Tyle.UI
         {
             WindowState = FormWindowState.Maximized;
             Activate();
+        }
+
+        internal void SetLSVFont(Font selFont)
+        {
+            lsvTailViewer.Font = selFont;
         }
 
         #region EventHandlers
@@ -135,6 +139,16 @@ namespace Tyle.UI
 
         private void mnuECopy_Click(object sender, EventArgs e)
         {
+            var buffer = new StringBuilder();
+            foreach (int selIndex in lsvTailViewer.SelectedIndices)
+            {
+                buffer.AppendLine(tailedFile[selIndex]);
+            }
+            var temp = buffer.ToString();
+            if (temp.Length > 0)
+            {
+                Clipboard.SetText(temp);
+            }
         }
 
         private void mnuEFind_Click(object sender, EventArgs e)
