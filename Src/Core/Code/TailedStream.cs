@@ -169,6 +169,7 @@ namespace Tyle.Core
                 // This way there is no need to verify if we are subscribed to events and subsequent need to unsubscribe.
                 fileWatcher.Dispose();
             }
+            TailedFilePath = Path.GetFullPath(TailedFilePath);
             // [BIB]:  https://stackoverflow.com/a/721743
             fileWatcher = new FileSystemWatcher();
             fileWatcher.Path = Path.GetDirectoryName(TailedFilePath);
