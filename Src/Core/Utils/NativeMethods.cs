@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Core.Utils
 {
-    public static class Native
+    public static class NativeMethods
     {
         public const int LVM_FIRST     =  0x1000;
         public const int EM_LIMITTEXT  =  0xC5;
