@@ -173,7 +173,7 @@ namespace Tyle.UI
 
         private void mnuPHighlighting_Click(object sender, EventArgs e)
         {
-            Highlighter.visualCues.ShowDialog();
+            Highlighter.visualCues.Show(this);
         }
 
         private void mnuPFont_Click(object sender, EventArgs e)
