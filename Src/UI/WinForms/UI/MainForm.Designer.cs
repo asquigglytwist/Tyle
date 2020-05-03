@@ -41,6 +41,7 @@
             this.mnuFExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrefs = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPHighlighting = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPFont = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindows = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWCascade = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWTileHorizontally = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,7 +53,6 @@
             this.tbcMDIChildren = new System.Windows.Forms.TabControl();
             this.imlMainForm = new System.Windows.Forms.ImageList(this.components);
             this.dlgFontForLSV = new System.Windows.Forms.FontDialog();
-            this.mnuPFont = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,7 +79,7 @@
             this.mnuMain.Name = "mnuMain";
             this.mnuMain.Size = new System.Drawing.Size(897, 33);
             this.mnuMain.TabIndex = 2;
-            this.mnuMain.Text = "menuStrip1";
+            this.mnuMain.Text = "MainMenu";
             // 
             // mnuFile
             // 
@@ -100,6 +100,7 @@
             this.mnuFOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.mnuFOpen.Size = new System.Drawing.Size(298, 34);
             this.mnuFOpen.Text = "&Open";
+            this.mnuFOpen.ToolTipText = "Open a new log file for viewing";
             this.mnuFOpen.Click += new System.EventHandler(this.mnuFOpen_Click);
             // 
             // tssAfterOpen
@@ -113,6 +114,7 @@
             this.mnuFClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
             this.mnuFClose.Size = new System.Drawing.Size(298, 34);
             this.mnuFClose.Text = "&Close";
+            this.mnuFClose.ToolTipText = "Close the active log file";
             this.mnuFClose.Click += new System.EventHandler(this.mnuFClose_Click);
             // 
             // mnuFCloseAll
@@ -122,6 +124,7 @@
             | System.Windows.Forms.Keys.W)));
             this.mnuFCloseAll.Size = new System.Drawing.Size(298, 34);
             this.mnuFCloseAll.Text = "Close &All";
+            this.mnuFCloseAll.ToolTipText = "Close all logs that are currently open";
             this.mnuFCloseAll.Click += new System.EventHandler(this.mnuFCloseAll_Click);
             // 
             // tssBeforeExit
@@ -149,9 +152,19 @@
             // mnuPHighlighting
             // 
             this.mnuPHighlighting.Name = "mnuPHighlighting";
-            this.mnuPHighlighting.Size = new System.Drawing.Size(270, 34);
+            this.mnuPHighlighting.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.K)));
+            this.mnuPHighlighting.Size = new System.Drawing.Size(273, 34);
             this.mnuPHighlighting.Text = "&Highlighting";
+            this.mnuPHighlighting.ToolTipText = "Display the Highlighting configuration";
             this.mnuPHighlighting.Click += new System.EventHandler(this.mnuPHighlighting_Click);
+            // 
+            // mnuPFont
+            // 
+            this.mnuPFont.Name = "mnuPFont";
+            this.mnuPFont.Size = new System.Drawing.Size(273, 34);
+            this.mnuPFont.Text = "&Font";
+            this.mnuPFont.ToolTipText = "Pick a font for the Log Viewer";
+            this.mnuPFont.Click += new System.EventHandler(this.mnuPFont_Click);
             // 
             // mnuWindows
             // 
@@ -233,13 +246,6 @@
             this.imlMainForm.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imlMainForm.ImageStream")));
             this.imlMainForm.TransparentColor = System.Drawing.Color.Transparent;
             this.imlMainForm.Images.SetKeyName(0, "NewLinesFound.png");
-            // 
-            // mnuPFont
-            // 
-            this.mnuPFont.Name = "mnuPFont";
-            this.mnuPFont.Size = new System.Drawing.Size(270, 34);
-            this.mnuPFont.Text = "&Font";
-            this.mnuPFont.Click += new System.EventHandler(this.mnuPFont_Click);
             // 
             // MainForm
             // 

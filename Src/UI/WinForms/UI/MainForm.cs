@@ -14,6 +14,7 @@ namespace Tyle.UI
         public MainForm()
         {
             InitializeComponent();
+            mnuFExit.ToolTipText = $"Quit {AppMetaData.ApplicationName}{Environment.NewLine}(Closes all files open for viewing)";
 #if DEBUG
             dlgOpenFile.CheckFileExists = false;
             dlgOpenFile.CheckPathExists = false;
