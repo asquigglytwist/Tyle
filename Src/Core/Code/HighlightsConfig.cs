@@ -10,36 +10,53 @@ namespace Tyle.Core
     public static class HighlightsHandler
     {
         // [TIP]:  Learn some manners, will ya?
-        static readonly List<HighlightConfig> HighlightConfigList;
+        static readonly List<HighlightConfig> HighlightConfigMap;
 
         static HighlightsHandler()
         {
-            HighlightConfigList = new List<HighlightConfig>();
+            HighlightConfigMap = new List<HighlightConfig>();
         }
 
         public static void Add(HighlightConfig config)
         {
-            HighlightConfigList.Add(config);
+            lock (HighlightConfigMap)
+            {
+                HighlightConfigMap.Add(config);
+            }
         }
+
+        public static void Remove(string uniqueID)
+            => Remove(HighlightConfigMap.FindIndex(x => x.UniqueID.Equals(uniqueID)));
 
         public static void Remove(int index)
         {
-            var count = HighlightConfigList.Count;
-            if (count > 0 && index > 0 && count < index)
+            lock (HighlightConfigMap)
             {
-                HighlightConfigList.RemoveAt(index);
+                var count = HighlightConfigMap.Count;
+                if (count > 0 && index > 0 && count < index)
+                {
+                    HighlightConfigMap.RemoveAt(index);
+                }
             }
-            var exMsg = $"Index {index} out of range for {nameof(HighlightConfigList)} with {count} items.";
+            var exMsg = $"Index {index} out of range for {nameof(HighlightConfigMap)} with {HighlightConfigMap.Count} items.";
             throw new IndexOutOfRangeException(exMsg);
+        }
+
+        public static List<HighlightConfig> AllConfigs
+        {
+            get
+            {
+                return HighlightConfigMap;
+            }
         }
 
         public static HighlightConfig? TryGetConfigFor(string line)
         {
-            var temp = HighlightConfigList.FindIndex(
+            var temp = HighlightConfigMap.FindIndex(
                 c => line.IndexOf(c.Pattern, StringComparison.CurrentCultureIgnoreCase) > -1);
             if(temp >= 0)
             {
-                return HighlightConfigList[temp];
+                return HighlightConfigMap[temp];
             }
             return null;
         }
