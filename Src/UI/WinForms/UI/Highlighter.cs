@@ -51,7 +51,7 @@ namespace Tyle.UI
                         BackColor = cfg.BackGround,
                         Font = cfg.DisplayFont,
                         Text = cfg.Pattern,
-                        Tag = cfg.UniqueID,
+                        Tag = cfg,
                         ToolTipText = cfg.Pattern,
                         UseItemStyleForSubItems = false
                     };
@@ -150,9 +150,6 @@ namespace Tyle.UI
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            var item = new ListViewItem(tbxPattern.Text);
-            item.ForeColor = cmbForeGround.SelectedColor;
-            item.BackColor = cmbBackGround.SelectedColor;
             FontStyle fs = FontStyle.Regular;
             if(chkBold.Checked)
             {
@@ -170,10 +167,15 @@ namespace Tyle.UI
             {
                 fs |= FontStyle.Strikeout;
             }
-            item.Font = new Font(Font, fs);
+            var item = new ListViewItem(tbxPattern.Text)
+            {
+                ForeColor = cmbForeGround.SelectedColor,
+                BackColor = cmbBackGround.SelectedColor,
+                Font = new Font(Font, fs),
+                UseItemStyleForSubItems = false,
+                Tag = new HighlightConfig(Text, chkIgnoreCase.Checked, chkBold.Checked, chkItalic.Checked, chkUnderline.Checked, chkStrikeout.Checked, cmbForeGround.SelectedColor, cmbBackGround.SelectedColor, Font)
+            };
             item.SubItems.Add(tbxPattern.Text);
-            //item.Checked = true;
-            item.UseItemStyleForSubItems = false;
             lsvPreview.Items.Add(item);
         }
 
@@ -181,12 +183,25 @@ namespace Tyle.UI
             => btnAdd.Enabled = !string.IsNullOrWhiteSpace(tbxPattern.Text);
 
         private void lsvPreview_SelectedIndexChanged(object sender, EventArgs e)
-            => btnMoveUp.Enabled = btnMoveDown.Enabled = btnRemove.Enabled
-                = (lsvPreview.SelectedIndices.Count > 0);
+        {
+            var bIsAnItemSelected = lsvPreview.SelectedIndices.Count > 0;
+            btnMoveUp.Enabled = btnMoveDown.Enabled = btnRemove.Enabled
+                = bIsAnItemSelected;
+            if (bIsAnItemSelected)
+            {
+                var cfg = (HighlightConfig)lsvPreview.Items[lsvPreview.SelectedIndices[0]].Tag;
+                tbxPattern.Text = cfg.Pattern;
+                chkIgnoreCase.Checked = cfg.IgnoreCase;
+                chkBold.Checked = cfg.Bold;
+                chkItalic.Checked = cfg.Italic;
+                chkUnderline.Checked = cfg.Underline;
+                chkStrikeout.Checked = cfg.Strikeout;
+            }
+        }
 
         private void btnCustomColor_Click(object sender, EventArgs e)
         {
-            if (dlgCustomColor.ShowDialog() == DialogResult.OK)
+            if (dlgCustomColor.ShowDialog(this) == DialogResult.OK)
             {
                 var color = dlgCustomColor.Color;
                 var caller = (sender as Button).Tag as string;
