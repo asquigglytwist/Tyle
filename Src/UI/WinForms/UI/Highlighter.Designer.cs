@@ -68,6 +68,7 @@
             // 
             // lsvPreview
             // 
+            this.lsvPreview.AutoArrange = false;
             this.lsvPreview.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colPreview,
             this.colPattern});
@@ -76,6 +77,7 @@
             this.lsvPreview.FullRowSelect = true;
             this.lsvPreview.GridLines = true;
             this.lsvPreview.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lsvPreview.HideSelection = false;
             this.lsvPreview.Location = new System.Drawing.Point(0, 0);
             this.lsvPreview.MultiSelect = false;
             this.lsvPreview.Name = "lsvPreview";
@@ -84,6 +86,7 @@
             this.lsvPreview.TabIndex = 0;
             this.lsvPreview.UseCompatibleStateImageBehavior = false;
             this.lsvPreview.View = System.Windows.Forms.View.Details;
+            this.lsvPreview.SelectedIndexChanged += new System.EventHandler(this.lsvPreview_SelectedIndexChanged);
             // 
             // colPreview
             // 
@@ -184,7 +187,7 @@
             this.cmbBGBackUp.FormattingEnabled = true;
             this.cmbBGBackUp.Location = new System.Drawing.Point(329, 92);
             this.cmbBGBackUp.Name = "cmbBGBackUp";
-            this.cmbBGBackUp.Size = new System.Drawing.Size(336, 33);
+            this.cmbBGBackUp.Size = new System.Drawing.Size(336, 37);
             this.cmbBGBackUp.TabIndex = 14;
             // 
             // cmbFGBackUp
@@ -193,7 +196,7 @@
             this.cmbFGBackUp.FormattingEnabled = true;
             this.cmbFGBackUp.Location = new System.Drawing.Point(329, 51);
             this.cmbFGBackUp.Name = "cmbFGBackUp";
-            this.cmbFGBackUp.Size = new System.Drawing.Size(336, 33);
+            this.cmbFGBackUp.Size = new System.Drawing.Size(336, 37);
             this.cmbFGBackUp.TabIndex = 13;
             // 
             // btnCustomColorBG
@@ -286,7 +289,7 @@
             this.tbxPattern.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxPattern.Location = new System.Drawing.Point(3, 10);
             this.tbxPattern.Name = "tbxPattern";
-            this.tbxPattern.Size = new System.Drawing.Size(692, 30);
+            this.tbxPattern.Size = new System.Drawing.Size(692, 35);
             this.tbxPattern.TabIndex = 7;
             this.ttpHighlighter.SetToolTip(this.tbxPattern, "The pattern to be highlighted");
             this.tbxPattern.TextChanged += new System.EventHandler(this.tbxPattern_TextChanged);
@@ -322,7 +325,7 @@
             // Highlighter
             // 
             this.AcceptButton = this.btnOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(747, 629);

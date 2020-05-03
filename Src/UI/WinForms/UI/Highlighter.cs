@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tyle.Core;
 
 namespace Tyle.UI
 {
@@ -30,7 +31,42 @@ namespace Tyle.UI
             btnCustomColorText.Tag = CustomColorTextTag;
             btnCustomColorBG.Tag = CustomColorBGTag;
             InitTheColorCombos();
+            LoadSavedHightlightsConfig();
             unsavedChanges = false;
+        }
+
+        private void LoadSavedHightlightsConfig()
+        {
+            lock (HighlightsHandler.AllConfigs)
+            {
+                var allConfigs = HighlightsHandler.AllConfigs;
+                var totalConfigs = allConfigs.Count;
+                ListViewItem[] items = new ListViewItem[totalConfigs];
+                for (int i = 0; i < totalConfigs; i++)
+                {
+                    var cfg = allConfigs[i];
+                    items[i] = new ListViewItem()
+                    {
+                        ForeColor = cfg.ForeGround,
+                        BackColor = cfg.BackGround,
+                        Font = cfg.DisplayFont,
+                        Text = cfg.Pattern,
+                        Tag = cfg.UniqueID,
+                        ToolTipText = cfg.Pattern,
+                        UseItemStyleForSubItems = false
+                    };
+                    items[i].SubItems.Add(cfg.Pattern);//, lsvPreview.ForeColor, lsvPreview.BackColor, lsvPreview.Font);
+                }
+                if (items.Length > 0)
+                {
+                    lsvPreview.Items.AddRange(items);
+                    var lastItem = items.Last();
+                    lastItem.Selected = true;
+                    lsvPreview.FocusedItem = lastItem;
+                    lsvPreview.Select();
+                    lsvPreview.Focus();
+                }
+            }
         }
 
         protected void InitTheColorCombos()
@@ -89,6 +125,10 @@ namespace Tyle.UI
             this.pnlHighlightOptions.Controls.Add(this.cmbForeGround);
         }
 
+        private void UpdateHighlightsConfig()
+        {
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (unsavedChanges)
@@ -106,10 +146,6 @@ namespace Tyle.UI
             }
             UpdateHighlightsConfig();
             Close();
-        }
-
-        private void UpdateHighlightsConfig()
-        {
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -142,9 +178,11 @@ namespace Tyle.UI
         }
 
         private void tbxPattern_TextChanged(object sender, EventArgs e)
-        {
-            btnAdd.Enabled = !string.IsNullOrWhiteSpace(tbxPattern.Text);
-        }
+            => btnAdd.Enabled = !string.IsNullOrWhiteSpace(tbxPattern.Text);
+
+        private void lsvPreview_SelectedIndexChanged(object sender, EventArgs e)
+            => btnMoveUp.Enabled = btnMoveDown.Enabled = btnRemove.Enabled
+                = (lsvPreview.SelectedIndices.Count > 0);
 
         private void btnCustomColor_Click(object sender, EventArgs e)
         {
