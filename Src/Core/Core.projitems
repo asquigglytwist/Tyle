@@ -14,7 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Code\TailedFileChangedArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Code\TailedFileChangeType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Code\TailedStream.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utils\Native.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\NativeMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)AppMetaData.cs.Template" />

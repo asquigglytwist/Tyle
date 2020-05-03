@@ -104,6 +104,9 @@
     <Compile Include="UI\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ColorsComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\FindDialog.cs">
       <SubType>Form</SubType>
     </Compile>
