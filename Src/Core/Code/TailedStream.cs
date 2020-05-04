@@ -1,10 +1,9 @@
-﻿using Core.Code;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Tyle.Core
+namespace Core.Code
 {
     #region TailedStream
     public class TailedStream : IDisposable
