@@ -11,6 +11,6 @@ namespace Core.Utils
         public const int EM_LIMITTEXT  =  0xC5;
 
         [DllImport("user32.dll", CharSet = CharSet.Ansi)]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int msg, int len, IntPtr order);
+        internal static extern IntPtr SendMessage(IntPtr hWnd, uint msg, uint len, IntPtr order);
     }
 }
