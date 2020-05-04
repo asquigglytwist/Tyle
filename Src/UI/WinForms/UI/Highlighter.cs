@@ -8,31 +8,63 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Tyle.Core;
+using Core.Code;
 
 namespace Tyle.UI
 {
     public partial class Highlighter : TyleFormBase
     {
-        public static readonly Highlighter visualCues;
+        protected static readonly Highlighter visualCues;
         private ColorsComboBox cmbBackGround;
         private ColorsComboBox cmbForeGround;
         const string CustomColorTextTag = "TextColor", CustomColorBGTag = "BackGroundColor";
-        bool unsavedChanges;
+        readonly string SearchBoxDefaultText;
 
         static Highlighter()
         {
             visualCues = new Highlighter();
         }
 
+        public static void ShowAsDialog(MainForm owner)
+        {
+            visualCues.LoadSavedHightlightsConfig();
+            visualCues.Show(owner);
+        }
+
         protected Highlighter()
         {
             InitializeComponent();
+            SearchBoxDefaultText = ttpHighlighter.GetToolTip(tbxSearchPatterns);
             btnCustomColorText.Tag = CustomColorTextTag;
             btnCustomColorBG.Tag = CustomColorBGTag;
             InitTheColorCombos();
-            LoadSavedHightlightsConfig();
-            unsavedChanges = false;
+            //LoadSavedHightlightsConfig();
+            tbxSearchPatterns.Tag = true;
+            tbxSearchPatterns.Text = SearchBoxDefaultText;
+            tbxSearchPatterns.GotFocus += tbxSearchPatterns_FocusChanged;
+            tbxSearchPatterns.LostFocus += tbxSearchPatterns_FocusChanged;
+        }
+
+        private void tbxSearchPatterns_FocusChanged(object sender, EventArgs e)
+        {
+            var isDefaultText = (bool)tbxSearchPatterns.Tag;
+            if (tbxSearchPatterns.Focused)
+            {
+                if (isDefaultText)
+                {
+                    tbxSearchPatterns.Text = string.Empty;
+                }
+                else
+                {
+                    tbxSearchPatterns.SelectAll();
+                }
+            }
+            else
+            {
+                if (isDefaultText)
+                {
+                }
+            }
         }
 
         private void LoadSavedHightlightsConfig()
@@ -59,6 +91,7 @@ namespace Tyle.UI
                 }
                 if (items.Length > 0)
                 {
+                    lsvPreview.Items.Clear();
                     lsvPreview.Items.AddRange(items);
                     var lastItem = items.Last();
                     lastItem.Selected = true;
@@ -127,30 +160,31 @@ namespace Tyle.UI
 
         private void UpdateHighlightsConfig()
         {
+            var lsHighlightConfigs = new List<HighlightConfig>();
+            lock (lsvPreview.Items)
+            {
+                foreach (ListViewItem item in lsvPreview.Items)
+                {
+                    lsHighlightConfigs.Add((HighlightConfig)item.Tag);
+                }
+            }
+            HighlightsHandler.UpdateConfigs(lsHighlightConfigs);
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (unsavedChanges)
-            {
-                var dialogResult = MessageBox.Show("There are unsaved changes.  Would you like to save now?", AppMetaData.ApplicationName, MessageBoxButtons.YesNoCancel);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    // [BIB]:  https://stackoverflow.com/questions/11518529/how-to-call-a-button-click-event-from-another-method
-                    btnAdd.PerformClick();
-                }
-                if (dialogResult == DialogResult.Cancel)
-                {
-                    return;
-                }
-            }
+            Hide();
             UpdateHighlightsConfig();
-            Close();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            visualCues.Hide();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            FontStyle fs = FontStyle.Regular;
+            var fs = FontStyle.Regular;
             if(chkBold.Checked)
             {
                 fs |= FontStyle.Bold;
@@ -167,15 +201,17 @@ namespace Tyle.UI
             {
                 fs |= FontStyle.Strikeout;
             }
-            var item = new ListViewItem(tbxPattern.Text)
+            var txtPattern = tbxPattern.Text;
+            var tmpFont = new Font(Font, fs);
+            var item = new ListViewItem(txtPattern)
             {
                 ForeColor = cmbForeGround.SelectedColor,
                 BackColor = cmbBackGround.SelectedColor,
-                Font = new Font(Font, fs),
+                Font = tmpFont,
                 UseItemStyleForSubItems = false,
-                Tag = new HighlightConfig(Text, chkIgnoreCase.Checked, chkBold.Checked, chkItalic.Checked, chkUnderline.Checked, chkStrikeout.Checked, cmbForeGround.SelectedColor, cmbBackGround.SelectedColor, Font)
+                Tag = new HighlightConfig(txtPattern, chkIgnoreCase.Checked, chkBold.Checked, chkItalic.Checked, chkUnderline.Checked, chkStrikeout.Checked, cmbForeGround.SelectedColor, cmbBackGround.SelectedColor, tmpFont)
             };
-            item.SubItems.Add(tbxPattern.Text);
+            item.SubItems.Add(txtPattern);
             lsvPreview.Items.Add(item);
         }
 
