@@ -52,6 +52,9 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.ttpHighlighter = new System.Windows.Forms.ToolTip(this.components);
+            this.tbxSearchPatterns = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.dlgLSVFont = new System.Windows.Forms.FontDialog();
             this.pnlPreview.SuspendLayout();
             this.pnlPreviewOptions.SuspendLayout();
             this.pnlHighlightOptions.SuspendLayout();
@@ -60,10 +63,10 @@
             // pnlPreview
             // 
             this.pnlPreview.Controls.Add(this.lsvPreview);
-            this.pnlPreview.Location = new System.Drawing.Point(14, 14);
+            this.pnlPreview.Location = new System.Drawing.Point(14, 110);
             this.pnlPreview.Margin = new System.Windows.Forms.Padding(5);
             this.pnlPreview.Name = "pnlPreview";
-            this.pnlPreview.Size = new System.Drawing.Size(608, 375);
+            this.pnlPreview.Size = new System.Drawing.Size(652, 375);
             this.pnlPreview.TabIndex = 2;
             // 
             // lsvPreview
@@ -82,7 +85,7 @@
             this.lsvPreview.MultiSelect = false;
             this.lsvPreview.Name = "lsvPreview";
             this.lsvPreview.ShowGroups = false;
-            this.lsvPreview.Size = new System.Drawing.Size(608, 375);
+            this.lsvPreview.Size = new System.Drawing.Size(652, 375);
             this.lsvPreview.TabIndex = 0;
             this.lsvPreview.UseCompatibleStateImageBehavior = false;
             this.lsvPreview.View = System.Windows.Forms.View.Details;
@@ -96,7 +99,7 @@
             // colPattern
             // 
             this.colPattern.Text = "Pattern";
-            this.colPattern.Width = 544;
+            this.colPattern.Width = 524;
             // 
             // pnlPreviewOptions
             // 
@@ -104,7 +107,7 @@
             this.pnlPreviewOptions.Controls.Add(this.btnMoveUp);
             this.pnlPreviewOptions.Controls.Add(this.btnRemove);
             this.pnlPreviewOptions.Controls.Add(this.btnAdd);
-            this.pnlPreviewOptions.Location = new System.Drawing.Point(637, 14);
+            this.pnlPreviewOptions.Location = new System.Drawing.Point(676, 110);
             this.pnlPreviewOptions.Margin = new System.Windows.Forms.Padding(5);
             this.pnlPreviewOptions.Name = "pnlPreviewOptions";
             this.pnlPreviewOptions.Size = new System.Drawing.Size(88, 375);
@@ -120,7 +123,8 @@
             this.btnMoveDown.Padding = new System.Windows.Forms.Padding(2);
             this.btnMoveDown.Size = new System.Drawing.Size(56, 56);
             this.btnMoveDown.TabIndex = 3;
-            this.btnMoveDown.Text = "&v";
+            this.btnMoveDown.Text = "⇓";
+            this.ttpHighlighter.SetToolTip(this.btnMoveDown, "Move the selected Highlight configuration down");
             this.btnMoveDown.UseVisualStyleBackColor = true;
             // 
             // btnMoveUp
@@ -133,7 +137,8 @@
             this.btnMoveUp.Padding = new System.Windows.Forms.Padding(2);
             this.btnMoveUp.Size = new System.Drawing.Size(56, 56);
             this.btnMoveUp.TabIndex = 2;
-            this.btnMoveUp.Text = "&^";
+            this.btnMoveUp.Text = "⇑";
+            this.ttpHighlighter.SetToolTip(this.btnMoveUp, "Move the selected Highlight configuration up");
             this.btnMoveUp.UseVisualStyleBackColor = true;
             // 
             // btnRemove
@@ -147,6 +152,7 @@
             this.btnRemove.Size = new System.Drawing.Size(56, 56);
             this.btnRemove.TabIndex = 1;
             this.btnRemove.Text = "&-";
+            this.ttpHighlighter.SetToolTip(this.btnRemove, "Remove the selected Highlight configuration");
             this.btnRemove.UseVisualStyleBackColor = true;
             // 
             // btnAdd
@@ -160,12 +166,14 @@
             this.btnAdd.Size = new System.Drawing.Size(56, 56);
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "&+";
+            this.ttpHighlighter.SetToolTip(this.btnAdd, "Add a new Highlight configuration");
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // pnlHighlightOptions
             // 
             this.pnlHighlightOptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlHighlightOptions.Controls.Add(this.button1);
             this.pnlHighlightOptions.Controls.Add(this.cmbBGBackUp);
             this.pnlHighlightOptions.Controls.Add(this.cmbFGBackUp);
             this.pnlHighlightOptions.Controls.Add(this.btnCustomColorBG);
@@ -176,16 +184,16 @@
             this.pnlHighlightOptions.Controls.Add(this.chkBold);
             this.pnlHighlightOptions.Controls.Add(this.chkIgnoreCase);
             this.pnlHighlightOptions.Controls.Add(this.tbxPattern);
-            this.pnlHighlightOptions.Location = new System.Drawing.Point(14, 397);
+            this.pnlHighlightOptions.Location = new System.Drawing.Point(5, 493);
             this.pnlHighlightOptions.Name = "pnlHighlightOptions";
-            this.pnlHighlightOptions.Size = new System.Drawing.Size(711, 142);
+            this.pnlHighlightOptions.Size = new System.Drawing.Size(772, 230);
             this.pnlHighlightOptions.TabIndex = 7;
             // 
             // cmbBGBackUp
             // 
             this.cmbBGBackUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBGBackUp.FormattingEnabled = true;
-            this.cmbBGBackUp.Location = new System.Drawing.Point(329, 92);
+            this.cmbBGBackUp.Location = new System.Drawing.Point(384, 165);
             this.cmbBGBackUp.Name = "cmbBGBackUp";
             this.cmbBGBackUp.Size = new System.Drawing.Size(336, 37);
             this.cmbBGBackUp.TabIndex = 14;
@@ -194,14 +202,14 @@
             // 
             this.cmbFGBackUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbFGBackUp.FormattingEnabled = true;
-            this.cmbFGBackUp.Location = new System.Drawing.Point(329, 51);
+            this.cmbFGBackUp.Location = new System.Drawing.Point(1, 167);
             this.cmbFGBackUp.Name = "cmbFGBackUp";
             this.cmbFGBackUp.Size = new System.Drawing.Size(336, 37);
             this.cmbFGBackUp.TabIndex = 13;
             // 
             // btnCustomColorBG
             // 
-            this.btnCustomColorBG.Location = new System.Drawing.Point(671, 92);
+            this.btnCustomColorBG.Location = new System.Drawing.Point(726, 171);
             this.btnCustomColorBG.Name = "btnCustomColorBG";
             this.btnCustomColorBG.Size = new System.Drawing.Size(24, 32);
             this.btnCustomColorBG.TabIndex = 10;
@@ -211,7 +219,7 @@
             // 
             // btnCustomColorText
             // 
-            this.btnCustomColorText.Location = new System.Drawing.Point(671, 51);
+            this.btnCustomColorText.Location = new System.Drawing.Point(343, 170);
             this.btnCustomColorText.Name = "btnCustomColorText";
             this.btnCustomColorText.Size = new System.Drawing.Size(24, 32);
             this.btnCustomColorText.TabIndex = 9;
@@ -223,9 +231,9 @@
             // 
             this.chkStrikeout.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkStrikeout.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkStrikeout.Location = new System.Drawing.Point(251, 59);
+            this.chkStrikeout.Location = new System.Drawing.Point(474, 85);
             this.chkStrikeout.Name = "chkStrikeout";
-            this.chkStrikeout.Size = new System.Drawing.Size(56, 56);
+            this.chkStrikeout.Size = new System.Drawing.Size(64, 64);
             this.chkStrikeout.TabIndex = 12;
             this.chkStrikeout.Text = "&S";
             this.chkStrikeout.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -236,9 +244,9 @@
             // 
             this.chkUnderline.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkUnderline.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkUnderline.Location = new System.Drawing.Point(127, 57);
+            this.chkUnderline.Location = new System.Drawing.Point(286, 85);
             this.chkUnderline.Name = "chkUnderline";
-            this.chkUnderline.Size = new System.Drawing.Size(56, 56);
+            this.chkUnderline.Size = new System.Drawing.Size(64, 64);
             this.chkUnderline.TabIndex = 11;
             this.chkUnderline.Text = "&U";
             this.chkUnderline.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -249,9 +257,9 @@
             // 
             this.chkItalic.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkItalic.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkItalic.Location = new System.Drawing.Point(189, 59);
+            this.chkItalic.Location = new System.Drawing.Point(381, 85);
             this.chkItalic.Name = "chkItalic";
-            this.chkItalic.Size = new System.Drawing.Size(56, 56);
+            this.chkItalic.Size = new System.Drawing.Size(64, 64);
             this.chkItalic.TabIndex = 10;
             this.chkItalic.Text = "&I";
             this.chkItalic.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -262,9 +270,9 @@
             // 
             this.chkBold.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkBold.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBold.Location = new System.Drawing.Point(65, 57);
+            this.chkBold.Location = new System.Drawing.Point(196, 85);
             this.chkBold.Name = "chkBold";
-            this.chkBold.Size = new System.Drawing.Size(56, 56);
+            this.chkBold.Size = new System.Drawing.Size(64, 64);
             this.chkBold.TabIndex = 9;
             this.chkBold.Text = "&B";
             this.chkBold.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -275,9 +283,9 @@
             // 
             this.chkIgnoreCase.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkIgnoreCase.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkIgnoreCase.Location = new System.Drawing.Point(3, 57);
+            this.chkIgnoreCase.Location = new System.Drawing.Point(8, 85);
             this.chkIgnoreCase.Name = "chkIgnoreCase";
-            this.chkIgnoreCase.Size = new System.Drawing.Size(56, 56);
+            this.chkIgnoreCase.Size = new System.Drawing.Size(64, 64);
             this.chkIgnoreCase.TabIndex = 8;
             this.chkIgnoreCase.Text = "&C";
             this.chkIgnoreCase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -287,34 +295,35 @@
             // tbxPattern
             // 
             this.tbxPattern.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxPattern.Location = new System.Drawing.Point(3, 10);
+            this.tbxPattern.Location = new System.Drawing.Point(8, 24);
             this.tbxPattern.Name = "tbxPattern";
-            this.tbxPattern.Size = new System.Drawing.Size(692, 35);
+            this.tbxPattern.Size = new System.Drawing.Size(742, 35);
             this.tbxPattern.TabIndex = 7;
             this.ttpHighlighter.SetToolTip(this.tbxPattern, "The pattern to be highlighted");
             this.tbxPattern.TextChanged += new System.EventHandler(this.tbxPattern_TextChanged);
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(547, 563);
+            this.btnOK.Location = new System.Drawing.Point(496, 731);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 46);
+            this.btnOK.Size = new System.Drawing.Size(104, 46);
             this.btnOK.TabIndex = 8;
             this.btnOK.Text = "&OK";
-            this.ttpHighlighter.SetToolTip(this.btnOK, "Click to save all changes");
+            this.ttpHighlighter.SetToolTip(this.btnOK, "Save all changes");
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(650, 563);
+            this.btnCancel.Location = new System.Drawing.Point(606, 731);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 46);
+            this.btnCancel.Size = new System.Drawing.Size(119, 46);
             this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "Cancel";
-            this.ttpHighlighter.SetToolTip(this.btnCancel, "Click to discard all changes");
+            this.ttpHighlighter.SetToolTip(this.btnCancel, "Discard all changes");
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // ttpHighlighter
             // 
@@ -322,13 +331,37 @@
             this.ttpHighlighter.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.ttpHighlighter.ToolTipTitle = "Tyle";
             // 
+            // tbxSearchPatterns
+            // 
+            this.tbxSearchPatterns.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.tbxSearchPatterns.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.tbxSearchPatterns.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxSearchPatterns.Location = new System.Drawing.Point(13, 28);
+            this.tbxSearchPatterns.Name = "tbxSearchPatterns";
+            this.tbxSearchPatterns.Size = new System.Drawing.Size(751, 35);
+            this.tbxSearchPatterns.TabIndex = 10;
+            this.ttpHighlighter.SetToolTip(this.tbxSearchPatterns, "Search Highlights configurations below");
+            this.tbxSearchPatterns.WordWrap = false;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(686, 85);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(64, 64);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "&F";
+            this.ttpHighlighter.SetToolTip(this.button1, "Font to be used for the pattern");
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Highlighter
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(747, 629);
+            this.ClientSize = new System.Drawing.Size(778, 789);
+            this.Controls.Add(this.tbxSearchPatterns);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.pnlHighlightOptions);
@@ -344,6 +377,7 @@
             this.pnlHighlightOptions.ResumeLayout(false);
             this.pnlHighlightOptions.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -373,5 +407,8 @@
         private System.Windows.Forms.ToolTip ttpHighlighter;
         private System.Windows.Forms.ComboBox cmbBGBackUp;
         private System.Windows.Forms.ComboBox cmbFGBackUp;
+        private System.Windows.Forms.TextBox tbxSearchPatterns;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.FontDialog dlgLSVFont;
     }
 }
