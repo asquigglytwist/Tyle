@@ -24,20 +24,6 @@ namespace Tyle.UI
             WindowState = FormWindowState.Maximized;
             tailedFile = new TailedStream(fileToTail, TailedFile_OnTailedFileChanged);
             Show();
-#if DEBUG
-            var hi = new HighlightConfig("Hi", false, true, true, true, true,
-                Color.Green, Color.AliceBlue, lsvTailViewer.Font);
-            var hello = new HighlightConfig("hello", true, false, true, true, true,
-                Color.DarkSeaGreen, Color.Aquamarine, lsvTailViewer.Font);
-            var yo = new HighlightConfig("yo!", true, false, true, true, true,
-                Color.Red, Color.LightGoldenrodYellow, lsvTailViewer.Font);
-            var yoyo = new HighlightConfig("yoyo", true, true, true, true, false,
-                Color.Green, Color.Navy, lsvTailViewer.Font);
-            HighlightsHandler.Add(hi);
-            HighlightsHandler.Add(hello);
-            HighlightsHandler.Add(yo);
-            HighlightsHandler.Add(yoyo);
-#endif
         }
 
         private void TailedFile_OnTailedFileChanged(object sender, TailedFileChangedArgs args)
