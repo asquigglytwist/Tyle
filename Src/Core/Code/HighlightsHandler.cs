@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Core.Code
@@ -50,6 +52,8 @@ namespace Core.Code
         public static void UpdateConfigs(List<HighlightConfig> newConfigs)
         {
             AllConfigs = newConfigs;
+            var configsInJSON = JsonConvert.SerializeObject(newConfigs, Formatting.Indented);
+            File.WriteAllText("Tyle.prefs", configsInJSON);
         }
 
         public static List<HighlightConfig> AllConfigs
