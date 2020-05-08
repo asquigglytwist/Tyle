@@ -57,6 +57,6 @@ namespace Core.Code
         }
 
         public static List<HighlightConfig> AllConfigs
-        { get; private set; }
+        { get; set; }
     }
 }
