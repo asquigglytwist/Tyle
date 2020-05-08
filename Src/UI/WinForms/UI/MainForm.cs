@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Core.Code;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -31,6 +34,8 @@ namespace Tyle.UI
         {
             mapOpenFiles?.Clear();
             mapOpenFiles = new Dictionary<string, TailViewerForm>();
+            var configsInJSON = File.ReadAllText("Tyle.prefs");
+            HighlightsHandler.AllConfigs = JsonConvert.DeserializeObject<List<HighlightConfig>>(configsInJSON);
         }
 
         private void OpenFilesForTailing(string[] fileNames)
