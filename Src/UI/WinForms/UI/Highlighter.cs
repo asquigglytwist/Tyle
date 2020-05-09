@@ -240,6 +240,12 @@ namespace Tyle.UI
                 ttpHighlighter.SetToolTip(btnBackGroundColor, cfg.BackGround.ToString());
                 pnlHighlightOptions.Enabled = true;
             }
+            else
+            {
+                pnlHighlightOptions.Enabled = false;
+                tbxPattern.Text = "";
+                tbxPattern.Enabled = true;
+            }
         }
 
         private void btnCustomColor_Click(object sender, EventArgs e)
