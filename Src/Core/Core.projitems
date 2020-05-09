@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AppMetaData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Code\HighlightsConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Code\HighlightsHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Code\Preferences.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Code\TailedFileChangedArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Code\TailedFileChangeType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Code\TailedStream.cs" />
