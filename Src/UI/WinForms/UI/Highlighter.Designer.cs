@@ -39,10 +39,11 @@
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.pnlHighlightOptions = new System.Windows.Forms.Panel();
+            this.btnBackGroundColor = new System.Windows.Forms.Button();
+            this.btnForeGroundColor = new System.Windows.Forms.Button();
+            this.btnFontForDisplay = new System.Windows.Forms.Button();
             this.cmbBGBackUp = new System.Windows.Forms.ComboBox();
             this.cmbFGBackUp = new System.Windows.Forms.ComboBox();
-            this.btnCustomColorBG = new System.Windows.Forms.Button();
-            this.btnCustomColorText = new System.Windows.Forms.Button();
             this.chkStrikeout = new System.Windows.Forms.CheckBox();
             this.chkUnderline = new System.Windows.Forms.CheckBox();
             this.chkItalic = new System.Windows.Forms.CheckBox();
@@ -53,7 +54,6 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.ttpHighlighter = new System.Windows.Forms.ToolTip(this.components);
             this.tbxSearchPatterns = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.dlgLSVFont = new System.Windows.Forms.FontDialog();
             this.pnlPreview.SuspendLayout();
             this.pnlPreviewOptions.SuspendLayout();
@@ -173,11 +173,11 @@
             // pnlHighlightOptions
             // 
             this.pnlHighlightOptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlHighlightOptions.Controls.Add(this.button1);
+            this.pnlHighlightOptions.Controls.Add(this.btnBackGroundColor);
+            this.pnlHighlightOptions.Controls.Add(this.btnForeGroundColor);
+            this.pnlHighlightOptions.Controls.Add(this.btnFontForDisplay);
             this.pnlHighlightOptions.Controls.Add(this.cmbBGBackUp);
             this.pnlHighlightOptions.Controls.Add(this.cmbFGBackUp);
-            this.pnlHighlightOptions.Controls.Add(this.btnCustomColorBG);
-            this.pnlHighlightOptions.Controls.Add(this.btnCustomColorText);
             this.pnlHighlightOptions.Controls.Add(this.chkStrikeout);
             this.pnlHighlightOptions.Controls.Add(this.chkUnderline);
             this.pnlHighlightOptions.Controls.Add(this.chkItalic);
@@ -188,6 +188,39 @@
             this.pnlHighlightOptions.Name = "pnlHighlightOptions";
             this.pnlHighlightOptions.Size = new System.Drawing.Size(772, 230);
             this.pnlHighlightOptions.TabIndex = 7;
+            // 
+            // btnBackGroundColor
+            // 
+            this.btnBackGroundColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBackGroundColor.Location = new System.Drawing.Point(524, 88);
+            this.btnBackGroundColor.Name = "btnBackGroundColor";
+            this.btnBackGroundColor.Size = new System.Drawing.Size(64, 64);
+            this.btnBackGroundColor.TabIndex = 17;
+            this.ttpHighlighter.SetToolTip(this.btnBackGroundColor, "BackGround Color to be used for the pattern");
+            this.btnBackGroundColor.UseVisualStyleBackColor = true;
+            // 
+            // btnForeGroundColor
+            // 
+            this.btnForeGroundColor.BackColor = System.Drawing.Color.White;
+            this.btnForeGroundColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnForeGroundColor.Location = new System.Drawing.Point(454, 87);
+            this.btnForeGroundColor.Name = "btnForeGroundColor";
+            this.btnForeGroundColor.Size = new System.Drawing.Size(64, 64);
+            this.btnForeGroundColor.TabIndex = 16;
+            this.btnForeGroundColor.Text = "&A";
+            this.ttpHighlighter.SetToolTip(this.btnForeGroundColor, "ForeGround Color to be used for the pattern");
+            this.btnForeGroundColor.UseVisualStyleBackColor = false;
+            // 
+            // btnFontForDisplay
+            // 
+            this.btnFontForDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFontForDisplay.Location = new System.Drawing.Point(384, 88);
+            this.btnFontForDisplay.Name = "btnFontForDisplay";
+            this.btnFontForDisplay.Size = new System.Drawing.Size(64, 64);
+            this.btnFontForDisplay.TabIndex = 15;
+            this.btnFontForDisplay.Text = "&F";
+            this.ttpHighlighter.SetToolTip(this.btnFontForDisplay, "Font to be used for the pattern");
+            this.btnFontForDisplay.UseVisualStyleBackColor = true;
             // 
             // cmbBGBackUp
             // 
@@ -207,31 +240,11 @@
             this.cmbFGBackUp.Size = new System.Drawing.Size(336, 37);
             this.cmbFGBackUp.TabIndex = 13;
             // 
-            // btnCustomColorBG
-            // 
-            this.btnCustomColorBG.Location = new System.Drawing.Point(726, 171);
-            this.btnCustomColorBG.Name = "btnCustomColorBG";
-            this.btnCustomColorBG.Size = new System.Drawing.Size(24, 32);
-            this.btnCustomColorBG.TabIndex = 10;
-            this.ttpHighlighter.SetToolTip(this.btnCustomColorBG, "Pick a custom color");
-            this.btnCustomColorBG.UseVisualStyleBackColor = true;
-            this.btnCustomColorBG.Click += new System.EventHandler(this.btnCustomColor_Click);
-            // 
-            // btnCustomColorText
-            // 
-            this.btnCustomColorText.Location = new System.Drawing.Point(343, 170);
-            this.btnCustomColorText.Name = "btnCustomColorText";
-            this.btnCustomColorText.Size = new System.Drawing.Size(24, 32);
-            this.btnCustomColorText.TabIndex = 9;
-            this.ttpHighlighter.SetToolTip(this.btnCustomColorText, "Pick a custom color");
-            this.btnCustomColorText.UseVisualStyleBackColor = true;
-            this.btnCustomColorText.Click += new System.EventHandler(this.btnCustomColor_Click);
-            // 
             // chkStrikeout
             // 
             this.chkStrikeout.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkStrikeout.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkStrikeout.Location = new System.Drawing.Point(474, 85);
+            this.chkStrikeout.Location = new System.Drawing.Point(309, 87);
             this.chkStrikeout.Name = "chkStrikeout";
             this.chkStrikeout.Size = new System.Drawing.Size(64, 64);
             this.chkStrikeout.TabIndex = 12;
@@ -244,7 +257,7 @@
             // 
             this.chkUnderline.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkUnderline.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkUnderline.Location = new System.Drawing.Point(286, 85);
+            this.chkUnderline.Location = new System.Drawing.Point(169, 87);
             this.chkUnderline.Name = "chkUnderline";
             this.chkUnderline.Size = new System.Drawing.Size(64, 64);
             this.chkUnderline.TabIndex = 11;
@@ -257,7 +270,7 @@
             // 
             this.chkItalic.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkItalic.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkItalic.Location = new System.Drawing.Point(381, 85);
+            this.chkItalic.Location = new System.Drawing.Point(239, 87);
             this.chkItalic.Name = "chkItalic";
             this.chkItalic.Size = new System.Drawing.Size(64, 64);
             this.chkItalic.TabIndex = 10;
@@ -270,7 +283,7 @@
             // 
             this.chkBold.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkBold.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBold.Location = new System.Drawing.Point(196, 85);
+            this.chkBold.Location = new System.Drawing.Point(87, 85);
             this.chkBold.Name = "chkBold";
             this.chkBold.Size = new System.Drawing.Size(64, 64);
             this.chkBold.TabIndex = 9;
@@ -328,6 +341,7 @@
             // ttpHighlighter
             // 
             this.ttpHighlighter.IsBalloon = true;
+            this.ttpHighlighter.ShowAlways = true;
             this.ttpHighlighter.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.ttpHighlighter.ToolTipTitle = "Tyle";
             // 
@@ -343,22 +357,12 @@
             this.ttpHighlighter.SetToolTip(this.tbxSearchPatterns, "Search Highlights configurations below");
             this.tbxSearchPatterns.WordWrap = false;
             // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(686, 85);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(64, 64);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "&F";
-            this.ttpHighlighter.SetToolTip(this.button1, "Font to be used for the pattern");
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // Highlighter
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(778, 789);
             this.Controls.Add(this.tbxSearchPatterns);
@@ -371,6 +375,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Highlighter";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Highlighter";
             this.pnlPreview.ResumeLayout(false);
             this.pnlPreviewOptions.ResumeLayout(false);
@@ -392,8 +398,6 @@
         private System.Windows.Forms.Button btnMoveUp;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Panel pnlHighlightOptions;
-        private System.Windows.Forms.Button btnCustomColorBG;
-        private System.Windows.Forms.Button btnCustomColorText;
         private System.Windows.Forms.TextBox tbxPattern;
         private System.Windows.Forms.CheckBox chkIgnoreCase;
         private System.Windows.Forms.CheckBox chkStrikeout;
@@ -408,7 +412,9 @@
         private System.Windows.Forms.ComboBox cmbBGBackUp;
         private System.Windows.Forms.ComboBox cmbFGBackUp;
         private System.Windows.Forms.TextBox tbxSearchPatterns;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnFontForDisplay;
         private System.Windows.Forms.FontDialog dlgLSVFont;
+        private System.Windows.Forms.Button btnBackGroundColor;
+        private System.Windows.Forms.Button btnForeGroundColor;
     }
 }

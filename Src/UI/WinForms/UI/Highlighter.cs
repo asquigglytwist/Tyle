@@ -35,8 +35,10 @@ namespace Tyle.UI
         {
             InitializeComponent();
             SearchBoxDefaultText = ttpHighlighter.GetToolTip(tbxSearchPatterns);
-            btnCustomColorText.Tag = CustomColorTextTag;
-            btnCustomColorBG.Tag = CustomColorBGTag;
+            btnForeGroundColor.Tag = CustomColorTextTag;
+            btnForeGroundColor.Click += btnCustomColor_Click;
+            btnBackGroundColor.Tag = CustomColorBGTag;
+            btnBackGroundColor.Click += btnCustomColor_Click;
             InitTheColorCombos();
             //LoadSavedHightlightsConfig();
             tbxSearchPatterns.Tag = true;
