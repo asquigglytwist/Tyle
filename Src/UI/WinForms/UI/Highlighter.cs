@@ -55,17 +55,17 @@ namespace Tyle.UI
                 if (isDefaultText)
                 {
                     tbxSearchPatterns.Text = string.Empty;
+                    tbxSearchPatterns.Tag = false;
                 }
                 else
                 {
                     tbxSearchPatterns.SelectAll();
                 }
             }
-            else
+            else if (string.IsNullOrWhiteSpace(tbxSearchPatterns.Text))
             {
-                if (isDefaultText)
-                {
-                }
+                tbxSearchPatterns.Text = SearchBoxDefaultText;
+                tbxSearchPatterns.Tag = true;
             }
         }
 
