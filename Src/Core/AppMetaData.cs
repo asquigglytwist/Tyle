@@ -2,7 +2,7 @@ namespace Tyle
 {
     public static class AppMetaData
     {
-        public const string BuildTimeStamp = "2020-05-08  17:39:34 UTC";
+        public const string BuildTimeStamp = "2020-05-09  12:39:14 UTC";
         public const string BuildMode = "WinForms";
 #region AssemblyInfo
         public const string ApplicationName = "Tyle";
@@ -19,8 +19,8 @@ namespace Tyle
         // [BIB]:  https://stackoverflow.com/questions/64602/what-are-differences-between-assemblyversion-assemblyfileversion-and-assemblyin
         private const string major = "0";
         private const string minor = "2005";
-        private const string build = "08";
-        private const string revision = "1739";
+        private const string build = "09";
+        private const string revision = "1239";
         public const string ProductVersion = major + "." + minor + ".0.0";
         public const string AssemblyVersion = major + "." + minor + "." + build + ".0";
         // [BIB]:  https://stackoverflow.com/questions/17144355/how-can-i-replace-every-occurrence-of-a-string-in-a-file-with-powershell
@@ -31,7 +31,7 @@ namespace Tyle
         // [BIB]:  https://stackoverflow.com/questions/6245570/how-to-get-the-current-branch-name-in-git
         public const string RepoBranch = "master";
         // [BIB]:  https://stackoverflow.com/questions/5694389/get-the-short-git-version-hash
-        public const string CommitHash = "1cba6c595b0f647e2d95318219cc9bd9c344c161";
+        public const string CommitHash = "ba757c9d5fd6efdf479fb5cd5eacae64f5f6fc71";
 #endregion //  Git - Repo Details
     }
 }
