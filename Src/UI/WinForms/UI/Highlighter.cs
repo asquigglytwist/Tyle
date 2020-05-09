@@ -234,6 +234,11 @@ namespace Tyle.UI
                 chkItalic.Checked = cfg.Italic;
                 chkUnderline.Checked = cfg.Underline;
                 chkStrikeout.Checked = cfg.Strikeout;
+                btnForeGroundColor.ForeColor = cfg.ForeGround;
+                ttpHighlighter.SetToolTip(btnForeGroundColor, cfg.ForeGround.ToString());
+                btnBackGroundColor.BackColor = cfg.BackGround;
+                ttpHighlighter.SetToolTip(btnBackGroundColor, cfg.BackGround.ToString());
+                pnlHighlightOptions.Enabled = true;
             }
         }
 
