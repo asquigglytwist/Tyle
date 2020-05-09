@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Core.Code
@@ -50,9 +52,10 @@ namespace Core.Code
         public static void UpdateConfigs(List<HighlightConfig> newConfigs)
         {
             AllConfigs = newConfigs;
+            Preferences.Save(newConfigs);
         }
 
         public static List<HighlightConfig> AllConfigs
-        { get; private set; }
+        { get; set; }
     }
 }
