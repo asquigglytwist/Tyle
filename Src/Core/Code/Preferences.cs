@@ -27,7 +27,7 @@ namespace Core.Code
             var configsInJSON = NSJ.JsonConvert.SerializeObject(newConfigs, NSJ.Formatting.Indented);
             File.WriteAllText(fileName, configsInJSON);
             var fullJSON = $@"{{
-    ""prefsVersion"": 1.0,
+    ""prefsVersion"": {AppMetaData.PrefsVersion},
     ""allConfigs"": {configsInJSON}
 }}";
             File.WriteAllText(fileName + ".json", fullJSON);
