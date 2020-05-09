@@ -25,17 +25,18 @@ namespace Core.Code
                 throw new ArgumentException($"Argument {nameof(fileName)} is invalid: NULL, Empty or WhiteSpace");
             }
             var configsInJSON = NSJ.JsonConvert.SerializeObject(newConfigs, NSJ.Formatting.Indented);
-            File.WriteAllText(fileName, configsInJSON);
             var fullJSON = $@"{{
     ""prefsVersion"": {AppMetaData.PrefsVersion},
     ""allConfigs"": {configsInJSON}
 }}";
-            File.WriteAllText(fileName + ".json", fullJSON);
+            File.WriteAllText(fileName, fullJSON);
         }
 
         public static void LoadPrefs(string fileName = PrefsFileName)
         {
-            var configsInJSON = File.ReadAllText(fileName);
+            var fullJSON = File.ReadAllText(fileName);
+            var prefsObj = NJL.JObject.Parse(fullJSON);
+            var configsInJSON = prefsObj.GetValue("allConfigs").ToString();
             HighlightsHandler.AllConfigs = NSJ.JsonConvert.DeserializeObject<List<HighlightConfig>>(configsInJSON);
         }
     }
