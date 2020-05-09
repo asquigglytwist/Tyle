@@ -110,7 +110,6 @@ namespace Tyle.UI
             }
             else
             {
-                //Text = color.ToString();
                 Text = CustomColor;
             }
             SelectedColor = color;
