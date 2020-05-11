@@ -340,10 +340,11 @@
             // 
             // ttpHighlighter
             // 
-            this.ttpHighlighter.IsBalloon = true;
+            //this.ttpHighlighter.OwnerDraw = true;
             this.ttpHighlighter.ShowAlways = true;
-            this.ttpHighlighter.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.ttpHighlighter.ToolTipTitle = "Tyle";
+            //this.ttpHighlighter.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this.ttpHighlighter_Draw);
+            //this.ttpHighlighter.Popup += new System.Windows.Forms.PopupEventHandler(this.ttpHighlighter_Popup);
             // 
             // tbxSearchPatterns
             // 
