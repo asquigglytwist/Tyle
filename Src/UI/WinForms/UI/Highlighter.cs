@@ -14,15 +14,22 @@ namespace Tyle.UI
 {
     public partial class Highlighter : TyleFormBase
     {
+        #region Fields
         protected static readonly Highlighter visualCues;
         private ColorsComboBox cmbBackGround;
         private ColorsComboBox cmbForeGround;
         const string CustomColorTextTag = "TextColor", CustomColorBGTag = "BackGroundColor";
         readonly string SearchBoxDefaultText;
+        #endregion // Fields
 
         static Highlighter()
         {
             visualCues = new Highlighter();
+            visualCues.ttpHighlighter.BackColor = Color.Crimson;
+            visualCues.ttpHighlighter.ForeColor = Color.AliceBlue;
+            visualCues.ttpHighlighter.ShowAlways = true;
+            visualCues.ttpHighlighter.IsBalloon = false;
+            visualCues.ttpHighlighter.OwnerDraw = false;
         }
 
         public static void ShowAsDialog(MainForm owner)
@@ -47,28 +54,7 @@ namespace Tyle.UI
             tbxSearchPatterns.LostFocus += tbxSearchPatterns_FocusChanged;
         }
 
-        private void tbxSearchPatterns_FocusChanged(object sender, EventArgs e)
-        {
-            var isDefaultText = (bool)tbxSearchPatterns.Tag;
-            if (tbxSearchPatterns.Focused)
-            {
-                if (isDefaultText)
-                {
-                    tbxSearchPatterns.Text = string.Empty;
-                    tbxSearchPatterns.Tag = false;
-                }
-                else
-                {
-                    tbxSearchPatterns.SelectAll();
-                }
-            }
-            else if (string.IsNullOrWhiteSpace(tbxSearchPatterns.Text))
-            {
-                tbxSearchPatterns.Text = SearchBoxDefaultText;
-                tbxSearchPatterns.Tag = true;
-            }
-        }
-
+        #region Helpers
         private void LoadSavedHightlightsConfig()
         {
             lock (HighlightsHandler.AllConfigs)
@@ -172,53 +158,33 @@ namespace Tyle.UI
             }
             HighlightsHandler.UpdateConfigs(lsHighlightConfigs);
         }
+        #endregion // Helpers
 
-        private void btnOK_Click(object sender, EventArgs e)
+        #region EventHandlers
+        private void tbxSearchPatterns_FocusChanged(object sender, EventArgs e)
         {
-            Hide();
-            UpdateHighlightsConfig();
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            visualCues.Hide();
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            var fs = FontStyle.Regular;
-            if(chkBold.Checked)
+            var isDefaultText = (bool)tbxSearchPatterns.Tag;
+            if (tbxSearchPatterns.Focused)
             {
-                fs |= FontStyle.Bold;
+                if (isDefaultText)
+                {
+                    tbxSearchPatterns.Text = string.Empty;
+                    tbxSearchPatterns.Tag = false;
+                }
+                else
+                {
+                    tbxSearchPatterns.SelectAll();
+                }
             }
-            if(chkItalic.Checked)
+            else if (string.IsNullOrWhiteSpace(tbxSearchPatterns.Text))
             {
-                fs |= FontStyle.Italic;
+                tbxSearchPatterns.Text = SearchBoxDefaultText;
+                tbxSearchPatterns.Tag = true;
             }
-            if (chkUnderline.Checked)
-            {
-                fs |= FontStyle.Underline;
-            }
-            if (chkStrikeout.Checked)
-            {
-                fs |= FontStyle.Strikeout;
-            }
-            var txtPattern = tbxPattern.Text;
-            var tmpFont = new Font(Font, fs);
-            var item = new ListViewItem(txtPattern)
-            {
-                ForeColor = cmbForeGround.SelectedColor,
-                BackColor = cmbBackGround.SelectedColor,
-                Font = tmpFont,
-                UseItemStyleForSubItems = false,
-                Tag = new HighlightConfig(txtPattern, chkIgnoreCase.Checked, chkBold.Checked, chkItalic.Checked, chkUnderline.Checked, chkStrikeout.Checked, cmbForeGround.SelectedColor, cmbBackGround.SelectedColor, tmpFont)
-            };
-            item.SubItems.Add(txtPattern);
-            lsvPreview.Items.Add(item);
         }
 
         private void tbxPattern_TextChanged(object sender, EventArgs e)
-            => btnAdd.Enabled = !string.IsNullOrWhiteSpace(tbxPattern.Text);
+    => btnAdd.Enabled = !string.IsNullOrWhiteSpace(tbxPattern.Text);
 
         private void lsvPreview_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -248,6 +214,39 @@ namespace Tyle.UI
             }
         }
 
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            var fs = FontStyle.Regular;
+            if (chkBold.Checked)
+            {
+                fs |= FontStyle.Bold;
+            }
+            if (chkItalic.Checked)
+            {
+                fs |= FontStyle.Italic;
+            }
+            if (chkUnderline.Checked)
+            {
+                fs |= FontStyle.Underline;
+            }
+            if (chkStrikeout.Checked)
+            {
+                fs |= FontStyle.Strikeout;
+            }
+            var txtPattern = tbxPattern.Text;
+            var tmpFont = new Font(Font, fs);
+            var item = new ListViewItem(txtPattern)
+            {
+                ForeColor = cmbForeGround.SelectedColor,
+                BackColor = cmbBackGround.SelectedColor,
+                Font = tmpFont,
+                UseItemStyleForSubItems = false,
+                Tag = new HighlightConfig(txtPattern, chkIgnoreCase.Checked, chkBold.Checked, chkItalic.Checked, chkUnderline.Checked, chkStrikeout.Checked, cmbForeGround.SelectedColor, cmbBackGround.SelectedColor, tmpFont)
+            };
+            item.SubItems.Add(txtPattern);
+            lsvPreview.Items.Add(item);
+        }
+
         private void btnCustomColor_Click(object sender, EventArgs e)
         {
             // [BIB]:  https://stackoverflow.com/questions/4261162/modal-common-dialog-not-showing-until-pressing-the-alt-key/5080752
@@ -268,5 +267,30 @@ namespace Tyle.UI
                 }
             }
         }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            Hide();
+            UpdateHighlightsConfig();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            visualCues.Hide();
+        }
+
+        //private void ttpHighlighter_Popup(object sender, PopupEventArgs e)
+        //{
+        //    e.ToolTipSize = TextRenderer.MeasureText(ttpHighlighter.GetToolTip(e.AssociatedControl), visualCues.Font);
+        //}
+
+        //private void ttpHighlighter_Draw(object sender, DrawToolTipEventArgs e)
+        //{
+        //    e.Graphics.FillRectangle(SystemBrushes.Info, e.Bounds);
+        //    e.DrawBackground();
+        //    e.DrawBorder();
+        //    e.DrawText(TextFormatFlags.VerticalCenter);
+        //}
+        #endregion // EventHandlers
     }
 }
