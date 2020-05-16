@@ -10,8 +10,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AppMetaData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Code\FilteredLogFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Code\LogFileStream.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Code\HighlightsConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Code\HighlightsHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Code\LogEntry.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Code\NumberExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Code\Preferences.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Code\TailedFileChangedArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Code\TailedFileChangeType.cs" />
