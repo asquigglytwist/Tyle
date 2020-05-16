@@ -33,7 +33,8 @@ namespace Core.Code
             }
             if (IgnoreCase)
             {
-                return line.IndexOf(Pattern, StringComparison.CurrentCultureIgnoreCase) > -1;
+                // [BIB]:  https://docs.microsoft.com/en-us/dotnet/standard/base-types/best-practices-strings
+                return line.IndexOf(Pattern, StringComparison.OrdinalIgnoreCase) > -1;
             }
             return line.Contains(Pattern);
         }
