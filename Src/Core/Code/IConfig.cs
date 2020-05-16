@@ -44,12 +44,15 @@ namespace Core.Code
             {
                 return rxPattern.IsMatch(line);
             }
-            if (IgnoreCase)
+            else
             {
-                // [BIB]:  https://docs.microsoft.com/en-us/dotnet/standard/base-types/best-practices-strings
-                return line.IndexOf(Pattern, StringComparison.OrdinalIgnoreCase) > -1;
+                if (IgnoreCase)
+                {
+                    // [BIB]:  https://docs.microsoft.com/en-us/dotnet/standard/base-types/best-practices-strings
+                    return line.IndexOf(Pattern, StringComparison.OrdinalIgnoreCase) > -1;
+                }
+                return line.Contains(Pattern);
             }
-            return line.Contains(Pattern);
         }
     }
 }
