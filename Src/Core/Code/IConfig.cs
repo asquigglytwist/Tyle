@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Core.Code
 {
@@ -18,18 +19,30 @@ namespace Core.Code
         public readonly bool IgnoreCase;
         public readonly bool IsRegex;
         public readonly ConfigAction Action;
+        protected readonly Regex rxPattern;
 
-        public IConfig(string pattern)
+        public IConfig(string pattern, bool ignoreCase = true, bool isRegex = false)
         {
             UniqueID = Guid.NewGuid().ToString("N").ToLowerInvariant();
             Pattern = pattern;
+            IgnoreCase = ignoreCase;
+            IsRegex = isRegex;
+            if (isRegex)
+            {
+                RegexOptions rxOpt = RegexOptions.Compiled;
+                if (ignoreCase)
+                {
+                    rxOpt |= RegexOptions.IgnoreCase;
+                }
+                rxPattern = new Regex(Pattern, rxOpt);
+            }
         }
 
         public virtual bool DoesLineMatch(string line)
         {
             if (IsRegex)
             {
-                throw new NotImplementedException($"{nameof(IsRegex)} is not supported, yet...");
+                return rxPattern.IsMatch(line);
             }
             if (IgnoreCase)
             {
