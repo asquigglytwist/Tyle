@@ -10,10 +10,10 @@ namespace Core.Code
     {
         #region Fields
         const int ItemNotFound = -1, DelayBeforeRaisingEvent = 2000;
-        readonly int CRLFLength = Environment.NewLine.Length;
-        StreamReader fileStream;
-        List<string> lsLinesInFile;
-        FileSystemWatcher fileWatcher;
+        protected readonly int CRLFLength = Environment.NewLine.Length;
+        protected StreamReader fileStream;
+        protected List<LogEntry> lsLinesInFile;
+        protected FileSystemWatcher fileWatcher;
         public delegate void TailedFileChangedHandler(object sender, TailedFileChangedArgs e);
         public event TailedFileChangedHandler OnTailedFileChanged;
         #endregion
@@ -23,7 +23,7 @@ namespace Core.Code
         {
             TailedFilePath = filePath;
             LongestLine = "---";
-            lsLinesInFile = new List<string>();
+            lsLinesInFile = new List<LogEntry>();
         }
 
         public TailedStream(string filePath, TailedFileChangedHandler changeHandler)
@@ -63,10 +63,10 @@ namespace Core.Code
             if (lsLinesInFile.Count > 0)
             {
                 searchStartIndex %= lsLinesInFile.Count;
-                foundItemIndex = lsLinesInFile.FindIndex(searchStartIndex, (line => (line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > -1)));
+                foundItemIndex = lsLinesInFile.FindIndex(searchStartIndex, (entry => (entry.Line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > -1)));
                 if (foundItemIndex == ItemNotFound && searchStartIndex != 0 && wrapSearch)
                 {
-                    foundItemIndex = lsLinesInFile.FindIndex(0, (line => (line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > ItemNotFound)));
+                    foundItemIndex = lsLinesInFile.FindIndex(0, (entry => (entry.Line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > ItemNotFound)));
                 }
             }
             return foundItemIndex;
@@ -111,7 +111,7 @@ namespace Core.Code
                     }
                     temp = temp.Replace("\t", "    ");
                     LongestLine = (LongestLine.Length < temp.Length ? temp : LongestLine);
-                    lsLinesInFile.Add(temp);
+                    lsLinesInFile.Add(new LogEntry(temp));
                 }
             }
             catch (Exception)
@@ -140,13 +140,13 @@ namespace Core.Code
                             if (shiftInPosition < CRLFLength)
                             {
                                 // TODO:  We should theoretically not be running into an IndexOutOfRange issue here; Check again though...
-                                lsLinesInFile[lsLinesInFile.Count - 1] = lsLinesInFile[lsLinesInFile.Count - 1] + temp;
+                                lsLinesInFile[lsLinesInFile.Count - 1] = new LogEntry(lsLinesInFile[lsLinesInFile.Count - 1].Line + temp);
                                 lastLineExtended = true;
                             }
                             else
                             {
                                 // We've read the line; So we have to add it to the list...
-                                lsLinesInFile.Add(temp);
+                                lsLinesInFile.Add(new LogEntry(temp));
                             }
                             LongestLine = (LongestLine.Length < temp.Length ? temp : LongestLine);
                         }
@@ -279,6 +279,7 @@ namespace Core.Code
         }
 
         public long StreamSize { get; private set; }
+
         public DateTime LastModified { get; private set; }
 
         public string LongestLine { get; protected set; }
@@ -289,7 +290,7 @@ namespace Core.Code
         {
             get
             {
-                return lsLinesInFile[index];
+                return lsLinesInFile[index].Line;
             }
         }
         #endregion
