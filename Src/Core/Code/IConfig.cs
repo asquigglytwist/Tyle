@@ -25,6 +25,17 @@ namespace Core.Code
             Pattern = pattern;
         }
 
-        public abstract bool DoesLineMatch(string line);
+        public virtual bool DoesLineMatch(string line)
+        {
+            if (IsRegex)
+            {
+                throw new NotImplementedException($"{nameof(IsRegex)} is not supported, yet...");
+            }
+            if (IgnoreCase)
+            {
+                return line.IndexOf(Pattern, StringComparison.CurrentCultureIgnoreCase) > -1;
+            }
+            return line.Contains(Pattern);
+        }
     }
 }
