@@ -7,21 +7,18 @@ using System.Threading.Tasks;
 
 namespace Core.Code
 {
-    public struct HighlightConfig
+    public class HighlightConfig : IConfig
     {
-        public readonly string UniqueID;
-        public readonly string Pattern;
-        public readonly bool IgnoreCase, Bold, Italic, Underline, Strikeout;
+        public readonly bool Bold, Italic, Underline, Strikeout;
         public readonly Color ForeGround, BackGround;
         public readonly Font DisplayFont;
 
-        public HighlightConfig(string pattern, bool ignoreCase,
+        public HighlightConfig(string pattern, bool ignoreCase, bool isRegex,
             bool bold, bool italic, bool underline, bool strikeout,
             Color foreGround, Color backGround,
             Font displayFont)
+            : base(ConfigAction.Highlight, pattern, ignoreCase, isRegex)
         {
-            Pattern = pattern;
-            IgnoreCase = ignoreCase;
             Bold = bold;
             Italic = italic;
             Underline = underline;
@@ -34,7 +31,6 @@ namespace Core.Code
                 | (underline ? FontStyle.Underline : FontStyle.Regular)
                 | (strikeout ? FontStyle.Strikeout : FontStyle.Regular);
             DisplayFont = new Font(displayFont, style);
-            UniqueID = Guid.NewGuid().ToString("N").ToLowerInvariant();
         }
     }
 }
