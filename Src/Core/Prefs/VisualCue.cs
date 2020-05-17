@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 namespace Core.Code
 {
     #region VisualCue
+    /// <summary>
+    /// Represents the VisualCue / Decoration for a matched <see cref="LogEntry"/>
+    /// </summary>
     public class VisualCue
     {
         #region Fields
@@ -45,13 +48,13 @@ namespace Core.Code
         /// <summary>
         /// Creates a new instance of <see cref="VisualCue"/>
         /// </summary>
-        /// <param name="bold">Bold style for the text</param>
-        /// <param name="italic">Italicizes the text</param>
-        /// <param name="underline">Underlines the text</param>
-        /// <param name="strikeout">Strike-out the text</param>
-        /// <param name="foreGround">Foreground color for the text</param>
-        /// <param name="backGround">Background color for the text</param>
-        /// <param name="displayFont">Font to be used for displaying the text</param>
+        /// <param name="bold"><inheritdoc cref="Bold"/></param>
+        /// <param name="italic"><inheritdoc cref="Italic"/></param>
+        /// <param name="underline"><inheritdoc cref="Underline"/></param>
+        /// <param name="strikeout"><inheritdoc cref="Strikeout"/></param>
+        /// <param name="foreGround"><inheritdoc cref="ForeGround"/></param>
+        /// <param name="backGround"><inheritdoc cref="BackGround"/></param>
+        /// <param name="displayFont"><inheritdoc cref="DisplayFont"/></param>
         public VisualCue(bool bold, bool italic, bool underline, bool strikeout,
             Color foreGround, Color backGround, Font displayFont)
         {
