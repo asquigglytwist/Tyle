@@ -19,14 +19,18 @@ namespace Core.Code
         public readonly bool IgnoreCase;
         public readonly bool IsRegex;
         public readonly ConfigAction Action;
+#if COMPILED_REGEX_FOR_CONFIG
         protected readonly Regex rxPattern;
+#endif
 
-        public IConfig(string pattern, bool ignoreCase = true, bool isRegex = false)
+        public IConfig(ConfigAction action, string pattern, bool ignoreCase = true, bool isRegex = false)
         {
             UniqueID = Guid.NewGuid().ToString("N").ToLowerInvariant();
+            Action = action;
             Pattern = pattern;
             IgnoreCase = ignoreCase;
             IsRegex = isRegex;
+#if COMPILED_REGEX_FOR_CONFIG
             if (isRegex)
             {
                 RegexOptions rxOpt = RegexOptions.Compiled;
@@ -36,13 +40,22 @@ namespace Core.Code
                 }
                 rxPattern = new Regex(Pattern, rxOpt);
             }
+#endif
         }
 
         public virtual bool DoesLineMatch(string line)
         {
             if (IsRegex)
             {
+#if COMPILED_REGEX_FOR_CONFIG
                 return rxPattern.IsMatch(line);
+#else
+                if (IgnoreCase)
+                {
+                    return Regex.IsMatch(line, Pattern, RegexOptions.IgnoreCase);
+                }
+                return Regex.IsMatch(line, Pattern);
+#endif
             }
             else
             {
