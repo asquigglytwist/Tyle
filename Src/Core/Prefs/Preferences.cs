@@ -16,26 +16,41 @@ namespace Core.Code
         public static List<Rule> Rules
         { get; private set; }
 
-        public static void Save(List<Rule> newConfigs, string fileName = PrefsFileName)
+        public static void Save(List<Rule> newRules, string fileName = PrefsFileName)
         {
             if (string.IsNullOrWhiteSpace(fileName))
             {
                 throw new ArgumentException($"Argument {nameof(fileName)} is invalid: NULL, Empty or WhiteSpace");
             }
-            var configsInJSON = NSJ.JsonConvert.SerializeObject(newConfigs, NSJ.Formatting.Indented);
+            var rulesInJSON = NSJ.JsonConvert.SerializeObject(newRules,
+                NSJ.Formatting.Indented);
             var fullJSON = $@"{{
     ""prefsVersion"": {AppMetaData.PrefsVersion},
-    ""allConfigs"": {configsInJSON}
+    ""allRules"": {rulesInJSON}
 }}";
             File.WriteAllText(fileName, fullJSON);
         }
 
         public static void LoadPrefs(string fileName = PrefsFileName)
         {
-            var fullJSON = File.ReadAllText(fileName);
-            var prefsObj = NJL.JObject.Parse(fullJSON);
-            var configsInJSON = prefsObj.GetValue("allConfigs").ToString();
-            Rules = NSJ.JsonConvert.DeserializeObject<List<Rule>>(configsInJSON);
+            try
+            {
+                if (File.Exists(fileName))
+                {
+                    var fullJSON = File.ReadAllText(fileName);
+                    var prefsObj = NJL.JObject.Parse(fullJSON);
+                    var configsInJSON = prefsObj.GetValue("allConfigs").ToString();
+                    Rules = NSJ.JsonConvert.DeserializeObject<List<Rule>>(configsInJSON); 
+                }
+                //else
+                //{
+                //    throw new FileNotFoundException($"Prefs file not found:  {fileName}");
+                //}
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
