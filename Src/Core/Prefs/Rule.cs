@@ -28,12 +28,20 @@ namespace Core.Code
         /// </summary>
         public readonly bool IsRegex;
 #if COMPILED_REGEX_FOR_CONFIG
+        /// <summary>
+        /// (Pre-)Compiled <see cref="Regex"/> instance of the <see cref="Pattern"/>, if <see cref="IsRegex"/> is True
+        /// </summary>
         protected readonly Regex rxPattern;
 #endif
         /// <summary>
-        /// The <see cref="VisualCue"/> to be used when displaying any <see cref="LogEntry"/> that match this <see cref="Rule"/>
+        /// The <see cref="VisualCue"/> to be used when displaying any <see cref="LogEntry"/> that match no <see cref="Rule"/>
         /// </summary>
         public readonly VisualCue Decoration;
+
+        /// <summary>
+        /// If True, any <see cref="LogEntry"/> that matches this <see cref="Rule"/> will be Filtered Out (i.e., Omitted from View but not removed from the LogFile)
+        /// </summary>
+        public readonly bool IsAnExcludeFilter;
 
         /// <summary>
         /// Constructs a new <see cref="Rule"/>
@@ -83,6 +91,18 @@ namespace Core.Code
                 foreGround, backGround, displayFont);
         }
 
+        public Rule(string pattern, bool ignoreCase, bool isRegex,
+            bool isAnExclude)
+            : this(pattern, ignoreCase, isRegex)
+        {
+            IsAnExcludeFilter = isAnExclude;
+        }
+
+        /// <summary>
+        /// Tests <paramref name="line"/> against this <see cref="Rule"/> for a match
+        /// </summary>
+        /// <param name="line">The <see cref="LogEntry.Line"/> to be tested</param>
+        /// <returns>True when <see cref="LogEntry.Line"/> matches this <see cref="Rule"/>; False otherwise</returns>
         protected virtual bool DoesLineMatch(string line)
         {
             if (IsRegex)
