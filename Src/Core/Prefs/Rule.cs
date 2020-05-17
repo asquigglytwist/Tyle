@@ -103,7 +103,7 @@ namespace Core.Code
         /// </summary>
         /// <param name="line">The <see cref="LogEntry.Line"/> to be tested</param>
         /// <returns>True when <see cref="LogEntry.Line"/> matches this <see cref="Rule"/>; False otherwise</returns>
-        protected virtual bool DoesLineMatch(string line)
+        public virtual bool DoesLineMatch(string line)
         {
             if (IsRegex)
             {
