@@ -38,7 +38,7 @@ namespace Core.Code
             throw new IndexOutOfRangeException(exMsg);
         }
 
-        public static HighlightConfig? TryGetConfigFor(string line)
+        public static HighlightConfig TryGetConfigFor(string line)
         {
             var temp = AllConfigs.FindIndex(
                 c => line.IndexOf(c.Pattern, StringComparison.CurrentCultureIgnoreCase) > -1);
