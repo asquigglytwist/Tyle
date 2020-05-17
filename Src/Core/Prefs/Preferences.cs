@@ -28,10 +28,19 @@ namespace Core.Code
     ""prefsVersion"": {AppMetaData.PrefsVersion},
     ""allRules"": {rulesInJSON}
 }}";
-            File.WriteAllText(fileName, fullJSON);
+            try
+            {
+                File.WriteAllText(fileName, fullJSON);
+            }
+            catch (Exception)
+            {
+                var tempFile = Path.GetTempFileName();
+                File.WriteAllText(tempFile, fullJSON);
+                throw;
+            }
         }
 
-        public static void LoadPrefs(string fileName = PrefsFileName)
+        public static void Load(string fileName = PrefsFileName)
         {
             try
             {
