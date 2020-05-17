@@ -21,8 +21,8 @@ namespace Core.Code
             }
         }
 
-        public static void Remove(string uniqueID)
-            => Remove(AllConfigs.FindIndex(x => x.UniqueID.Equals(uniqueID)));
+        //public static void Remove(string uniqueID)
+        //    => Remove(AllConfigs.FindIndex(x => x.UniqueID.Equals(uniqueID)));
 
         public static void Remove(int index)
         {
@@ -38,16 +38,16 @@ namespace Core.Code
             throw new IndexOutOfRangeException(exMsg);
         }
 
-        public static HighlightConfig TryGetConfigFor(string line)
-        {
-            var temp = AllConfigs.FindIndex(
-                c => line.IndexOf(c.Pattern, StringComparison.CurrentCultureIgnoreCase) > -1);
-            if (temp >= 0)
-            {
-                return AllConfigs[temp];
-            }
-            return null;
-        }
+        //public static HighlightConfig TryGetConfigFor(string line)
+        //{
+        //    var temp = AllConfigs.FindIndex(
+        //        c => line.IndexOf(c.Pattern, StringComparison.CurrentCultureIgnoreCase) > -1);
+        //    if (temp >= 0)
+        //    {
+        //        return AllConfigs[temp];
+        //    }
+        //    return null;
+        //}
 
         public static void UpdateConfigs(List<HighlightConfig> newConfigs)
         {

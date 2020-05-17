@@ -70,12 +70,12 @@ namespace Tyle.UI
                         ForeColor = cfg.ForeGround,
                         BackColor = cfg.BackGround,
                         Font = cfg.DisplayFont,
-                        Text = cfg.Pattern,
+                        //Text = cfg.Pattern,
                         Tag = cfg,
-                        ToolTipText = cfg.Pattern,
+                        //ToolTipText = cfg.Pattern,
                         UseItemStyleForSubItems = false
                     };
-                    items[i].SubItems.Add(cfg.Pattern);//, lsvPreview.ForeColor, lsvPreview.BackColor, lsvPreview.Font);
+                    //items[i].SubItems.Add(cfg.Pattern);//, lsvPreview.ForeColor, lsvPreview.BackColor, lsvPreview.Font);
                 }
                 if (items.Length > 0)
                 {
@@ -194,8 +194,8 @@ namespace Tyle.UI
             if (bIsAnItemSelected)
             {
                 var cfg = (HighlightConfig)lsvPreview.Items[lsvPreview.SelectedIndices[0]].Tag;
-                tbxPattern.Text = cfg.Pattern;
-                chkIgnoreCase.Checked = cfg.IgnoreCase;
+                //tbxPattern.Text = cfg.Pattern;
+                //chkIgnoreCase.Checked = cfg.IgnoreCase;
                 chkBold.Checked = cfg.Bold;
                 chkItalic.Checked = cfg.Italic;
                 chkUnderline.Checked = cfg.Underline;
