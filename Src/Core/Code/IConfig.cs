@@ -5,28 +5,19 @@ using System.Text.RegularExpressions;
 
 namespace Core.Code
 {
-    public enum ConfigAction
-    {
-        Highlight,
-        Filter,
-        React
-    }
-
     public abstract class IConfig
     {
         public readonly string UniqueID;
         public readonly string Pattern;
         public readonly bool IgnoreCase;
         public readonly bool IsRegex;
-        public readonly ConfigAction Action;
 #if COMPILED_REGEX_FOR_CONFIG
         protected readonly Regex rxPattern;
 #endif
 
-        public IConfig(ConfigAction action, string pattern, bool ignoreCase = true, bool isRegex = false)
+        public IConfig(string pattern, bool ignoreCase = true, bool isRegex = false)
         {
             UniqueID = Guid.NewGuid().ToString("N").ToLowerInvariant();
-            Action = action;
             Pattern = pattern;
             IgnoreCase = ignoreCase;
             IsRegex = isRegex;
