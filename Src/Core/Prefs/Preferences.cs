@@ -34,8 +34,8 @@ namespace Core.Code
             }
             catch (Exception)
             {
-                var tempFile = Path.GetTempFileName();
-                File.WriteAllText(tempFile, fullJSON);
+                //var tempFile = Path.GetTempFileName();
+                //File.WriteAllText(tempFile, fullJSON);
                 throw;
             }
         }

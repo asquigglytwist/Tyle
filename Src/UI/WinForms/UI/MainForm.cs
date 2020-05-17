@@ -34,7 +34,7 @@ namespace Tyle.UI
         {
             mapOpenFiles?.Clear();
             mapOpenFiles = new Dictionary<string, TailViewerForm>();
-            Preferences.LoadPrefs();
+            Preferences.Load();
         }
 
         private void OpenFilesForTailing(string[] fileNames)
