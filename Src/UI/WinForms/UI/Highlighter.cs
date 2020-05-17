@@ -241,7 +241,7 @@ namespace Tyle.UI
                 BackColor = cmbBackGround.SelectedColor,
                 Font = tmpFont,
                 UseItemStyleForSubItems = false,
-                Tag = new HighlightConfig(txtPattern, chkIgnoreCase.Checked, false, chkBold.Checked, chkItalic.Checked, chkUnderline.Checked, chkStrikeout.Checked, cmbForeGround.SelectedColor, cmbBackGround.SelectedColor, tmpFont)
+                // Tag = new HighlightConfig(txtPattern, chkIgnoreCase.Checked, false, chkBold.Checked, chkItalic.Checked, chkUnderline.Checked, chkStrikeout.Checked, cmbForeGround.SelectedColor, cmbBackGround.SelectedColor, tmpFont)
             };
             item.SubItems.Add(txtPattern);
             lsvPreview.Items.Add(item);
