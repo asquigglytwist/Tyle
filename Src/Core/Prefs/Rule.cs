@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Core.Code
 {
-    public abstract class IConfig
+    public class Rule
     {
         public readonly string UniqueID;
         public readonly string Pattern;
@@ -14,8 +15,9 @@ namespace Core.Code
 #if COMPILED_REGEX_FOR_CONFIG
         protected readonly Regex rxPattern;
 #endif
+        public readonly VisualCue Decoration;
 
-        public IConfig(string pattern, bool ignoreCase = true, bool isRegex = false)
+        protected Rule(string pattern, bool ignoreCase = true, bool isRegex = false)
         {
             UniqueID = Guid.NewGuid().ToString("N").ToLowerInvariant();
             Pattern = pattern;
@@ -34,7 +36,17 @@ namespace Core.Code
 #endif
         }
 
-        public virtual bool DoesLineMatch(string line)
+        public Rule(string pattern, bool ignoreCase, bool isRegex,
+            bool bold, bool italic, bool underline, bool strikeout,
+            Color foreGround, Color backGround,
+            Font displayFont)
+            : this(pattern, ignoreCase, isRegex)
+        {
+            Decoration = new VisualCue(bold, italic, underline, strikeout,
+                foreGround, backGround, displayFont);
+        }
+
+        protected virtual bool DoesLineMatch(string line)
         {
             if (IsRegex)
             {

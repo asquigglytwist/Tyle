@@ -11,9 +11,9 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AppMetaData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\FilteredLogFile.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Prefs\IConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Prefs\Rule.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\LogFileStream.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Prefs\HighlightsConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Prefs\VisualCue.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HighlightsHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\LogEntry.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\NumberExtensions.cs" />

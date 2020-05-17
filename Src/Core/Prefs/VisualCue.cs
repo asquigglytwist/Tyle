@@ -7,13 +7,17 @@ using System.Threading.Tasks;
 
 namespace Core.Code
 {
-    public class HighlightConfig
+    public class VisualCue
     {
-        public readonly bool Bold, Italic, Underline, Strikeout;
-        public readonly Color ForeGround, BackGround;
+        public readonly bool Bold;
+        public readonly bool Italic;
+        public readonly bool Underline;
+        public readonly bool Strikeout;
+        public readonly Color ForeGround;
+        public readonly Color BackGround;
         public readonly Font DisplayFont;
 
-        public HighlightConfig(bool bold, bool italic, bool underline, bool strikeout,
+        public VisualCue(bool bold, bool italic, bool underline, bool strikeout,
             Color foreGround, Color backGround,
             Font displayFont)
         {

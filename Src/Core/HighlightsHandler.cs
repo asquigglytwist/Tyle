@@ -10,10 +10,10 @@ namespace Core.Code
     {
         static HighlightsHandler()
         {
-            AllConfigs = new List<HighlightConfig>();
+            AllConfigs = new List<VisualCue>();
         }
 
-        public static void Add(HighlightConfig config)
+        public static void Add(VisualCue config)
         {
             lock (AllConfigs)
             {
@@ -49,13 +49,13 @@ namespace Core.Code
         //    return null;
         //}
 
-        public static void UpdateConfigs(List<HighlightConfig> newConfigs)
+        public static void UpdateConfigs(List<VisualCue> newConfigs)
         {
             AllConfigs = newConfigs;
             Preferences.Save(newConfigs);
         }
 
-        public static List<HighlightConfig> AllConfigs
+        public static List<VisualCue> AllConfigs
         { get; set; }
     }
 }

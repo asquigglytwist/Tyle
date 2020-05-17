@@ -12,13 +12,11 @@ namespace Core.Code
     {
         const string PrefsFileExtension = ".prefs";
         const string PrefsFileName = AppMetaData.ApplicationName + PrefsFileExtension;
+        
+        public static List<Rule> Rules
+        { get; private set; }
 
-        static Preferences()
-        {
-            //PrefsFileName = $"{AppMetaData.ApplicationName}.{PrefsFileExtension}";
-        }
-
-        public static void Save(List<HighlightConfig> newConfigs, string fileName = PrefsFileName)
+        public static void Save(List<VisualCue> newConfigs, string fileName = PrefsFileName)
         {
             if (string.IsNullOrWhiteSpace(fileName))
             {
@@ -37,7 +35,7 @@ namespace Core.Code
             var fullJSON = File.ReadAllText(fileName);
             var prefsObj = NJL.JObject.Parse(fullJSON);
             var configsInJSON = prefsObj.GetValue("allConfigs").ToString();
-            HighlightsHandler.AllConfigs = NSJ.JsonConvert.DeserializeObject<List<HighlightConfig>>(configsInJSON);
+            HighlightsHandler.AllConfigs = NSJ.JsonConvert.DeserializeObject<List<VisualCue>>(configsInJSON);
         }
     }
 }
