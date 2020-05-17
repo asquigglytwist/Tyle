@@ -46,8 +46,9 @@ namespace Core.Code
         /// </summary>
         void IDisposable.Dispose()
         {
-            fileStream?.Dispose();
-            lsLinesInFile?.Clear();
+            fileStream.Close();
+            fileStream.Dispose();
+            lsLinesInFile.Clear();
         }
         #endregion // IDisposable
 
