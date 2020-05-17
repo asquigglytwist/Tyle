@@ -148,12 +148,12 @@ namespace Tyle.UI
 
         private void UpdateHighlightsConfig()
         {
-            var lsHighlightConfigs = new List<HighlightConfig>();
+            var lsHighlightConfigs = new List<VisualCue>();
             lock (lsvPreview.Items)
             {
                 foreach (ListViewItem item in lsvPreview.Items)
                 {
-                    lsHighlightConfigs.Add((HighlightConfig)item.Tag);
+                    lsHighlightConfigs.Add((VisualCue)item.Tag);
                 }
             }
             HighlightsHandler.UpdateConfigs(lsHighlightConfigs);
@@ -193,7 +193,7 @@ namespace Tyle.UI
                 = bIsAnItemSelected;
             if (bIsAnItemSelected)
             {
-                var cfg = (HighlightConfig)lsvPreview.Items[lsvPreview.SelectedIndices[0]].Tag;
+                var cfg = (VisualCue)lsvPreview.Items[lsvPreview.SelectedIndices[0]].Tag;
                 //tbxPattern.Text = cfg.Pattern;
                 //chkIgnoreCase.Checked = cfg.IgnoreCase;
                 chkBold.Checked = cfg.Bold;

@@ -94,7 +94,7 @@ namespace Tyle.UI
                 UseItemStyleForSubItems = false,
                 ToolTipText = lineToDisplay
             };
-            HighlightConfig cfg = null;// HighlightsHandler.TryGetConfigFor(lineToDisplay);
+            VisualCue cfg = null;// HighlightsHandler.TryGetConfigFor(lineToDisplay);
             if (cfg != null)
             {
                 e.Item.SubItems.Add(lineToDisplay, cfg.ForeGround, cfg.BackGround, cfg.DisplayFont);
