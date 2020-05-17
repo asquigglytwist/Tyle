@@ -44,7 +44,15 @@ namespace Core.Code
         public readonly Font DisplayFont;
         #endregion // Fields
 
-        #region Constructor
+        #region Constructor(s)
+        /// <summary>
+        /// Static constructor for <see cref="VisualCue"/>; Initializes <see cref="_VisCueForUnDecorated"/> with <see cref="SystemFonts.DefaultFont"/>
+        /// </summary>
+        static VisualCue()
+        {
+            DefaultDecoration = new VisualCue(SystemFonts.DefaultFont);
+        }
+
         /// <summary>
         /// Creates a new instance of <see cref="VisualCue"/>
         /// </summary>
@@ -71,7 +79,27 @@ namespace Core.Code
                 | (strikeout ? FontStyle.Strikeout : FontStyle.Regular);
             DisplayFont = new Font(displayFont, style);
         }
+
+        /// <summary>
+        /// <inheritdoc cref="VisualCue.VisualCue"/> with all styling disabled
+        /// </summary>
+        /// <param name="unDecoratedFont">Font to be used for all UnDecorated <see cref="LogEntry"/></param>
+        protected VisualCue(Font unDecoratedFont)
+            : this(false, false, false, false, SystemColors.ControlText, SystemColors.Control, unDecoratedFont)
+        {
+        }
         #endregion // Constructor
+
+        public static void UpdateFontForUnDecoratedEntries(Font undecoratedFont)
+        {
+            DefaultDecoration = new VisualCue(undecoratedFont);
+        }
+
+        /// <summary>
+        /// <see cref="VisualCue"/> instance for all UnDecorated <see cref="LogEntry"/>
+        /// </summary>
+        public static VisualCue DefaultDecoration
+        { get; private set; }
     }
     #endregion // VisualCue
 }
