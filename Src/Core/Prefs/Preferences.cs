@@ -12,7 +12,10 @@ namespace Core.Code
     {
         const string PrefsFileExtension = ".prefs";
         const string PrefsFileName = AppMetaData.ApplicationName + PrefsFileExtension;
-        
+
+        const string JPN_PrefsVersion = "prefsVersion";
+        const string JPN_AllRules = "allRules";
+
         public static List<Rule> Rules
         { get; private set; }
 
@@ -25,8 +28,8 @@ namespace Core.Code
             var rulesInJSON = NSJ.JsonConvert.SerializeObject(newRules,
                 NSJ.Formatting.Indented);
             var fullJSON = $@"{{
-    ""prefsVersion"": {AppMetaData.PrefsVersion},
-    ""allRules"": {rulesInJSON}
+    ""{JPN_PrefsVersion}"": {AppMetaData.PrefsVersion},
+    ""{JPN_AllRules}"": {rulesInJSON}
 }}";
             try
             {
