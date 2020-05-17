@@ -8,12 +8,27 @@ using Tyle;
 
 namespace Core.Code
 {
+    /// <summary>
+    /// Handles all User Preferences
+    /// </summary>
     public static class Preferences
     {
+        /// <summary>
+        /// Extension for the Preferences file
+        /// </summary>
         const string PrefsFileExtension = ".prefs";
+        /// <summary>
+        /// Default name for the saved Preferences file
+        /// </summary>
         const string PrefsFileName = AppMetaData.ApplicationName + PrefsFileExtension;
 
+        /// <summary>
+        /// JSON Property Name for the Version of the Preferences save file format
+        /// </summary>
         const string JPN_PrefsVersion = "prefsVersion";
+        /// <summary>
+        /// JSON Property Name for the serialized <see cref="Rule"/>(s)
+        /// </summary>
         const string JPN_AllRules = "allRules";
 
         public static List<Rule> Rules
