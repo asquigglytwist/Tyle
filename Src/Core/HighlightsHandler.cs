@@ -52,7 +52,7 @@ namespace Core.Code
         public static void UpdateConfigs(List<VisualCue> newConfigs)
         {
             AllConfigs = newConfigs;
-            Preferences.Save(newConfigs);
+            //Preferences.Save(newConfigs);
         }
 
         public static List<VisualCue> AllConfigs
