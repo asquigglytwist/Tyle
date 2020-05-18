@@ -14,16 +14,16 @@ namespace Core.Code
     public static class Preferences
     {
         /// <summary>
-        /// Extension for the Preferences file
+        /// Extension for the <see cref="Preferences"/> file
         /// </summary>
         const string PrefsFileExtension = ".prefs";
         /// <summary>
-        /// Default name for the saved Preferences file
+        /// Default name for the saved <see cref="Preferences"/> file
         /// </summary>
         const string PrefsFileName = AppMetaData.ApplicationName + PrefsFileExtension;
 
         /// <summary>
-        /// JSON Property Name for the Version of the Preferences save file format
+        /// JSON Property Name for the Version of the <see cref="Preferences"/> save file format
         /// </summary>
         const string JPN_PrefsVersion = "prefsVersion";
         /// <summary>
@@ -31,9 +31,17 @@ namespace Core.Code
         /// </summary>
         const string JPN_AllRules = "allRules";
 
+        /// <summary>
+        /// <see cref="List{T}"/> of all <see cref="Rule"/>(s)
+        /// </summary>
         public static List<Rule> Rules
         { get; private set; }
 
+        /// <summary>
+        /// Save all <see cref="Rule"/> (<paramref name="newRules"/>) to <see cref="Preferences"/> file: <paramref name="fileName"/>
+        /// </summary>
+        /// <param name="newRules">New <see cref="Rule"/>(s)</param>
+        /// <param name="fileName">Preferences file to save the <see cref="Rule"/>(s) into</param>
         public static void Save(List<Rule> newRules, string fileName = PrefsFileName)
         {
             if (string.IsNullOrWhiteSpace(fileName))
@@ -58,6 +66,10 @@ namespace Core.Code
             }
         }
 
+        /// <summary>
+        /// Load all <see cref="Preferences"/> from <paramref name="fileName"/> file
+        /// </summary>
+        /// <param name="fileName">Path to the <see cref="Preferences"/> file</param>
         public static void Load(string fileName = PrefsFileName)
         {
             try
