@@ -8,11 +8,13 @@ using Tyle;
 
 namespace Core.Code
 {
+    #region Preferences
     /// <summary>
     /// Handles all User Preferences
     /// </summary>
     public static class Preferences
     {
+        #region Fields
         /// <summary>
         /// Extension for the <see cref="Preferences"/> file
         /// </summary>
@@ -30,13 +32,17 @@ namespace Core.Code
         /// JSON Property Name for the serialized <see cref="Rule"/>(s)
         /// </summary>
         const string JPN_AllRules = "allRules";
+        #endregion // Fields
 
+        #region Properties
         /// <summary>
         /// <see cref="List{T}"/> of all <see cref="Rule"/>(s)
         /// </summary>
         public static List<Rule> Rules
         { get; private set; }
+        #endregion // Properties
 
+        #region Methods
         /// <summary>
         /// Save all <see cref="Rule"/> (<paramref name="newRules"/>) to <see cref="Preferences"/> file: <paramref name="fileName"/>
         /// </summary>
@@ -79,7 +85,7 @@ namespace Core.Code
                     var fullJSON = File.ReadAllText(fileName);
                     var prefsObj = NJL.JObject.Parse(fullJSON);
                     var configsInJSON = prefsObj.GetValue("allConfigs").ToString();
-                    Rules = NSJ.JsonConvert.DeserializeObject<List<Rule>>(configsInJSON); 
+                    Rules = NSJ.JsonConvert.DeserializeObject<List<Rule>>(configsInJSON);
                 }
                 //else
                 //{
@@ -91,5 +97,7 @@ namespace Core.Code
                 throw;
             }
         }
+        #endregion // Methods
     }
+    #endregion // Preferences
 }
