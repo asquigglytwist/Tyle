@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-namespace Core.Code
+namespace Core.Prefs
 {
     #region LogFileStream
     /// <summary>
@@ -13,7 +14,8 @@ namespace Core.Code
     {
         #region Fields
         protected StreamReader fileStream;
-        protected List<LogEntry> lsLinesInFile;
+        protected List<LogEntry> rawLinesInFile;
+        protected List<LogEntry> processedLogEntries;
         public const int ItemNotFound = -1;
         #endregion // Fields
 
@@ -33,9 +35,10 @@ namespace Core.Code
             {
                 throw new FileNotFoundException(filePath);
             }
-            LogFilePath = filePath;
+            FilePath = filePath;
+            FileName = Path.GetFileName(filePath);
             LongestLine = "---";
-            lsLinesInFile = new List<LogEntry>();
+            rawLinesInFile = new List<LogEntry>();
             ReadLinesToEOF();
         }
         #endregion // Constructor
@@ -48,7 +51,8 @@ namespace Core.Code
         {
             fileStream.Close();
             fileStream.Dispose();
-            lsLinesInFile.Clear();
+            rawLinesInFile.Clear();
+            processedLogEntries.Clear();
         }
         #endregion // IDisposable
 
@@ -70,13 +74,14 @@ namespace Core.Code
                     }
                     temp = temp.Replace("\t", "    ");
                     LongestLine = (LongestLine.Length < temp.Length ? temp : LongestLine);
-                    lsLinesInFile.Add(new LogEntry(temp));
+                    rawLinesInFile.Add(new LogEntry(temp));
                 }
             }
             catch (Exception)
             {
                 return false;
             }
+            processedLogEntries = RulesEngine.UpdateLogEntries(rawLinesInFile);
             return true;
         }
 
@@ -90,13 +95,13 @@ namespace Core.Code
         public int FindItem(string searchText, int searchStartIndex = 0, bool wrapSearch = true)
         {
             int foundItemIndex = ItemNotFound;
-            if (lsLinesInFile.Count > 0)
+            if (processedLogEntries.Count > 0)
             {
-                searchStartIndex %= lsLinesInFile.Count;
-                foundItemIndex = lsLinesInFile.FindIndex(searchStartIndex, (entry => (entry.Line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > -1)));
+                searchStartIndex %= processedLogEntries.Count;
+                foundItemIndex = processedLogEntries.FindIndex(searchStartIndex, (entry => (entry.Line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > -1)));
                 if (foundItemIndex == ItemNotFound && searchStartIndex != 0 && wrapSearch)
                 {
-                    foundItemIndex = lsLinesInFile.FindIndex(0, (entry => (entry.Line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > ItemNotFound)));
+                    foundItemIndex = processedLogEntries.FindIndex(0, (entry => (entry.Line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > ItemNotFound)));
                 }
             }
             return foundItemIndex;
@@ -107,19 +112,40 @@ namespace Core.Code
         /// <summary>
         /// Complete path to the LogFile
         /// </summary>
-        public string LogFilePath { get; private set; }
+        public string FilePath { get; private set; }
 
         /// <summary>
         /// The LogFile's name
         /// </summary>
-        public string LogFileName
-            => Path.GetFileName(LogFilePath);
+        public string FileName { get; private set; }
 
         /// <summary>
-        /// Size of the LogFile, in a readable format
+        /// Actual size of the file under <see cref="LogFileStream"/>, in a readable format
         /// </summary>
-        public string LogFileSize
+        public string FileSize
             => fileStream.BaseStream.Length.AsReadableFileSize();
+
+        /// <summary>
+        /// The number of Lines that are currently available for viewing
+        /// </summary>
+        public int FilteredLineCount
+        {
+            get
+            {
+                return processedLogEntries.Count;
+            }
+        }
+
+        /// <summary>
+        /// Total number of Lines in the <see cref="LogFileStream"/>
+        /// </summary>
+        public int RawLineCount
+        {
+            get
+            {
+                return rawLinesInFile.Count;
+            }
+        }
 
         /// <summary>
         /// The LongestLine within
@@ -133,7 +159,7 @@ namespace Core.Code
         /// </summary>
         /// <param name="index">Line number to be retrieved</param>
         /// <returns>The <paramref name="index"/>'th line</returns>
-        public string this[int index] => lsLinesInFile[index].Line;
+        public string this[int index] => processedLogEntries[index].Line;
 
         public int this[string needle, int startIndex = 0, bool wrapAround = true]
         {
