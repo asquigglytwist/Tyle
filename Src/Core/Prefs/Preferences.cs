@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using Tyle;
 
-namespace Core.Code
+namespace Core.Prefs
 {
     #region Preferences
     /// <summary>
@@ -33,14 +33,6 @@ namespace Core.Code
         /// </summary>
         const string JPN_AllRules = "allRules";
         #endregion // Fields
-
-        #region Properties
-        /// <summary>
-        /// <see cref="List{T}"/> of all <see cref="Rule"/>(s)
-        /// </summary>
-        public static List<Rule> Rules
-        { get; private set; }
-        #endregion // Properties
 
         #region Methods
         /// <summary>
@@ -85,7 +77,7 @@ namespace Core.Code
                     var fullJSON = File.ReadAllText(fileName);
                     var prefsObj = NJL.JObject.Parse(fullJSON);
                     var configsInJSON = prefsObj.GetValue("allConfigs").ToString();
-                    Rules = NSJ.JsonConvert.DeserializeObject<List<Rule>>(configsInJSON);
+                    RulesEngine.Rules = NSJ.JsonConvert.DeserializeObject<List<Rule>>(configsInJSON);
                 }
                 //else
                 //{
