@@ -1,4 +1,4 @@
-﻿using Core.Code;
+﻿using Core.Prefs;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -35,6 +35,14 @@ namespace Tyle.UI
             mapOpenFiles?.Clear();
             mapOpenFiles = new Dictionary<string, TailViewerForm>();
             Preferences.Load();
+#if DEBUG
+            var exclude = new Rule("Exclude", true, false, true);
+            var interesting = new Rule("interesting", false, false, true, true, false, false, Color.Crimson, Color.AliceBlue, this.Font);
+            var boring = new Rule("Boring", true, false, true, true, false, false, Color.LimeGreen, Color.Navy, this.Font);
+            RulesEngine.Rules.Add(exclude);
+            RulesEngine.Rules.Add(interesting);
+            RulesEngine.Rules.Add(boring);
+#endif
         }
 
         private void OpenFilesForTailing(string[] fileNames)
