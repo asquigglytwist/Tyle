@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\FilteredLogFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Prefs\Rule.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\LogFileStream.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Prefs\RulesEngine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Prefs\VisualCue.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HighlightsHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\LogEntry.cs" />
@@ -29,6 +30,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)LogFile\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Prefs\" />
   </ItemGroup>
 </Project>
