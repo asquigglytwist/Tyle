@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Code
+namespace Core.Prefs
 {
     #region TailedFileChangedArgs
     /// <summary>

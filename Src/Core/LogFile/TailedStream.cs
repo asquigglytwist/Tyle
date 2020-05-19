@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Core.Code
+namespace Core.Prefs
 {
     #region TailedStream
     public class TailedStream : IDisposable
