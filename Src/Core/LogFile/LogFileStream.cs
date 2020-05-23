@@ -95,13 +95,32 @@ namespace Core.Prefs
         public int FindItem(string searchText, int searchStartIndex = 0, bool wrapSearch = true)
         {
             int foundItemIndex = ItemNotFound;
-            if (filteredLogEntries.Count > 0)
+            if (IsInFilterMode)
             {
-                searchStartIndex %= filteredLogEntries.Count;
-                foundItemIndex = filteredLogEntries.FindIndex(searchStartIndex, (entry => (entry.Line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > -1)));
-                if (foundItemIndex == ItemNotFound && searchStartIndex != 0 && wrapSearch)
+                if (filteredLogEntries.Count > 0)
                 {
-                    foundItemIndex = filteredLogEntries.FindIndex(0, (entry => (entry.Line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > ItemNotFound)));
+                    searchStartIndex %= filteredLogEntries.Count;
+                    foundItemIndex = filteredLogEntries.FindIndex(searchStartIndex,
+                        (entry => (entry.Line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > -1)));
+                    if (foundItemIndex == ItemNotFound && searchStartIndex != 0 && wrapSearch)
+                    {
+                        foundItemIndex = filteredLogEntries.FindIndex(0,
+                            (entry => (entry.Line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > ItemNotFound)));
+                    }
+                }
+            }
+            else
+            {
+                if (rawLogEntries.Count > 0)
+                {
+                    searchStartIndex %= rawLogEntries.Count;
+                    foundItemIndex = rawLogEntries.FindIndex(searchStartIndex,
+                        (entry => (entry.Line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > -1)));
+                    if (foundItemIndex == ItemNotFound && searchStartIndex != 0 && wrapSearch)
+                    {
+                        foundItemIndex = rawLogEntries.FindIndex(0,
+                            (entry => (entry.Line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > ItemNotFound)));
+                    }
                 }
             }
             return foundItemIndex;
@@ -109,6 +128,8 @@ namespace Core.Prefs
         #endregion // Methods
 
         #region Properties
+        public bool IsInFilterMode;
+
         /// <summary>
         /// Complete path to the LogFile
         /// </summary>
@@ -125,10 +146,13 @@ namespace Core.Prefs
         public string FileSize
             => fileStream.BaseStream.Length.AsReadableFileSize();
 
+        public int LineCount
+            => IsInFilterMode ? FilteredLineCount : RawLineCount;
+
         /// <summary>
         /// The number of Lines that are currently available for viewing
         /// </summary>
-        public int FilteredLineCount
+        protected int FilteredLineCount
         {
             get
             {
@@ -139,7 +163,7 @@ namespace Core.Prefs
         /// <summary>
         /// Total number of Lines in the <see cref="LogFileStream"/>
         /// </summary>
-        public int RawLineCount
+        protected int RawLineCount
         {
             get
             {
@@ -159,7 +183,8 @@ namespace Core.Prefs
         /// </summary>
         /// <param name="index">Line number to be retrieved</param>
         /// <returns>The <paramref name="index"/>'th line</returns>
-        public string this[int index] => filteredLogEntries[index].Line;
+        public LogEntry this[int index]
+            => IsInFilterMode ? filteredLogEntries[index] : rawLogEntries[index];
 
         public int this[string needle, int startIndex = 0, bool wrapAround = true]
         {
