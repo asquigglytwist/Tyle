@@ -7,6 +7,11 @@ namespace Core.Prefs
 {
     public static class RulesEngine
     {
+        static RulesEngine()
+        {
+            Rules = new List<Rule>();
+        }
+
         #region Properties
         /// <summary>
         /// <see cref="List{T}"/> of all <see cref="Rule"/>(s)
@@ -30,15 +35,15 @@ namespace Core.Prefs
                 {
                     var entry = rawLogEntries[i];
                     var match = Rules.Find(r => r.DoesLineMatch(entry.Line));
-                    if (match != null)
+                    if (match != null && match.IsAnExcludeFilter)
                     {
-                        if (match.IsAnExcludeFilter)
-                        {
-                            continue;
-                        }
-                        entry.MatchingRule = match;
+                        continue;
                     }
-                    filteredLogEntries.Add(new FilteredLogEntry(entry, i));
+                    var t = new FilteredLogEntry(entry, i)
+                    {
+                        MatchingRule = match
+                    };
+                    filteredLogEntries.Add(t);
                 }
             }
             return filteredLogEntries;
