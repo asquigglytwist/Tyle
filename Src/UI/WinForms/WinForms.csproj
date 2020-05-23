@@ -116,6 +116,12 @@
     <Compile Include="UI\FindDialog.Designer.cs">
       <DependentUpon>FindDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\LogFileViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\LogFileViewer.Designer.cs">
+      <DependentUpon>LogFileViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FindDialog.resx">
       <DependentUpon>FindDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\LogFileViewer.resx">
+      <DependentUpon>LogFileViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
