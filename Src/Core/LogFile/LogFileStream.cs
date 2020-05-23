@@ -14,8 +14,8 @@ namespace Core.Prefs
     {
         #region Fields
         protected StreamReader fileStream;
-        protected List<LogEntry> rawLinesInFile;
-        protected List<LogEntry> processedLogEntries;
+        protected List<LogEntry> rawLogEntries;
+        protected List<FilteredLogEntry> filteredLogEntries;
         public const int ItemNotFound = -1;
         #endregion // Fields
 
@@ -38,7 +38,7 @@ namespace Core.Prefs
             FilePath = filePath;
             FileName = Path.GetFileName(filePath);
             LongestLine = "---";
-            rawLinesInFile = new List<LogEntry>();
+            rawLogEntries = new List<LogEntry>();
             ReadLinesToEOF();
         }
         #endregion // Constructor
@@ -51,8 +51,8 @@ namespace Core.Prefs
         {
             fileStream.Close();
             fileStream.Dispose();
-            rawLinesInFile.Clear();
-            processedLogEntries.Clear();
+            rawLogEntries.Clear();
+            filteredLogEntries.Clear();
         }
         #endregion // IDisposable
 
@@ -74,14 +74,14 @@ namespace Core.Prefs
                     }
                     temp = temp.Replace("\t", "    ");
                     LongestLine = (LongestLine.Length < temp.Length ? temp : LongestLine);
-                    rawLinesInFile.Add(new LogEntry(temp));
+                    rawLogEntries.Add(new LogEntry(temp));
                 }
             }
             catch (Exception)
             {
                 return false;
             }
-            processedLogEntries = RulesEngine.UpdateLogEntries(rawLinesInFile);
+            filteredLogEntries = RulesEngine.FilterLogEntries(rawLogEntries);
             return true;
         }
 
@@ -95,13 +95,13 @@ namespace Core.Prefs
         public int FindItem(string searchText, int searchStartIndex = 0, bool wrapSearch = true)
         {
             int foundItemIndex = ItemNotFound;
-            if (processedLogEntries.Count > 0)
+            if (filteredLogEntries.Count > 0)
             {
-                searchStartIndex %= processedLogEntries.Count;
-                foundItemIndex = processedLogEntries.FindIndex(searchStartIndex, (entry => (entry.Line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > -1)));
+                searchStartIndex %= filteredLogEntries.Count;
+                foundItemIndex = filteredLogEntries.FindIndex(searchStartIndex, (entry => (entry.Line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > -1)));
                 if (foundItemIndex == ItemNotFound && searchStartIndex != 0 && wrapSearch)
                 {
-                    foundItemIndex = processedLogEntries.FindIndex(0, (entry => (entry.Line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > ItemNotFound)));
+                    foundItemIndex = filteredLogEntries.FindIndex(0, (entry => (entry.Line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) > ItemNotFound)));
                 }
             }
             return foundItemIndex;
@@ -132,7 +132,7 @@ namespace Core.Prefs
         {
             get
             {
-                return processedLogEntries.Count;
+                return filteredLogEntries.Count;
             }
         }
 
@@ -143,7 +143,7 @@ namespace Core.Prefs
         {
             get
             {
-                return rawLinesInFile.Count;
+                return rawLogEntries.Count;
             }
         }
 
@@ -159,7 +159,7 @@ namespace Core.Prefs
         /// </summary>
         /// <param name="index">Line number to be retrieved</param>
         /// <returns>The <paramref name="index"/>'th line</returns>
-        public string this[int index] => processedLogEntries[index].Line;
+        public string this[int index] => filteredLogEntries[index].Line;
 
         public int this[string needle, int startIndex = 0, bool wrapAround = true]
         {
