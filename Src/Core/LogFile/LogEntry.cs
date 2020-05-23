@@ -18,4 +18,15 @@ namespace Core.Prefs
         public Rule MatchingRule
         { get; set; }
     }
+
+    public class FilteredLogEntry : LogEntry
+    {
+        public FilteredLogEntry(LogEntry entry, int srcLineNumber) : base(entry.Line)
+        {
+            SourceLineNumber = srcLineNumber;
+        }
+
+        public readonly int SourceLineNumber;
+        //{ get; private set; }
+    }
 }
