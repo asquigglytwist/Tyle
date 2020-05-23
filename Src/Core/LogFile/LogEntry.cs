@@ -9,14 +9,10 @@ namespace Core.Prefs
         public LogEntry(string line)
         {
             Line = line;
-            MatchingRule = null;
         }
 
         public string Line
         { get; private set; }
-
-        public Rule MatchingRule
-        { get; set; }
     }
 
     public class FilteredLogEntry : LogEntry
@@ -24,9 +20,13 @@ namespace Core.Prefs
         public FilteredLogEntry(LogEntry entry, int srcLineNumber) : base(entry.Line)
         {
             SourceLineNumber = srcLineNumber;
+            MatchingRule = null;
         }
 
         public readonly int SourceLineNumber;
         //{ get; private set; }
+
+        public Rule MatchingRule
+        { get; set; }
     }
 }
