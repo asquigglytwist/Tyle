@@ -15,20 +15,20 @@ namespace Core.Prefs
         { get; set; }
         #endregion // Properties
 
-        public static VisualCue TryGetDecorationFor(LogEntry entry)
+        public static Rule TryGetRuleFor(LogEntry entry)
         {
-            return Rules.Find(c => c.DoesLineMatch(entry.Line))?.Decoration;
+            return Rules.Find(c => c.DoesLineMatch(entry.Line));
         }
 
-        public static List<LogEntry> UpdateLogEntries(List<LogEntry> logEntries)
+        public static List<FilteredLogEntry> FilterLogEntries(List<LogEntry> rawLogEntries)
         {
-            var filteredLogEntries = new List<LogEntry>();
+            var filteredLogEntries = new List<FilteredLogEntry>();
             lock (Rules)
             {
-                var itrRules = new Queue<Rule>(Rules);
-                for (int i = 0; i < logEntries.Count; i++)
+                //var itrRules = new Queue<Rule>(Rules);
+                for (int i = 0; i < rawLogEntries.Count; i++)
                 {
-                    var entry = logEntries[i];
+                    var entry = rawLogEntries[i];
                     var match = Rules.Find(r => r.DoesLineMatch(entry.Line));
                     if (match != null)
                     {
@@ -38,7 +38,7 @@ namespace Core.Prefs
                         }
                         entry.MatchingRule = match;
                     }
-                    filteredLogEntries.Add(entry);
+                    filteredLogEntries.Add(new FilteredLogEntry(entry, i));
                 }
             }
             return filteredLogEntries;
