@@ -11,7 +11,8 @@ namespace Tyle.UI
 {
     public partial class MainForm : TyleFormBase
     {
-        private Dictionary<string, TailViewerForm> mapOpenFiles;
+        //private Dictionary<string, TailViewerForm> mapOpenFiles;
+        private Dictionary<string, LogFileViewer> mapOpenFiles;
         private Font fontForListView;
 
         public MainForm()
@@ -33,7 +34,7 @@ namespace Tyle.UI
         private void ResetAppState()
         {
             mapOpenFiles?.Clear();
-            mapOpenFiles = new Dictionary<string, TailViewerForm>();
+            mapOpenFiles = new Dictionary<string, LogFileViewer>();
             Preferences.Load();
 #if DEBUG
             var exclude = new Rule("Exclude", true, false, true);
@@ -48,19 +49,20 @@ namespace Tyle.UI
         private void OpenFilesForTailing(string[] fileNames)
         {
 #if DEBUG
-            foreach(string file in fileNames)
+            foreach (string file in fileNames)
 #else
             System.Threading.Tasks.Parallel.ForEach(fileNames, file =>
 #endif
             {
-                var temp= file.ToLower();
-                if(mapOpenFiles.ContainsKey(temp))
+                var temp = file.ToLower();
+                if (mapOpenFiles.ContainsKey(temp))
                 {
                     mapOpenFiles[temp]?.ActivateAndMaximize();
                 }
                 else
                 {
-                    var tailForm = new TailViewerForm(this, file);
+                    //var tailForm = new TailViewerForm(this, file);
+                    var tailForm = new LogFileViewer(this, file);
                     mapOpenFiles[temp] = tailForm;
                     var newPage = new TabPage(tailForm.Text)
                     {
@@ -80,15 +82,15 @@ namespace Tyle.UI
         public void NotifyStoppedTailing(string fileName, string title)
         {
             mapOpenFiles.Remove(fileName.ToLower());
-            foreach(TabPage page in tbcMDIChildren.TabPages)
+            foreach (TabPage page in tbcMDIChildren.TabPages)
             {
-                if(page.Text.Equals(title))
+                if (page.Text.Equals(title))
                 {
                     tbcMDIChildren.TabPages.Remove(page);
                     break;
                 }
             }
-            if(tbcMDIChildren.TabPages.Count < 1)
+            if (tbcMDIChildren.TabPages.Count < 1)
             {
                 tbcMDIChildren.Hide();
             }
@@ -96,9 +98,9 @@ namespace Tyle.UI
 
         public void NotifyFileUpdate(string title)
         {
-            foreach(TabPage page in tbcMDIChildren.TabPages)
+            foreach (TabPage page in tbcMDIChildren.TabPages)
             {
-                if(page.Text.Equals(title))
+                if (page.Text.Equals(title))
                 {
                     page.ImageKey = "NewLinesFound.png";
                     break;
@@ -170,7 +172,8 @@ namespace Tyle.UI
 
         private void tbcMDIChildren_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TailViewerForm childForm;
+            //TailViewerForm childForm;
+            LogFileViewer childForm;
             if (tbcMDIChildren.SelectedTab != null && mapOpenFiles.TryGetValue(tbcMDIChildren.SelectedTab.ToolTipText.ToLower(), out childForm))
             {
                 childForm.Activate();
