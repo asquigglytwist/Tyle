@@ -229,6 +229,7 @@
             // 
             // tbcMDIChildren
             // 
+            this.tbcMDIChildren.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.tbcMDIChildren.Dock = System.Windows.Forms.DockStyle.Top;
             this.tbcMDIChildren.ImageList = this.imlMainForm;
             this.tbcMDIChildren.Location = new System.Drawing.Point(0, 33);
