@@ -80,9 +80,11 @@ namespace Tyle.UI
                     r.Width = width;
                     r.Height = height;
                     br = new LinearGradientBrush(r, Color.Black, Color.Black, 0, false);
-                    var cb = new ColorBlend();
-                    cb.Positions = new[] { 0, 1 / 2f, 1 };
-                    cb.Colors = new[] { Color.Red, Color.Green, Color.Blue };
+                    var cb = new ColorBlend
+                    {
+                        Positions = new[] { 0, 1 / 2f, 1 },
+                        Colors = new[] { Color.Red, Color.Green, Color.Blue }
+                    };
                     (br as LinearGradientBrush).InterpolationColors = cb;
                 }
                 using (var g = e.Graphics)
@@ -91,6 +93,7 @@ namespace Tyle.UI
                     g.FillRectangle(br, x, y, width, height);
                     g.DrawString(itemText, Font, Brushes.Black, x + ColoredRectangleWidth + ColoredRectanglePadding, y);
                 }
+                br?.Dispose();
             }
         }
 
