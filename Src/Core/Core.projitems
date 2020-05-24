@@ -17,7 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HighlightsHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\LogEntry.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\NumberExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Rules\Preferences.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Prefs\Preferences.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\TailedFileChangedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\TailedFileChangeType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\TailedStream_Old.cs" />
@@ -29,5 +29,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)LogFile\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Prefs\" />
   </ItemGroup>
 </Project>
