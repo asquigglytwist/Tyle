@@ -10,17 +10,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AppMetaData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Prefs\Rule.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rules\Rule.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\LogFileStream.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Prefs\RulesEngine.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Prefs\VisualCue.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rules\RulesEngine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rules\VisualCue.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HighlightsHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\LogEntry.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\NumberExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Prefs\Preferences.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rules\Preferences.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\TailedFileChangedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\TailedFileChangeType.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LogFile\TailedStream.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LogFile\TailedStream_Old.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\NativeMethods.cs" />
   </ItemGroup>
   <ItemGroup>

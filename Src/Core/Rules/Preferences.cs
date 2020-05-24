@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using Tyle;
 
-namespace Core.Prefs
+namespace Core.LogFile
 {
     #region Preferences
     /// <summary>
