@@ -11,7 +11,7 @@ namespace Core.Prefs
     /// <summary>
     /// Represents the VisualCue / Decoration for a matched <see cref="LogEntry"/>
     /// </summary>
-    public class VisualCue
+    public class VisualCue : IDisposable
     {
         #region Fields
         /// <summary>
@@ -93,6 +93,11 @@ namespace Core.Prefs
         public static void UpdateFontForUnDecoratedEntries(Font undecoratedFont)
         {
             DefaultDecoration = new VisualCue(undecoratedFont);
+        }
+
+        public void Dispose()
+        {
+            DisplayFont.Dispose();
         }
 
         /// <summary>
