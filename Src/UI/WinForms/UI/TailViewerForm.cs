@@ -13,7 +13,7 @@ namespace Tyle.UI
     {
         #region Fields
         readonly MainForm MainForm;
-        readonly TailedStream tailedFile;
+        readonly TailedStream_Old tailedFile;
         #endregion
 
         public TailViewerForm(MainForm mdiParentForm, string fileToTail)
@@ -23,7 +23,7 @@ namespace Tyle.UI
             MdiParent = MainForm = mdiParentForm;
             Text = Path.GetFileName(fileToTail);
             WindowState = FormWindowState.Maximized;
-            tailedFile = new TailedStream(fileToTail, TailedFile_OnTailedFileChanged);
+            tailedFile = new TailedStream_Old(fileToTail, TailedFile_OnTailedFileChanged);
             Show();
         }
 

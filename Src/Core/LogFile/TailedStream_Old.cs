@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Core.LogFile
 {
     #region TailedStream
-    public class TailedStream : IDisposable
+    public class TailedStream_Old : IDisposable
     {
         #region Fields
         const int ItemNotFound = -1, DelayBeforeRaisingEvent = 2000;
@@ -19,14 +19,14 @@ namespace Core.LogFile
         #endregion
 
         #region Constructor
-        protected TailedStream(string filePath)
+        protected TailedStream_Old(string filePath)
         {
             TailedFilePath = filePath;
             LongestLine = "---";
             lsLinesInFile = new List<LogEntry>();
         }
 
-        public TailedStream(string filePath, TailedFileChangedHandler changeHandler)
+        public TailedStream_Old(string filePath, TailedFileChangedHandler changeHandler)
             : this(filePath)
         {
             OnTailedFileChanged += changeHandler;
