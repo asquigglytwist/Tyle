@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Tyle;
+using Core.Rules;
 
-namespace Core.Rules
+namespace Core.Prefs
 {
     #region Preferences
     /// <summary>
