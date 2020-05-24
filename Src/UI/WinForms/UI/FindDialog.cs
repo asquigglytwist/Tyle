@@ -4,12 +4,7 @@ namespace Tyle.UI
 {
     public partial class FindDialog : TyleFormBase
     {
-        public static FindDialog findDialog;
-
-        static FindDialog()
-        {
-            findDialog = new FindDialog();
-        }
+        public static readonly FindDialog findDialog = new FindDialog();
 
         protected FindDialog()
         {
