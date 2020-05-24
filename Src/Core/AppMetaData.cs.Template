@@ -4,7 +4,7 @@
     {
         public const string BuildTimeStamp = "[PS_Stub_BuildTimeStamp]";
         public const string BuildMode = "[PS_Stub_BuildMode]";
-        public const double PrefsVersion = 1.0;
+        public const double PrefsVersion = 0.1;
 #region AssemblyInfo
         public const string ApplicationName = "Tyle";
         public const string Description = "Tail Your Logs Efficiently...";
