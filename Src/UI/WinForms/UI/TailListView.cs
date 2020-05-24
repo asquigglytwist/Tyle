@@ -12,6 +12,8 @@ namespace Tyle.UI
     class TailListView : System.Windows.Forms.ListView
     {
         const TextFormatFlags TFFlags = TextFormatFlags.Left | TextFormatFlags.ExpandTabs | TextFormatFlags.SingleLine | TextFormatFlags.NoPrefix;
+        const string ColHdrLine = "Line";
+        const string ColHdrLineNumber = "LineNumber";
 
         public TailListView() : base()
         {
@@ -24,8 +26,8 @@ namespace Tyle.UI
             ShowItemToolTips = true;
             GridLines = true;
             HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            Columns.Add("LineNumber", -1, System.Windows.Forms.HorizontalAlignment.Left);
-            Columns.Add("Line", -1, System.Windows.Forms.HorizontalAlignment.Left);
+            Columns.Add(ColHdrLineNumber, -1, System.Windows.Forms.HorizontalAlignment.Left);
+            Columns.Add(ColHdrLine, -1, System.Windows.Forms.HorizontalAlignment.Left);
             LabelWrap = true;
             ShowGroups = false;
             OwnerDraw = true;
