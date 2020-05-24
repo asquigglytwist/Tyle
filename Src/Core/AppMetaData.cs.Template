@@ -9,6 +9,8 @@
         public const string ApplicationName = "Tyle";
         public const string Description = "Tail Your Logs Efficiently...";
         public const string CompanyName = "ASquigglyTwist";
+        // [BIB]:  https://stackoverflow.com/questions/4068360/c-sharp-warning-mark-assemblies-with-neutralresourceslanguageattribute
+        public const string NeutralResourcesLanguage = "en";
 #if DEBUG
         public const string AssemblyConfiguration = "Debug";
 #else
