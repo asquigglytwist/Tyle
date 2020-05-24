@@ -47,7 +47,7 @@ namespace Core.Prefs
         /// <summary>
         /// Releases all resources held by this instance of <see cref="LogFileStream"/> and disposes it
         /// </summary>
-        void IDisposable.Dispose()
+        public void Dispose()
         {
             fileStream.Close();
             fileStream.Dispose();
