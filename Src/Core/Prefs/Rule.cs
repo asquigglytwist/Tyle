@@ -9,7 +9,7 @@ namespace Core.Prefs
     /// <summary>
     /// Represents an individual Rule against which a <see cref="LogEntry"/> will be tested
     /// </summary>
-    public class Rule
+    public class Rule : IDisposable
     {
         /// <summary>
         /// An ID (<see cref="string"/>) to uniquely identify this instance of <see cref="Rule"/>
@@ -126,6 +126,11 @@ namespace Core.Prefs
                 }
                 return line.Contains(Pattern);
             }
+        }
+
+        public void Dispose()
+        {
+            Decoration.Dispose();
         }
     }
 }
