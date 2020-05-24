@@ -63,6 +63,7 @@ namespace Tyle.UI
                 {
                     //var tailForm = new TailViewerForm(this, file);
                     var tailForm = new LogFileViewer(this, file);
+                    tailForm.SetLSVFont(fontForListView);
                     mapOpenFiles[temp] = tailForm;
                     var newPage = new TabPage(tailForm.Text)
                     {
@@ -201,6 +202,7 @@ namespace Tyle.UI
                     {
                         openFile.SetLSVFont(selFont);
                     }
+                    VisualCue.UpdateDecorationForUnMatchedLogEntries(null, null, selFont);
                 }
                 fontForListView = selFont;
             }
