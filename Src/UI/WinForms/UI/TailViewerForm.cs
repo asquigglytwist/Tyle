@@ -26,7 +26,7 @@ namespace Tyle.UI
             Show();
         }
 
-        private void TailedFile_OnTailedFileChanged(object sender, TailedFileChangedArgs args)
+        private void TailedFile_OnTailedFileChanged(object sender, TailedFileChangedEventArgs args)
         {
             switch (args.ChangeType)
             {
@@ -115,7 +115,8 @@ namespace Tyle.UI
             {
                 if (e.CloseReason == CloseReason.UserClosing)
                 {
-                    if (MessageBox.Show(string.Format("Unable to close:{0}{1}{0}Would you like to cancel closure and continue tailing?", Environment.NewLine, tailedFile.TailedFilePath), "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+                    var tMsgToShow = $"Unable to close:{Environment.NewLine}{tailedFile.TailedFilePath}{Environment.NewLine}Would you like to cancel closure and continue tailing?";
+                    if (MessageBox.Show(tMsgToShow, "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
                     {
                         e.Cancel = true;
                     }
