@@ -4,7 +4,7 @@ namespace Tyle
     {
         public const string BuildTimeStamp = "2020-05-24  07:19:22 UTC";
         public const string BuildMode = "WinForms";
-        public const double PrefsVersion = 1.0;
+        public const double PrefsVersion = 0.1;
 #region AssemblyInfo
         public const string ApplicationName = "Tyle";
         public const string Description = "Tail Your Logs Efficiently...";
