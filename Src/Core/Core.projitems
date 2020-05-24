@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AppMetaData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LogFile\TailedStream.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rules\Rule.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\LogFileStream.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rules\RulesEngine.cs" />
@@ -28,7 +29,6 @@
     <None Include="$(MSBuildThisFileDirectory)VersionUpdater.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)LogFile\" />
     <Folder Include="$(MSBuildThisFileDirectory)Prefs\" />
   </ItemGroup>
 </Project>
