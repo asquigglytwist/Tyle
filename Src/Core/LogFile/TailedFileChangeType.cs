@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Prefs
+namespace Core.LogFile
 {
     #region TailedFileChangeType
     /// <summary>

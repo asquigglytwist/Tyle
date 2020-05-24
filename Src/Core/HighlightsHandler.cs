@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Core.Prefs
+namespace Core.LogFile
 {
     public static class HighlightsHandler
     {

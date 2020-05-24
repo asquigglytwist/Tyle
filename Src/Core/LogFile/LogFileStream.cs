@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-namespace Core.Prefs
+namespace Core.LogFile
 {
     #region LogFileStream
     /// <summary>

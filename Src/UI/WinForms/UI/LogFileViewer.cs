@@ -1,4 +1,4 @@
-﻿using Core.Prefs;
+﻿using Core.LogFile;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
