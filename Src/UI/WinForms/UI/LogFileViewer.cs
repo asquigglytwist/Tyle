@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tyle.Utils;
 
 namespace Tyle.UI
 {
@@ -25,7 +26,7 @@ namespace Tyle.UI
             Text = tailedFile.FileName;
             MdiParent = MainForm = mdiParentForm;
             WindowState = FormWindowState.Maximized;
-            tailedFile.IsInFilterMode = true;
+            tailedFile.IsInFilterMode = false;
             UpdateTailView();
             Show();
         }
@@ -106,28 +107,7 @@ namespace Tyle.UI
         {
             int lineNumber = e.ItemIndex;
             var entryToDisplay = tailedFile[lineNumber];
-            string line = entryToDisplay.Line;
-            if (tailedFile.IsInFilterMode)
-            {
-                lineNumber = (entryToDisplay as FilteredLogEntry).SourceLineNumber;
-            }
-            e.Item = new ListViewItem(lineNumber.ToString())
-            {
-                ForeColor = SystemColors.HighlightText,
-                BackColor = SystemColors.Highlight,
-                Checked = true,
-                UseItemStyleForSubItems = false,
-                ToolTipText = line
-            };
-            var cfg = RulesEngine.TryGetRuleFor(entryToDisplay)?.Decoration;
-            if (cfg != null)
-            {
-                _ = e.Item.SubItems.Add(line, cfg.ForeGround, cfg.BackGround, cfg.DisplayFont);
-            }
-            else
-            {
-                _ = e.Item.SubItems.Add(line, lsvTailViewer.ForeColor, lsvTailViewer.BackColor, lsvTailViewer.Font);
-            }
+            e.Item = entryToDisplay.ToListViewItem(lineNumber, tailedFile.IsInFilterMode);
         }
 
         private void LogFileViewer_FormClosing(object sender, FormClosingEventArgs e)

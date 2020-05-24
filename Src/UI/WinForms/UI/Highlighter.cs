@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Core.LogFile;
 using Core.Rules;
+using Tyle.Core;
 
 namespace Tyle.UI
 {
