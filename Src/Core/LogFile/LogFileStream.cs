@@ -18,6 +18,7 @@ namespace Core.LogFile
         protected List<LogEntry> rawLogEntries;
         protected List<FilteredLogEntry> filteredLogEntries;
         public const int ItemNotFound = -1;
+        protected const string DefaultLongestLine = "---";
         #endregion // Fields
 
         #region Constructor
@@ -27,20 +28,21 @@ namespace Core.LogFile
         /// <param name="filePath">Full path to the log file</param>
         public LogFileStream(string filePath)
         {
+            rawLogEntries = new List<LogEntry>();
             if (File.Exists(filePath))
             {
                 fileStream = new StreamReader(
                     new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+                LongestLine = DefaultLongestLine;
+                ReadLinesToEOF();
             }
             else
             {
-                throw new FileNotFoundException(filePath);
+                LongestLine = string.Empty;
+                filteredLogEntries = new List<FilteredLogEntry>();
             }
             FilePath = filePath;
             FileName = Path.GetFileName(filePath);
-            LongestLine = "---";
-            rawLogEntries = new List<LogEntry>();
-            ReadLinesToEOF();
         }
         #endregion // Constructor
 
@@ -50,8 +52,8 @@ namespace Core.LogFile
         /// </summary>
         public void Dispose()
         {
-            fileStream.Close();
-            fileStream.Dispose();
+            fileStream?.Close();
+            fileStream?.Dispose();
             rawLogEntries.Clear();
             filteredLogEntries.Clear();
         }
@@ -145,7 +147,7 @@ namespace Core.LogFile
         /// Actual size of the file under <see cref="LogFileStream"/>, in a readable format
         /// </summary>
         public string FileSize
-            => fileStream.BaseStream.Length.AsReadableFileSize();
+            => fileStream?.BaseStream.Length.AsReadableFileSize() ?? 0L.AsReadableFileSize();
 
         public int LineCount
             => IsInFilterMode ? FilteredLineCount : RawLineCount;
