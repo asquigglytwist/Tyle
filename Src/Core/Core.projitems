@@ -18,7 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\LogEntry.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\NumberExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Prefs\Preferences.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LogFile\TailedFileChangedArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LogFile\TailedFileChangedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\TailedFileChangeType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\TailedStream.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\NativeMethods.cs" />
