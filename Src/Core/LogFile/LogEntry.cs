@@ -17,7 +17,7 @@ namespace Core.Prefs
 
     public class FilteredLogEntry : LogEntry
     {
-        public FilteredLogEntry(LogEntry entry, int srcLineNumber) : base(entry.Line)
+        public FilteredLogEntry(LogEntry entry, int srcLineNumber) : base(entry?.Line)
         {
             SourceLineNumber = srcLineNumber;
             MatchingRule = null;
