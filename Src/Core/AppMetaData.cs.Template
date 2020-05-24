@@ -1,4 +1,4 @@
-﻿namespace Tyle
+﻿namespace Tyle.Core
 {
     public static class AppMetaData
     {
