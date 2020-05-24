@@ -4,10 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Tyle;
 using Core.Rules;
 
-namespace Core.Prefs
+namespace Tyle.Core
 {
     #region Preferences
     /// <summary>

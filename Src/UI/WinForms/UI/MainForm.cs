@@ -1,13 +1,11 @@
-﻿using Core.LogFile;
-using Core.Prefs;
-using Core.Rules;
-using Newtonsoft.Json;
+﻿using Core.Rules;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using Tyle.Core;
 
 namespace Tyle.UI
 {

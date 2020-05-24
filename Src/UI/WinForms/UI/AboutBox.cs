@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
+using Tyle.Core;
 
 namespace Tyle.UI
 {
