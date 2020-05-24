@@ -4,31 +4,31 @@ using System.Text;
 
 namespace Core.Prefs
 {
-    #region TailedFileChangedArgs
+    #region TailedFileChangedEventArgs
     /// <summary>
     /// Provides data for the OnTailedFileChanged event.
     /// </summary>
-    public class TailedFileChangedArgs : EventArgs
+    public class TailedFileChangedEventArgs : EventArgs
     {
         // [BIB]:  https://www.codeproject.com/Articles/9355/Creating-advanced-C-custom-events
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of TailedFileChangedArgs
+        /// Initializes a new instance of TailedFileChangedEventArgs
         /// </summary>
         /// <param name="changeType">Indicates the type of change that has occured.</param>
         /// <param name="changedLinesCount">Number of lines that have changed.</param>
-        public TailedFileChangedArgs(TailedFileChangeType changeType, int changedLinesCount = 0)
+        public TailedFileChangedEventArgs(TailedFileChangeType changeType, int changedLinesCount = 0)
         {
             ChangeType = changeType;
             ChangedLinesCount = changedLinesCount;
         }
 
         /// <summary>
-        /// Initializes a new instance of TailedFileChangedArgs when the file is renamed.
+        /// Initializes a new instance of TailedFileChangedEventArgs when the file is renamed.
         /// </summary>
         /// <param name="oldPath">Fullpath of the file before renaming.</param>
         /// <param name="newPath">Fullpath of the file after renaming.</param>
-        public TailedFileChangedArgs(string oldPath, string newPath)
+        public TailedFileChangedEventArgs(string oldPath, string newPath)
             : this(TailedFileChangeType.Renamed)
         {
             OldFilePath = oldPath;
@@ -38,7 +38,7 @@ namespace Core.Prefs
 
         #region Properties
         /// <summary>
-        /// Indicates the type of change that this instance of TailedFileChangedArgs represents.
+        /// Indicates the type of change that this instance of TailedFileChangedEventArgs represents.
         /// </summary>
         public TailedFileChangeType ChangeType { get; protected set; }
         /// <summary>

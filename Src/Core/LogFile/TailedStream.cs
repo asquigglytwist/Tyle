@@ -14,7 +14,7 @@ namespace Core.Prefs
         protected StreamReader fileStream;
         protected List<LogEntry> lsLinesInFile;
         protected FileSystemWatcher fileWatcher;
-        public delegate void TailedFileChangedHandler(object sender, TailedFileChangedArgs e);
+        public delegate void TailedFileChangedHandler(object sender, TailedFileChangedEventArgs e);
         public event TailedFileChangedHandler OnTailedFileChanged;
         #endregion
 
@@ -84,8 +84,8 @@ namespace Core.Prefs
                 {
                     WatchFileForChanges(true);
                     // [BIB]:  https://stackoverflow.com/a/34458726
-                    Task.Delay(DelayBeforeRaisingEvent).ContinueWith(t => OnTailedFileChanged(this, new TailedFileChangedArgs(TailedFileChangeType.InitialReadComplete, lsLinesInFile.Count)));
-                    //OnTailedFileChanged(this, new TailedFileChangedArgs(TailedFileChangeType.InitialReadComplete, lsLinesInFile.Count));
+                    Task.Delay(DelayBeforeRaisingEvent).ContinueWith(t => OnTailedFileChanged(this, new TailedFileChangedEventArgs(TailedFileChangeType.InitialReadComplete, lsLinesInFile.Count)));
+                    //OnTailedFileChanged(this, new TailedFileChangedEventArgs(TailedFileChangeType.InitialReadComplete, lsLinesInFile.Count));
                     return true;
                 }
                 return false;
@@ -93,7 +93,7 @@ namespace Core.Prefs
             else
             {
                 WatchFileForChanges(false);
-                OnTailedFileChanged(this, new TailedFileChangedArgs(TailedFileChangeType.Deleted));
+                OnTailedFileChanged(this, new TailedFileChangedEventArgs(TailedFileChangeType.Deleted));
                 return true;
             }
         }
@@ -194,7 +194,7 @@ namespace Core.Prefs
             var currentSize = new FileInfo(TailedFilePath).Length;
             if (currentSize > 0)
             {
-                OnTailedFileChanged(this, new TailedFileChangedArgs(TailedFileChangeType.InitialReadComplete, lsLinesInFile.Count));
+                OnTailedFileChanged(this, new TailedFileChangedEventArgs(TailedFileChangeType.InitialReadComplete, lsLinesInFile.Count));
             }
         }
 
@@ -247,13 +247,13 @@ namespace Core.Prefs
                         // [BIB]:  https://stackoverflow.com/questions/33233161/how-to-ensure-that-streamreader-basestream-length-will-return-the-correct-value
                         // [BIB]:  https://stackoverflow.com/a/20863065
                         StreamSize = currentSize;
-                        OnTailedFileChanged(this, new TailedFileChangedArgs(temp, linesRead));
+                        OnTailedFileChanged(this, new TailedFileChangedEventArgs(temp, linesRead));
                     }
                     break;
                 case WatcherChangeTypes.Deleted:
                     fileStream.Close();
                     InitTailing();
-                    OnTailedFileChanged(this, new TailedFileChangedArgs(TailedFileChangeType.Deleted));
+                    OnTailedFileChanged(this, new TailedFileChangedEventArgs(TailedFileChangeType.Deleted));
                     break;
             }
         }
@@ -262,7 +262,7 @@ namespace Core.Prefs
         {
             // Specify what is done when a file is renamed.
             Console.WriteLine("File: {0} renamed to {1}", e.OldFullPath, e.FullPath);
-            OnTailedFileChanged(this, new TailedFileChangedArgs(e.OldFullPath, e.FullPath));
+            OnTailedFileChanged(this, new TailedFileChangedEventArgs(e.OldFullPath, e.FullPath));
         }
         #endregion
         #endregion
