@@ -1,4 +1,6 @@
 ﻿using Core.LogFile;
+using Core.Prefs;
+using Core.Rules;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
