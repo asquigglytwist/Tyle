@@ -250,18 +250,18 @@ namespace Tyle.UI
         private void btnCustomColor_Click(object sender, EventArgs e)
         {
             // [BIB]:  https://stackoverflow.com/questions/4261162/modal-common-dialog-not-showing-until-pressing-the-alt-key/5080752
-            Task.Delay(500)
+            _ = Task.Delay(500)
                 .ContinueWith(task => SendKeys.SendWait("%"))
                 .ContinueWith(task => SendKeys.SendWait("%"));
             if (dlgCustomColor.ShowDialog(visualCues) == DialogResult.OK)
             {
                 var color = dlgCustomColor.Color;
                 var caller = (sender as Button).Tag as string;
-                if (caller.Equals(CustomColorTextTag))
+                if (caller.Equals(CustomColorTextTag, StringComparison.OrdinalIgnoreCase))
                 {
                     cmbForeGround.PickColor(color);
                 }
-                else if (caller.Equals(CustomColorBGTag))
+                else if (caller.Equals(CustomColorBGTag, StringComparison.OrdinalIgnoreCase))
                 {
                     cmbBackGround.PickColor(color);
                 }
