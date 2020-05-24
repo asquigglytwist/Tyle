@@ -10,7 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AppMetaData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LogFile\FilteredLogFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Prefs\Rule.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogFile\LogFileStream.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Prefs\RulesEngine.cs" />
