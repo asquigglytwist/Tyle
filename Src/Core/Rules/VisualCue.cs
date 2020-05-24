@@ -17,31 +17,38 @@ namespace Core.Rules
         /// <summary>
         /// Bold-style for the text
         /// </summary>
-        public readonly bool Bold;
+        public bool Bold
+        { get; private set; }
         /// <summary>
         /// Italicizes the text
         /// </summary>
-        public readonly bool Italic;
+        public bool Italic
+        { get; private set; }
         /// <summary>
         /// Underlines the text
         /// </summary>
-        public readonly bool Underline;
+        public bool Underline
+        { get; private set; }
         /// <summary>
         /// Strike-out the text
         /// </summary>
-        public readonly bool Strikeout;
+        public bool Strikeout
+        { get; private set; }
         /// <summary>
         /// The text color to be used
         /// </summary>
-        public readonly Color ForeGround;
+        public Color ForeGround
+        { get; private set; }
         /// <summary>
         /// Background color for the text
         /// </summary>
-        public readonly Color BackGround;
+        public Color BackGround
+        { get; private set; }
         /// <summary>
         /// Font to be used for displaying the text
         /// </summary>
-        public readonly Font DisplayFont;
+        public Font DisplayFont
+        { get; private set; }
         #endregion // Fields
 
         #region Constructor(s)
