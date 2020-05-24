@@ -9,7 +9,7 @@ namespace Core.Rules
 {
     #region VisualCue
     /// <summary>
-    /// Represents the VisualCue / Decoration for a matched <see cref="LogEntry"/>
+    /// Represents the <see cref="VisualCue"/> / Decoration for a matched <see cref="LogFile.LogEntry"/>
     /// </summary>
     public class VisualCue : IDisposable
     {
@@ -50,7 +50,7 @@ namespace Core.Rules
         /// </summary>
         static VisualCue()
         {
-            DefaultDecoration = new VisualCue(SystemFonts.DefaultFont);
+            DefaultDecoration = new VisualCue(false, false, false, false, SystemColors.ControlText, SystemColors.Control, SystemFonts.DefaultFont);
         }
 
         /// <summary>
@@ -79,20 +79,23 @@ namespace Core.Rules
                 | (strikeout ? FontStyle.Strikeout : FontStyle.Regular);
             DisplayFont = new Font(displayFont, style);
         }
-
-        /// <summary>
-        /// <inheritdoc cref="VisualCue.VisualCue"/> with all styling disabled
-        /// </summary>
-        /// <param name="unDecoratedFont">Font to be used for all UnDecorated <see cref="LogEntry"/></param>
-        protected VisualCue(Font unDecoratedFont)
-            : this(false, false, false, false, SystemColors.ControlText, SystemColors.Control, unDecoratedFont)
-        {
-        }
         #endregion // Constructor
 
-        public static void UpdateFontForUnDecoratedEntries(Font undecoratedFont)
+        public static void UpdateDecorationForUnMatchedLogEntries(Color? fore, Color? back,
+            Font undecoratedFont)
         {
-            DefaultDecoration = new VisualCue(undecoratedFont);
+            if (fore.HasValue)
+            {
+                DefaultDecoration.ForeGround = fore.Value;
+            }
+            if (back.HasValue)
+            {
+                DefaultDecoration.BackGround = back.Value;
+            }
+            if (undecoratedFont != null)
+            {
+                DefaultDecoration.DisplayFont = undecoratedFont;
+            }
         }
 
         public void Dispose()
@@ -101,7 +104,7 @@ namespace Core.Rules
         }
 
         /// <summary>
-        /// <see cref="VisualCue"/> instance for all UnDecorated <see cref="LogEntry"/>
+        /// <see cref="VisualCue"/> instance for all UnDecorated <see cref="LogFile.LogEntry"/>
         /// </summary>
         public static VisualCue DefaultDecoration
         { get; private set; }
