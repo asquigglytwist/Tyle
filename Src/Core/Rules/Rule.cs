@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Core.LogFile
+namespace Core.Rules
 {
     /// <summary>
     /// Represents an individual Rule against which a <see cref="LogEntry"/> will be tested
