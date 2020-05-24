@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Core.LogFile
+namespace Tyle.Core
 {
     public static class HighlightsHandler
     {
@@ -57,6 +57,6 @@ namespace Core.LogFile
         }
 
         public static List<VisualCue> AllConfigs
-        { get; set; }
+        { get; private set; }
     }
 }
