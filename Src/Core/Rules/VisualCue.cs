@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Prefs
+namespace Core.Rules
 {
     #region VisualCue
     /// <summary>
