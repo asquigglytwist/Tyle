@@ -27,9 +27,11 @@ namespace Core.LogFile
             fileWatcher?.Dispose();
             FilePath = Path.GetFullPath(FilePath);
             // [BIB]:  https://stackoverflow.com/a/721743
-            fileWatcher = new FileSystemWatcher();
-            fileWatcher.Path = Path.GetDirectoryName(FilePath);
-            fileWatcher.Filter = Path.GetFileName(FilePath);
+            fileWatcher = new FileSystemWatcher
+            {
+                Path = Path.GetDirectoryName(FilePath),
+                Filter = Path.GetFileName(FilePath)
+            };
             if (fileExists)
             {
                 fileWatcher.NotifyFilter = (NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName);
