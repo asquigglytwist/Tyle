@@ -136,18 +136,20 @@ namespace Core.LogFile
         /// <summary>
         /// Complete path to the LogFile
         /// </summary>
-        public string FilePath { get; private set; }
+        public string FilePath { get; protected set; }
 
         /// <summary>
         /// The LogFile's name
         /// </summary>
-        public string FileName { get; private set; }
+        public string FileName { get; protected set; }
 
         /// <summary>
         /// Actual size of the file under <see cref="LogFileStream"/>, in a readable format
         /// </summary>
-        public string FileSize
-            => fileStream?.BaseStream.Length.AsReadableFileSize() ?? 0L.AsReadableFileSize();
+        public long FileSize
+            => fileStream?.BaseStream.Length ?? 0L;
+
+        public string FriendlyFileSize => FileSize.AsReadableFileSize();
 
         public int LineCount
             => IsInFilterMode ? FilteredLineCount : RawLineCount;
