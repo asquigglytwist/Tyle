@@ -30,7 +30,7 @@ namespace Core.LogFile
             fileWatcher = new FileSystemWatcher
             {
                 Path = Path.GetDirectoryName(FilePath),
-                Filter = Path.GetFileName(FilePath)
+                Filter = FileName
             };
             if (fileExists)
             {
