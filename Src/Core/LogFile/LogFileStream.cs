@@ -31,10 +31,7 @@ namespace Core.LogFile
             rawLogEntries = new List<LogEntry>();
             if (File.Exists(filePath))
             {
-                fileStream = new StreamReader(
-                    new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
-                LongestLine = DefaultLongestLine;
-                ReadLinesToEOF();
+                InitLogFileStream(filePath);
             }
             else
             {
@@ -43,6 +40,14 @@ namespace Core.LogFile
             }
             FilePath = filePath;
             FileName = Path.GetFileName(filePath);
+        }
+
+        protected void InitLogFileStream(string filePath)
+        {
+            fileStream = new StreamReader(
+                                new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+            LongestLine = DefaultLongestLine;
+            ReadLinesToEOF();
         }
         #endregion // Constructor
 
