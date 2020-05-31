@@ -66,16 +66,12 @@ namespace Core.LogFile
                         }
                         else
                         {
-                            /**
-                             * Treat both reduced file size and and unaltered file size as shrunk because we're not sure where
-                             * the change has happened within the file; Hence a complete reset makes more sense.
-                             */
+                            // Treat both reduced file size and unaltered file size as shrunk
+                            // because the the file may've changed other than at tail.
                             temp = TailedFileChangeType.Shrunk;
                         }
                         if (temp == TailedFileChangeType.Shrunk)
                         {
-                            fileStream.Close();
-                            fileStream.Dispose();
                             ReInitTailing();
                         }
                         // [BIB]:  https://stackoverflow.com/questions/33233161/how-to-ensure-that-streamreader-basestream-length-will-return-the-correct-value
@@ -85,6 +81,13 @@ namespace Core.LogFile
                     }
                     break;
             }
+        }
+
+        private void ReInitTailing()
+        {
+            fileStream?.Close();
+            fileStream?.Dispose();
+            InitLogFileStream(FilePath);
         }
 
         public long LastKnownSize { get; private set; }
