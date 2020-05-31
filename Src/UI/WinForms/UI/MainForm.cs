@@ -18,10 +18,10 @@ namespace Tyle.UI
         public MainForm()
         {
             InitializeComponent();
-            mnuFExit.ToolTipText = $"Quit {AppMetaData.ApplicationName}{Environment.NewLine}(Closes all files open for viewing)";
+            MnuFExit.ToolTipText = $"Quit {AppMetaData.ApplicationName}{Environment.NewLine}(Closes all files open for viewing)";
 #if DEBUG
-            dlgOpenFile.CheckFileExists = false;
-            dlgOpenFile.CheckPathExists = false;
+            DlgOpenFile.CheckFileExists = false;
+            DlgOpenFile.CheckPathExists = false;
 #endif
             Icon = Properties.Resources.Tyle;
             Text = AppMetaData.ApplicationName;
@@ -61,17 +61,16 @@ namespace Tyle.UI
                 }
                 else
                 {
-                    //var tailForm = new TailViewerForm(this, file);
-                    var tailForm = new LogFileViewer(this, file);
+                    var tailForm = new LogFileViewer(this, file, true);
                     tailForm.SetLSVFont(fontForListView);
                     mapOpenFiles[temp] = tailForm;
                     var newPage = new TabPage(tailForm.Text)
                     {
                         ToolTipText = file
                     };
-                    tbcMDIChildren.TabPages.Add(newPage);
-                    tbcMDIChildren.SelectedTab = newPage;
-                    tbcMDIChildren.Show();
+                    TbcMDIChildren.TabPages.Add(newPage);
+                    TbcMDIChildren.SelectedTab = newPage;
+                    TbcMDIChildren.Show();
                 }
 #if DEBUG
             }
@@ -83,23 +82,23 @@ namespace Tyle.UI
         public void NotifyStoppedTailing(string fileName, string title)
         {
             mapOpenFiles.Remove(fileName.ToLower());
-            foreach (TabPage page in tbcMDIChildren.TabPages)
+            foreach (TabPage page in TbcMDIChildren.TabPages)
             {
                 if (page.Text.Equals(title))
                 {
-                    tbcMDIChildren.TabPages.Remove(page);
+                    TbcMDIChildren.TabPages.Remove(page);
                     break;
                 }
             }
-            if (tbcMDIChildren.TabPages.Count < 1)
+            if (TbcMDIChildren.TabPages.Count < 1)
             {
-                tbcMDIChildren.Hide();
+                TbcMDIChildren.Hide();
             }
         }
 
         public void NotifyFileUpdate(string title)
         {
-            foreach (TabPage page in tbcMDIChildren.TabPages)
+            foreach (TabPage page in TbcMDIChildren.TabPages)
             {
                 if (page.Text.Equals(title))
                 {
@@ -110,25 +109,25 @@ namespace Tyle.UI
         }
 
         #region MenuEventHandlers
-        private void mnuFOpen_Click(object sender, EventArgs e)
+        private void MnuFOpen_Click(object sender, EventArgs e)
         {
-            if (DialogResult.OK == dlgOpenFile.ShowDialog())
+            if (DialogResult.OK == DlgOpenFile.ShowDialog())
             {
-                OpenFilesForTailing(dlgOpenFile.FileNames);
+                OpenFilesForTailing(DlgOpenFile.FileNames);
             }
         }
 
-        private void mnuFClose_Click(object sender, EventArgs e)
+        private void MnuFClose_Click(object sender, EventArgs e)
         {
             ActiveMdiChild?.Close();
         }
 
-        private void mnuFExit_Click(object sender, EventArgs e)
+        private void MnuFExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void mnuFCloseAll_Click(object sender, EventArgs e)
+        private void MnuFCloseAll_Click(object sender, EventArgs e)
         {
             foreach (Form f in MdiChildren)
             {
@@ -136,66 +135,64 @@ namespace Tyle.UI
             }
         }
 
-        private void mnuWCascade_Click(object sender, EventArgs e)
+        private void MnuWCascade_Click(object sender, EventArgs e)
         {
             LayoutMdi(MdiLayout.Cascade);
         }
 
-        private void mnuWTileHorizontally_Click(object sender, EventArgs e)
+        private void MnuWTileHorizontally_Click(object sender, EventArgs e)
         {
             LayoutMdi(MdiLayout.TileHorizontal);
         }
 
-        private void mnuWTileVertically_Click(object sender, EventArgs e)
+        private void MnuWTileVertically_Click(object sender, EventArgs e)
         {
             LayoutMdi(MdiLayout.TileVertical);
         }
 
-        private void mnuWArrangeIcons_Click(object sender, EventArgs e)
+        private void MnuWArrangeIcons_Click(object sender, EventArgs e)
         {
             LayoutMdi(MdiLayout.ArrangeIcons);
         }
         #endregion
 
         #region EventHandlers
-        private void frmMain_MdiChildActivate(object sender, EventArgs e)
+        private void FrmMain_MdiChildActivate(object sender, EventArgs e)
         {
-            var temp = (ActiveMdiChild as TailViewerForm)?.Text;
-            foreach (TabPage page in tbcMDIChildren.TabPages)
+            var temp = (ActiveMdiChild as LogFileViewer)?.Text;
+            foreach (TabPage page in TbcMDIChildren.TabPages)
             {
                 if (page.Text.Equals(temp))
                 {
-                    tbcMDIChildren.SelectedTab = page;
+                    TbcMDIChildren.SelectedTab = page;
                     break;
                 }
             }
         }
 
-        private void tbcMDIChildren_SelectedIndexChanged(object sender, EventArgs e)
+        private void TbcMDIChildren_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //TailViewerForm childForm;
-            LogFileViewer childForm;
-            if (tbcMDIChildren.SelectedTab != null && mapOpenFiles.TryGetValue(tbcMDIChildren.SelectedTab.ToolTipText.ToLower(), out childForm))
+            if (TbcMDIChildren.SelectedTab != null && mapOpenFiles.TryGetValue(TbcMDIChildren.SelectedTab.ToolTipText.ToLower(), out LogFileViewer childForm))
             {
                 childForm.Activate();
             }
         }
 
-        private void mnuHAabout_Click(object sender, EventArgs e)
+        private void MnuHAabout_Click(object sender, EventArgs e)
         {
             AboutBox.AppAbout.ShowDialog();
         }
 
-        private void mnuPHighlighting_Click(object sender, EventArgs e)
+        private void MnuPHighlighting_Click(object sender, EventArgs e)
         {
             Highlighter.ShowAsDialog(this);
         }
 
-        private void mnuPFont_Click(object sender, EventArgs e)
+        private void MnuPFont_Click(object sender, EventArgs e)
         {
-            if (dlgFontForLSV.ShowDialog() == DialogResult.OK)
+            if (DlgFontForLSV.ShowDialog() == DialogResult.OK)
             {
-                var selFont = dlgFontForLSV.Font;
+                var selFont = DlgFontForLSV.Font;
                 if (selFont != fontForListView)
                 {
                     foreach (var openFile in mapOpenFiles.Values)

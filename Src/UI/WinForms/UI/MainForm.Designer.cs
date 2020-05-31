@@ -30,239 +30,239 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.stsMain = new System.Windows.Forms.StatusStrip();
-            this.mnuMain = new System.Windows.Forms.MenuStrip();
-            this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.tssAfterOpen = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuFClose = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFCloseAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.tssBeforeExit = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuFExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuPrefs = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuPHighlighting = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuPFont = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuWindows = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuWCascade = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuWTileHorizontally = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuWTileVertically = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuWArrangeIcons = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuHAabout = new System.Windows.Forms.ToolStripMenuItem();
-            this.dlgOpenFile = new System.Windows.Forms.OpenFileDialog();
-            this.tbcMDIChildren = new System.Windows.Forms.TabControl();
-            this.imlMainForm = new System.Windows.Forms.ImageList(this.components);
-            this.dlgFontForLSV = new System.Windows.Forms.FontDialog();
-            this.mnuMain.SuspendLayout();
+            this.StsMain = new System.Windows.Forms.StatusStrip();
+            this.MnuMain = new System.Windows.Forms.MenuStrip();
+            this.MnuFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuFOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.TssAfterOpen = new System.Windows.Forms.ToolStripSeparator();
+            this.MnuFClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuFCloseAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.TssBeforeExit = new System.Windows.Forms.ToolStripSeparator();
+            this.MnuFExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuPrefs = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuPHighlighting = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuPFont = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuWindows = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuWCascade = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuWTileHorizontally = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuWTileVertically = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuWArrangeIcons = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuHAabout = new System.Windows.Forms.ToolStripMenuItem();
+            this.DlgOpenFile = new System.Windows.Forms.OpenFileDialog();
+            this.TbcMDIChildren = new System.Windows.Forms.TabControl();
+            this.ImlMainForm = new System.Windows.Forms.ImageList(this.components);
+            this.DlgFontForLSV = new System.Windows.Forms.FontDialog();
+            this.MnuMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // stsMain
             // 
-            this.stsMain.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.stsMain.Location = new System.Drawing.Point(0, 565);
-            this.stsMain.Name = "stsMain";
-            this.stsMain.Size = new System.Drawing.Size(897, 22);
-            this.stsMain.TabIndex = 1;
-            this.stsMain.Text = "statusStrip1";
+            this.StsMain.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.StsMain.Location = new System.Drawing.Point(0, 565);
+            this.StsMain.Name = "stsMain";
+            this.StsMain.Size = new System.Drawing.Size(897, 22);
+            this.StsMain.TabIndex = 1;
+            this.StsMain.Text = "statusStrip1";
             // 
             // mnuMain
             // 
-            this.mnuMain.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.mnuMain.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.mnuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuFile,
-            this.mnuPrefs,
-            this.mnuWindows,
-            this.mnuHelp});
-            this.mnuMain.Location = new System.Drawing.Point(0, 0);
-            this.mnuMain.MdiWindowListItem = this.mnuWindows;
-            this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(897, 33);
-            this.mnuMain.TabIndex = 2;
-            this.mnuMain.Text = "MainMenu";
+            this.MnuMain.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.MnuMain.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.MnuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MnuFile,
+            this.MnuPrefs,
+            this.MnuWindows,
+            this.MnuHelp});
+            this.MnuMain.Location = new System.Drawing.Point(0, 0);
+            this.MnuMain.MdiWindowListItem = this.MnuWindows;
+            this.MnuMain.Name = "mnuMain";
+            this.MnuMain.Size = new System.Drawing.Size(897, 33);
+            this.MnuMain.TabIndex = 2;
+            this.MnuMain.Text = "MainMenu";
             // 
             // mnuFile
             // 
-            this.mnuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuFOpen,
-            this.tssAfterOpen,
-            this.mnuFClose,
-            this.mnuFCloseAll,
-            this.tssBeforeExit,
-            this.mnuFExit});
-            this.mnuFile.Name = "mnuFile";
-            this.mnuFile.Size = new System.Drawing.Size(54, 29);
-            this.mnuFile.Text = "&File";
+            this.MnuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MnuFOpen,
+            this.TssAfterOpen,
+            this.MnuFClose,
+            this.MnuFCloseAll,
+            this.TssBeforeExit,
+            this.MnuFExit});
+            this.MnuFile.Name = "mnuFile";
+            this.MnuFile.Size = new System.Drawing.Size(54, 29);
+            this.MnuFile.Text = "&File";
             // 
             // mnuFOpen
             // 
-            this.mnuFOpen.Name = "mnuFOpen";
-            this.mnuFOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.mnuFOpen.Size = new System.Drawing.Size(298, 34);
-            this.mnuFOpen.Text = "&Open";
-            this.mnuFOpen.ToolTipText = "Open a new log file for viewing";
-            this.mnuFOpen.Click += new System.EventHandler(this.mnuFOpen_Click);
+            this.MnuFOpen.Name = "mnuFOpen";
+            this.MnuFOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.MnuFOpen.Size = new System.Drawing.Size(298, 34);
+            this.MnuFOpen.Text = "&Open";
+            this.MnuFOpen.ToolTipText = "Open a new log file for viewing";
+            this.MnuFOpen.Click += new System.EventHandler(this.MnuFOpen_Click);
             // 
             // tssAfterOpen
             // 
-            this.tssAfterOpen.Name = "tssAfterOpen";
-            this.tssAfterOpen.Size = new System.Drawing.Size(295, 6);
+            this.TssAfterOpen.Name = "tssAfterOpen";
+            this.TssAfterOpen.Size = new System.Drawing.Size(295, 6);
             // 
             // mnuFClose
             // 
-            this.mnuFClose.Name = "mnuFClose";
-            this.mnuFClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
-            this.mnuFClose.Size = new System.Drawing.Size(298, 34);
-            this.mnuFClose.Text = "&Close";
-            this.mnuFClose.ToolTipText = "Close the active log file";
-            this.mnuFClose.Click += new System.EventHandler(this.mnuFClose_Click);
+            this.MnuFClose.Name = "mnuFClose";
+            this.MnuFClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+            this.MnuFClose.Size = new System.Drawing.Size(298, 34);
+            this.MnuFClose.Text = "&Close";
+            this.MnuFClose.ToolTipText = "Close the active log file";
+            this.MnuFClose.Click += new System.EventHandler(this.MnuFClose_Click);
             // 
             // mnuFCloseAll
             // 
-            this.mnuFCloseAll.Name = "mnuFCloseAll";
-            this.mnuFCloseAll.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.MnuFCloseAll.Name = "mnuFCloseAll";
+            this.MnuFCloseAll.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.W)));
-            this.mnuFCloseAll.Size = new System.Drawing.Size(298, 34);
-            this.mnuFCloseAll.Text = "Close &All";
-            this.mnuFCloseAll.ToolTipText = "Close all logs that are currently open";
-            this.mnuFCloseAll.Click += new System.EventHandler(this.mnuFCloseAll_Click);
+            this.MnuFCloseAll.Size = new System.Drawing.Size(298, 34);
+            this.MnuFCloseAll.Text = "Close &All";
+            this.MnuFCloseAll.ToolTipText = "Close all logs that are currently open";
+            this.MnuFCloseAll.Click += new System.EventHandler(this.MnuFCloseAll_Click);
             // 
             // tssBeforeExit
             // 
-            this.tssBeforeExit.Name = "tssBeforeExit";
-            this.tssBeforeExit.Size = new System.Drawing.Size(295, 6);
+            this.TssBeforeExit.Name = "tssBeforeExit";
+            this.TssBeforeExit.Size = new System.Drawing.Size(295, 6);
             // 
             // mnuFExit
             // 
-            this.mnuFExit.Name = "mnuFExit";
-            this.mnuFExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.mnuFExit.Size = new System.Drawing.Size(298, 34);
-            this.mnuFExit.Text = "E&xit";
-            this.mnuFExit.Click += new System.EventHandler(this.mnuFExit_Click);
+            this.MnuFExit.Name = "mnuFExit";
+            this.MnuFExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
+            this.MnuFExit.Size = new System.Drawing.Size(298, 34);
+            this.MnuFExit.Text = "E&xit";
+            this.MnuFExit.Click += new System.EventHandler(this.MnuFExit_Click);
             // 
             // mnuPrefs
             // 
-            this.mnuPrefs.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuPHighlighting,
-            this.mnuPFont});
-            this.mnuPrefs.Name = "mnuPrefs";
-            this.mnuPrefs.Size = new System.Drawing.Size(118, 29);
-            this.mnuPrefs.Text = "&Preferences";
+            this.MnuPrefs.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MnuPHighlighting,
+            this.MnuPFont});
+            this.MnuPrefs.Name = "mnuPrefs";
+            this.MnuPrefs.Size = new System.Drawing.Size(118, 29);
+            this.MnuPrefs.Text = "&Preferences";
             // 
             // mnuPHighlighting
             // 
-            this.mnuPHighlighting.Name = "mnuPHighlighting";
-            this.mnuPHighlighting.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.K)));
-            this.mnuPHighlighting.Size = new System.Drawing.Size(273, 34);
-            this.mnuPHighlighting.Text = "&Highlighting";
-            this.mnuPHighlighting.ToolTipText = "Display the Highlighting configuration";
-            this.mnuPHighlighting.Click += new System.EventHandler(this.mnuPHighlighting_Click);
+            this.MnuPHighlighting.Name = "mnuPHighlighting";
+            this.MnuPHighlighting.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.K)));
+            this.MnuPHighlighting.Size = new System.Drawing.Size(273, 34);
+            this.MnuPHighlighting.Text = "&Highlighting";
+            this.MnuPHighlighting.ToolTipText = "Display the Highlighting configuration";
+            this.MnuPHighlighting.Click += new System.EventHandler(this.MnuPHighlighting_Click);
             // 
             // mnuPFont
             // 
-            this.mnuPFont.Name = "mnuPFont";
-            this.mnuPFont.Size = new System.Drawing.Size(273, 34);
-            this.mnuPFont.Text = "&Font";
-            this.mnuPFont.ToolTipText = "Pick a font for the Log Viewer";
-            this.mnuPFont.Click += new System.EventHandler(this.mnuPFont_Click);
+            this.MnuPFont.Name = "mnuPFont";
+            this.MnuPFont.Size = new System.Drawing.Size(273, 34);
+            this.MnuPFont.Text = "&Font";
+            this.MnuPFont.ToolTipText = "Pick a font for the Log Viewer";
+            this.MnuPFont.Click += new System.EventHandler(this.MnuPFont_Click);
             // 
             // mnuWindows
             // 
-            this.mnuWindows.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuWCascade,
-            this.mnuWTileHorizontally,
-            this.mnuWTileVertically,
-            this.mnuWArrangeIcons});
-            this.mnuWindows.Name = "mnuWindows";
-            this.mnuWindows.Size = new System.Drawing.Size(102, 29);
-            this.mnuWindows.Text = "&Windows";
+            this.MnuWindows.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MnuWCascade,
+            this.MnuWTileHorizontally,
+            this.MnuWTileVertically,
+            this.MnuWArrangeIcons});
+            this.MnuWindows.Name = "mnuWindows";
+            this.MnuWindows.Size = new System.Drawing.Size(102, 29);
+            this.MnuWindows.Text = "&Windows";
             // 
             // mnuWCascade
             // 
-            this.mnuWCascade.Name = "mnuWCascade";
-            this.mnuWCascade.Size = new System.Drawing.Size(240, 34);
-            this.mnuWCascade.Text = "&Cascade";
-            this.mnuWCascade.Click += new System.EventHandler(this.mnuWCascade_Click);
+            this.MnuWCascade.Name = "mnuWCascade";
+            this.MnuWCascade.Size = new System.Drawing.Size(240, 34);
+            this.MnuWCascade.Text = "&Cascade";
+            this.MnuWCascade.Click += new System.EventHandler(this.MnuWCascade_Click);
             // 
             // mnuWTileHorizontally
             // 
-            this.mnuWTileHorizontally.Name = "mnuWTileHorizontally";
-            this.mnuWTileHorizontally.Size = new System.Drawing.Size(240, 34);
-            this.mnuWTileHorizontally.Text = "Tile &Horizontally";
-            this.mnuWTileHorizontally.Click += new System.EventHandler(this.mnuWTileHorizontally_Click);
+            this.MnuWTileHorizontally.Name = "mnuWTileHorizontally";
+            this.MnuWTileHorizontally.Size = new System.Drawing.Size(240, 34);
+            this.MnuWTileHorizontally.Text = "Tile &Horizontally";
+            this.MnuWTileHorizontally.Click += new System.EventHandler(this.MnuWTileHorizontally_Click);
             // 
             // mnuWTileVertically
             // 
-            this.mnuWTileVertically.Name = "mnuWTileVertically";
-            this.mnuWTileVertically.Size = new System.Drawing.Size(240, 34);
-            this.mnuWTileVertically.Text = "Tile &Vertically";
-            this.mnuWTileVertically.Click += new System.EventHandler(this.mnuWTileVertically_Click);
+            this.MnuWTileVertically.Name = "mnuWTileVertically";
+            this.MnuWTileVertically.Size = new System.Drawing.Size(240, 34);
+            this.MnuWTileVertically.Text = "Tile &Vertically";
+            this.MnuWTileVertically.Click += new System.EventHandler(this.MnuWTileVertically_Click);
             // 
             // mnuWArrangeIcons
             // 
-            this.mnuWArrangeIcons.Name = "mnuWArrangeIcons";
-            this.mnuWArrangeIcons.Size = new System.Drawing.Size(240, 34);
-            this.mnuWArrangeIcons.Text = "&Iconify";
-            this.mnuWArrangeIcons.Click += new System.EventHandler(this.mnuWArrangeIcons_Click);
+            this.MnuWArrangeIcons.Name = "mnuWArrangeIcons";
+            this.MnuWArrangeIcons.Size = new System.Drawing.Size(240, 34);
+            this.MnuWArrangeIcons.Text = "&Iconify";
+            this.MnuWArrangeIcons.Click += new System.EventHandler(this.MnuWArrangeIcons_Click);
             // 
             // mnuHelp
             // 
-            this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuHAabout});
-            this.mnuHelp.Name = "mnuHelp";
-            this.mnuHelp.Size = new System.Drawing.Size(65, 29);
-            this.mnuHelp.Text = "&Help";
+            this.MnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MnuHAabout});
+            this.MnuHelp.Name = "mnuHelp";
+            this.MnuHelp.Size = new System.Drawing.Size(65, 29);
+            this.MnuHelp.Text = "&Help";
             // 
             // mnuHAabout
             // 
-            this.mnuHAabout.Name = "mnuHAabout";
-            this.mnuHAabout.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
-            this.mnuHAabout.Size = new System.Drawing.Size(234, 34);
-            this.mnuHAabout.Text = "&About";
-            this.mnuHAabout.Click += new System.EventHandler(this.mnuHAabout_Click);
+            this.MnuHAabout.Name = "mnuHAabout";
+            this.MnuHAabout.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
+            this.MnuHAabout.Size = new System.Drawing.Size(234, 34);
+            this.MnuHAabout.Text = "&About";
+            this.MnuHAabout.Click += new System.EventHandler(this.MnuHAabout_Click);
             // 
             // dlgOpenFile
             // 
-            this.dlgOpenFile.DefaultExt = "log";
-            this.dlgOpenFile.Filter = "Common Log File Types (.txt; .log)|*.txt;*.log|All files (*.*)|*.*";
-            this.dlgOpenFile.Multiselect = true;
+            this.DlgOpenFile.DefaultExt = "log";
+            this.DlgOpenFile.Filter = "Common Log File Types (.txt; .log)|*.txt;*.log|All files (*.*)|*.*";
+            this.DlgOpenFile.Multiselect = true;
             // 
             // tbcMDIChildren
             // 
-            this.tbcMDIChildren.Appearance = System.Windows.Forms.TabAppearance.Buttons;
-            this.tbcMDIChildren.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tbcMDIChildren.ImageList = this.imlMainForm;
-            this.tbcMDIChildren.Location = new System.Drawing.Point(0, 33);
-            this.tbcMDIChildren.Multiline = true;
-            this.tbcMDIChildren.Name = "tbcMDIChildren";
-            this.tbcMDIChildren.SelectedIndex = 0;
-            this.tbcMDIChildren.ShowToolTips = true;
-            this.tbcMDIChildren.Size = new System.Drawing.Size(897, 32);
-            this.tbcMDIChildren.TabIndex = 4;
-            this.tbcMDIChildren.Visible = false;
-            this.tbcMDIChildren.SelectedIndexChanged += new System.EventHandler(this.tbcMDIChildren_SelectedIndexChanged);
+            this.TbcMDIChildren.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.TbcMDIChildren.Dock = System.Windows.Forms.DockStyle.Top;
+            this.TbcMDIChildren.ImageList = this.ImlMainForm;
+            this.TbcMDIChildren.Location = new System.Drawing.Point(0, 33);
+            this.TbcMDIChildren.Multiline = true;
+            this.TbcMDIChildren.Name = "tbcMDIChildren";
+            this.TbcMDIChildren.SelectedIndex = 0;
+            this.TbcMDIChildren.ShowToolTips = true;
+            this.TbcMDIChildren.Size = new System.Drawing.Size(897, 32);
+            this.TbcMDIChildren.TabIndex = 4;
+            this.TbcMDIChildren.Visible = false;
+            this.TbcMDIChildren.SelectedIndexChanged += new System.EventHandler(this.TbcMDIChildren_SelectedIndexChanged);
             // 
             // imlMainForm
             // 
-            this.imlMainForm.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imlMainForm.ImageStream")));
-            this.imlMainForm.TransparentColor = System.Drawing.Color.Transparent;
-            this.imlMainForm.Images.SetKeyName(0, "NewLinesFound.png");
+            this.ImlMainForm.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imlMainForm.ImageStream")));
+            this.ImlMainForm.TransparentColor = System.Drawing.Color.Transparent;
+            this.ImlMainForm.Images.SetKeyName(0, "NewLinesFound.png");
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(897, 587);
-            this.Controls.Add(this.tbcMDIChildren);
-            this.Controls.Add(this.stsMain);
-            this.Controls.Add(this.mnuMain);
+            this.Controls.Add(this.TbcMDIChildren);
+            this.Controls.Add(this.StsMain);
+            this.Controls.Add(this.MnuMain);
             this.IsMdiContainer = true;
-            this.MainMenuStrip = this.mnuMain;
+            this.MainMenuStrip = this.MnuMain;
             this.Name = "MainForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.MdiChildActivate += new System.EventHandler(this.frmMain_MdiChildActivate);
-            this.mnuMain.ResumeLayout(false);
-            this.mnuMain.PerformLayout();
+            this.MdiChildActivate += new System.EventHandler(this.FrmMain_MdiChildActivate);
+            this.MnuMain.ResumeLayout(false);
+            this.MnuMain.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,29 +270,29 @@
 
         #endregion
 
-        private System.Windows.Forms.StatusStrip stsMain;
-        private System.Windows.Forms.MenuStrip mnuMain;
-        private System.Windows.Forms.ToolStripMenuItem mnuFile;
-        private System.Windows.Forms.ToolStripMenuItem mnuPrefs;
-        private System.Windows.Forms.ToolStripMenuItem mnuWindows;
-        private System.Windows.Forms.ToolStripMenuItem mnuHelp;
-        private System.Windows.Forms.ToolStripMenuItem mnuFOpen;
-        private System.Windows.Forms.ToolStripSeparator tssAfterOpen;
-        private System.Windows.Forms.ToolStripMenuItem mnuFClose;
-        private System.Windows.Forms.ToolStripMenuItem mnuFCloseAll;
-        private System.Windows.Forms.ToolStripSeparator tssBeforeExit;
-        private System.Windows.Forms.ToolStripMenuItem mnuFExit;
-        private System.Windows.Forms.OpenFileDialog dlgOpenFile;
-        private System.Windows.Forms.ToolStripMenuItem mnuWCascade;
-        private System.Windows.Forms.ToolStripMenuItem mnuWTileHorizontally;
-        private System.Windows.Forms.ToolStripMenuItem mnuWTileVertically;
-        private System.Windows.Forms.ToolStripMenuItem mnuWArrangeIcons;
-        private System.Windows.Forms.TabControl tbcMDIChildren;
-        private System.Windows.Forms.ImageList imlMainForm;
-        private System.Windows.Forms.ToolStripMenuItem mnuHAabout;
-        private System.Windows.Forms.ToolStripMenuItem mnuPHighlighting;
-        private System.Windows.Forms.FontDialog dlgFontForLSV;
-        private System.Windows.Forms.ToolStripMenuItem mnuPFont;
+        private System.Windows.Forms.StatusStrip StsMain;
+        private System.Windows.Forms.MenuStrip MnuMain;
+        private System.Windows.Forms.ToolStripMenuItem MnuFile;
+        private System.Windows.Forms.ToolStripMenuItem MnuPrefs;
+        private System.Windows.Forms.ToolStripMenuItem MnuWindows;
+        private System.Windows.Forms.ToolStripMenuItem MnuHelp;
+        private System.Windows.Forms.ToolStripMenuItem MnuFOpen;
+        private System.Windows.Forms.ToolStripSeparator TssAfterOpen;
+        private System.Windows.Forms.ToolStripMenuItem MnuFClose;
+        private System.Windows.Forms.ToolStripMenuItem MnuFCloseAll;
+        private System.Windows.Forms.ToolStripSeparator TssBeforeExit;
+        private System.Windows.Forms.ToolStripMenuItem MnuFExit;
+        private System.Windows.Forms.OpenFileDialog DlgOpenFile;
+        private System.Windows.Forms.ToolStripMenuItem MnuWCascade;
+        private System.Windows.Forms.ToolStripMenuItem MnuWTileHorizontally;
+        private System.Windows.Forms.ToolStripMenuItem MnuWTileVertically;
+        private System.Windows.Forms.ToolStripMenuItem MnuWArrangeIcons;
+        private System.Windows.Forms.TabControl TbcMDIChildren;
+        private System.Windows.Forms.ImageList ImlMainForm;
+        private System.Windows.Forms.ToolStripMenuItem MnuHAabout;
+        private System.Windows.Forms.ToolStripMenuItem MnuPHighlighting;
+        private System.Windows.Forms.FontDialog DlgFontForLSV;
+        private System.Windows.Forms.ToolStripMenuItem MnuPFont;
     }
 }
 
