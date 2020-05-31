@@ -18,11 +18,16 @@ namespace Tyle.UI
         readonly LogFileStream tailedFile;
         private readonly MainForm MainForm;
 
-        public LogFileViewer(MainForm mdiParentForm, string fileToTail)
+        public LogFileViewer(MainForm mdiParentForm, string fileToTail, bool tail = false)
         {
             Hide();
             InitializeComponent();
-            tailedFile = new LogFileStream(fileToTail);
+            TailedStream.TailedFileChangedHandler tailedFileChanged = null;
+            if (tail)
+            {
+                tailedFileChanged = TailedFile_OnTailedFileChanged;
+            }
+            tailedFile = LogStreamFactory.GetStreamFor(fileToTail, tailedFileChanged);
             Text = tailedFile.FileName;
             MdiParent = MainForm = mdiParentForm;
             WindowState = FormWindowState.Maximized;
