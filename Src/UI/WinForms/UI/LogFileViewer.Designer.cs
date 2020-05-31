@@ -32,103 +32,103 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mnuTailForm = new System.Windows.Forms.MenuStrip();
-            this.mnuEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuECopy = new System.Windows.Forms.ToolStripMenuItem();
-            this.tssAfterCopy = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuEFind = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEFindNext = new System.Windows.Forms.ToolStripMenuItem();
-            this.lsvTailViewer = new Tyle.UI.TailListView();
-            this.mnuTailForm.SuspendLayout();
+            this.MnuTailForm = new System.Windows.Forms.MenuStrip();
+            this.MnuEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuECopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.TssAfterCopy = new System.Windows.Forms.ToolStripSeparator();
+            this.MnuEFind = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuEFindNext = new System.Windows.Forms.ToolStripMenuItem();
+            this.LsvTailViewer = new Tyle.UI.TailListView();
+            this.MnuTailForm.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnuTailForm
             // 
-            this.mnuTailForm.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.mnuTailForm.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.mnuTailForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuEdit});
-            this.mnuTailForm.Location = new System.Drawing.Point(0, 0);
-            this.mnuTailForm.Name = "mnuTailForm";
-            this.mnuTailForm.Size = new System.Drawing.Size(800, 33);
-            this.mnuTailForm.TabIndex = 2;
-            this.mnuTailForm.Text = "mnuTail";
-            this.mnuTailForm.Visible = false;
+            this.MnuTailForm.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.MnuTailForm.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.MnuTailForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MnuEdit});
+            this.MnuTailForm.Location = new System.Drawing.Point(0, 0);
+            this.MnuTailForm.Name = "mnuTailForm";
+            this.MnuTailForm.Size = new System.Drawing.Size(800, 33);
+            this.MnuTailForm.TabIndex = 2;
+            this.MnuTailForm.Text = "mnuTail";
+            this.MnuTailForm.Visible = false;
             // 
             // mnuEdit
             // 
-            this.mnuEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuECopy,
-            this.tssAfterCopy,
-            this.mnuEFind,
-            this.mnuEFindNext});
-            this.mnuEdit.MergeAction = System.Windows.Forms.MergeAction.Insert;
-            this.mnuEdit.MergeIndex = 1;
-            this.mnuEdit.Name = "mnuEdit";
-            this.mnuEdit.Size = new System.Drawing.Size(58, 29);
-            this.mnuEdit.Text = "&Edit";
+            this.MnuEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MnuECopy,
+            this.TssAfterCopy,
+            this.MnuEFind,
+            this.MnuEFindNext});
+            this.MnuEdit.MergeAction = System.Windows.Forms.MergeAction.Insert;
+            this.MnuEdit.MergeIndex = 1;
+            this.MnuEdit.Name = "mnuEdit";
+            this.MnuEdit.Size = new System.Drawing.Size(58, 29);
+            this.MnuEdit.Text = "&Edit";
             // 
             // mnuECopy
             // 
-            this.mnuECopy.Name = "mnuECopy";
-            this.mnuECopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.mnuECopy.Size = new System.Drawing.Size(220, 34);
-            this.mnuECopy.Text = "&Copy";
-            this.mnuECopy.Click += new System.EventHandler(this.mnuECopy_Click);
+            this.MnuECopy.Name = "mnuECopy";
+            this.MnuECopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.MnuECopy.Size = new System.Drawing.Size(220, 34);
+            this.MnuECopy.Text = "&Copy";
+            this.MnuECopy.Click += new System.EventHandler(this.MnuECopy_Click);
             // 
             // tssAfterCopy
             // 
-            this.tssAfterCopy.Name = "tssAfterCopy";
-            this.tssAfterCopy.Size = new System.Drawing.Size(217, 6);
+            this.TssAfterCopy.Name = "tssAfterCopy";
+            this.TssAfterCopy.Size = new System.Drawing.Size(217, 6);
             // 
             // mnuEFind
             // 
-            this.mnuEFind.Name = "mnuEFind";
-            this.mnuEFind.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.mnuEFind.Size = new System.Drawing.Size(220, 34);
-            this.mnuEFind.Text = "&Find";
-            this.mnuEFind.Click += new System.EventHandler(this.mnuEFind_Click);
+            this.MnuEFind.Name = "mnuEFind";
+            this.MnuEFind.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.MnuEFind.Size = new System.Drawing.Size(220, 34);
+            this.MnuEFind.Text = "&Find";
+            this.MnuEFind.Click += new System.EventHandler(this.MnuEFind_Click);
             // 
             // mnuEFindNext
             // 
-            this.mnuEFindNext.Enabled = false;
-            this.mnuEFindNext.Name = "mnuEFindNext";
-            this.mnuEFindNext.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.mnuEFindNext.Size = new System.Drawing.Size(220, 34);
-            this.mnuEFindNext.Text = "Find &Next";
-            this.mnuEFindNext.Click += new System.EventHandler(this.mnuEFindNext_Click);
+            this.MnuEFindNext.Enabled = false;
+            this.MnuEFindNext.Name = "mnuEFindNext";
+            this.MnuEFindNext.ShortcutKeys = System.Windows.Forms.Keys.F3;
+            this.MnuEFindNext.Size = new System.Drawing.Size(220, 34);
+            this.MnuEFindNext.Text = "Find &Next";
+            this.MnuEFindNext.Click += new System.EventHandler(this.MnuEFindNext_Click);
             // 
             // lsvTailViewer
             // 
-            this.lsvTailViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lsvTailViewer.FullRowSelect = true;
-            this.lsvTailViewer.GridLines = true;
-            this.lsvTailViewer.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.lsvTailViewer.HideSelection = false;
-            this.lsvTailViewer.Location = new System.Drawing.Point(0, 0);
-            this.lsvTailViewer.Name = "lsvTailViewer";
-            this.lsvTailViewer.OwnerDraw = true;
-            this.lsvTailViewer.ShowGroups = false;
-            this.lsvTailViewer.ShowItemToolTips = true;
-            this.lsvTailViewer.Size = new System.Drawing.Size(800, 450);
-            this.lsvTailViewer.TabIndex = 3;
-            this.lsvTailViewer.UseCompatibleStateImageBehavior = false;
-            this.lsvTailViewer.View = System.Windows.Forms.View.Details;
-            this.lsvTailViewer.VirtualMode = true;
-            this.lsvTailViewer.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.LsvTailViewer_RetrieveVirtualItem);
+            this.LsvTailViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LsvTailViewer.FullRowSelect = true;
+            this.LsvTailViewer.GridLines = true;
+            this.LsvTailViewer.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.LsvTailViewer.HideSelection = false;
+            this.LsvTailViewer.Location = new System.Drawing.Point(0, 0);
+            this.LsvTailViewer.Name = "lsvTailViewer";
+            this.LsvTailViewer.OwnerDraw = true;
+            this.LsvTailViewer.ShowGroups = false;
+            this.LsvTailViewer.ShowItemToolTips = true;
+            this.LsvTailViewer.Size = new System.Drawing.Size(800, 450);
+            this.LsvTailViewer.TabIndex = 3;
+            this.LsvTailViewer.UseCompatibleStateImageBehavior = false;
+            this.LsvTailViewer.View = System.Windows.Forms.View.Details;
+            this.LsvTailViewer.VirtualMode = true;
+            this.LsvTailViewer.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.LsvTailViewer_RetrieveVirtualItem);
             // 
             // LogFileViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.lsvTailViewer);
-            this.Controls.Add(this.mnuTailForm);
+            this.Controls.Add(this.LsvTailViewer);
+            this.Controls.Add(this.MnuTailForm);
             this.Name = "LogFileViewer";
             this.Text = "LogFileViewer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LogFileViewer_FormClosing);
-            this.mnuTailForm.ResumeLayout(false);
-            this.mnuTailForm.PerformLayout();
+            this.MnuTailForm.ResumeLayout(false);
+            this.MnuTailForm.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,12 +136,12 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip mnuTailForm;
-        private System.Windows.Forms.ToolStripMenuItem mnuEdit;
-        private System.Windows.Forms.ToolStripMenuItem mnuECopy;
-        private System.Windows.Forms.ToolStripSeparator tssAfterCopy;
-        private System.Windows.Forms.ToolStripMenuItem mnuEFind;
-        private System.Windows.Forms.ToolStripMenuItem mnuEFindNext;
-        private TailListView lsvTailViewer;
+        private System.Windows.Forms.MenuStrip MnuTailForm;
+        private System.Windows.Forms.ToolStripMenuItem MnuEdit;
+        private System.Windows.Forms.ToolStripMenuItem MnuECopy;
+        private System.Windows.Forms.ToolStripSeparator TssAfterCopy;
+        private System.Windows.Forms.ToolStripMenuItem MnuEFind;
+        private System.Windows.Forms.ToolStripMenuItem MnuEFindNext;
+        private TailListView LsvTailViewer;
     }
 }

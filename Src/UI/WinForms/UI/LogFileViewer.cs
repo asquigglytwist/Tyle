@@ -35,21 +35,21 @@ namespace Tyle.UI
         {
             int lineCount = tailedFile.LineCount;
             MainForm.NotifyFileUpdate(Text);
-            lsvTailViewer.VirtualListSize = lineCount;
-            lsvTailViewer.AutoFitColumnsToContent(tailedFile.LongestLine, lsvTailViewer.Font);
-            lsvTailViewer.SelectVirtualItem(lineCount - 1);
+            LsvTailViewer.VirtualListSize = lineCount;
+            LsvTailViewer.AutoFitColumnsToContent(tailedFile.LongestLine, LsvTailViewer.Font);
+            LsvTailViewer.SelectVirtualItem(lineCount - 1);
             // [BIB]:  https://stackoverflow.com/a/30104935
-            lsvTailViewer.Refresh();
+            LsvTailViewer.Refresh();
         }
 
         protected bool FindNextItem()
         {
-            if (lsvTailViewer.VirtualListSize > 0)
+            if (LsvTailViewer.VirtualListSize > 0)
             {
-                var foundItemIndex = tailedFile.FindItem(FindDialog.findDialog.SearchText, lsvTailViewer.SearchBeginIndex, FindDialog.findDialog.WrapSearch);
+                var foundItemIndex = tailedFile.FindItem(FindDialog.findDialog.SearchText, LsvTailViewer.SearchBeginIndex, FindDialog.findDialog.WrapSearch);
                 if (foundItemIndex != -1)
                 {
-                    lsvTailViewer.SelectVirtualItem(foundItemIndex);
+                    LsvTailViewer.SelectVirtualItem(foundItemIndex);
                     return true;
                 }
             }
@@ -64,13 +64,36 @@ namespace Tyle.UI
 
         internal void SetLSVFont(Font selFont)
         {
-            lsvTailViewer.Font = selFont;
+            LsvTailViewer.Font = selFont;
         }
 
-        private void mnuECopy_Click(object sender, EventArgs e)
+        private void TailedFile_OnTailedFileChanged(object sender, TailedFileChangedEventArgs args)
+        {
+            switch (args.ChangeType)
+            {
+                case TailedFileChangeType.InitialReadComplete:
+                case TailedFileChangeType.LastLineExtended:
+                case TailedFileChangeType.LinesAdded:
+                case TailedFileChangeType.Shrunk:
+                    // [BIB]:  https://stackoverflow.com/a/661662
+                    Invoke((MethodInvoker)delegate { UpdateTailView(); });
+                    break;
+                case TailedFileChangeType.Renamed:
+                    MessageBox.Show("File has been Renamed.");
+                    break;
+                case TailedFileChangeType.Deleted:
+                    MessageBox.Show("File has been deleted.");
+                    break;
+                case TailedFileChangeType.NoContentChange:
+                default:
+                    break;
+            }
+        }
+
+        private void MnuECopy_Click(object sender, EventArgs e)
         {
             var buffer = new StringBuilder();
-            foreach (int selIndex in lsvTailViewer.SelectedIndices)
+            foreach (int selIndex in LsvTailViewer.SelectedIndices)
             {
                 buffer.AppendLine(tailedFile[selIndex].Line);
             }
@@ -81,15 +104,15 @@ namespace Tyle.UI
             }
         }
 
-        private void mnuEFind_Click(object sender, EventArgs e)
+        private void MnuEFind_Click(object sender, EventArgs e)
         {
             if (FindDialog.findDialog.ShowDialog(this) == DialogResult.OK)
             {
                 if (FindNextItem())
                 {
-                    if (!mnuEFindNext.Enabled)
+                    if (!MnuEFindNext.Enabled)
                     {
-                        mnuEFindNext.Enabled = true;
+                        MnuEFindNext.Enabled = true;
                     }
                 }
                 else
@@ -99,7 +122,7 @@ namespace Tyle.UI
             }
         }
 
-        private void mnuEFindNext_Click(object sender, EventArgs e)
+        private void MnuEFindNext_Click(object sender, EventArgs e)
         {
         }
 
